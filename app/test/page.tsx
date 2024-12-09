@@ -11,7 +11,7 @@ export default function TestPage() {
       const vad = (window as any).vad;
       const vadInstance = await vad.MicVAD.new({
         onSpeechStart: () => {
-          console.log("Speech start detected");
+          console.log("Speech start detected 1");
         },
         onSpeechEnd: (audio: Float32Array) => {
           console.log("Speech ended", audio.length);
