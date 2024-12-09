@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import YouTube from "react-youtube";
+import ReactPlayer from "react-player";
 import {
   Dialog,
   DialogContent,
@@ -27,8 +27,8 @@ const VideoModal: React.FC<VideoModalProps> = ({
           <DialogTitle className="text-white">Techniques Video</DialogTitle>
         </DialogHeader>
         <div className="aspect-video w-full">
-          <YouTube
-            videoId={videoId}
+          <ReactPlayer
+            url={`https://www.youtube.com/watch?v=${videoId}`}
             opts={{
               width: "100%",
               height: "100%",
