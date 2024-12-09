@@ -51,9 +51,9 @@ export default function Training() {
                 <p className="text-slate-600">
                   The {program.name} program is designed to{" "}
                   {program.description.toLowerCase()}. Through dedicated
-                  practice and guidance from experienced instructors, you'll
-                  develop not only physical skills but also mental fortitude and
-                  spiritual growth.
+                  practice and guidance from experienced instructors,
+                  you&apos;ll develop not only physical skills but also mental
+                  fortitude and spiritual growth.
                 </p>
                 <Button className="mt-4">Enroll Now</Button>
               </DialogContent>

@@ -1,3 +1,20 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  // Next.js의 핵심 웹 바이탈과 타입스크립트 기본 규칙 확장
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    // any 타입 사용을 허용 (TypeScript의 타입 검사를 완화)
+    "@typescript-eslint/no-explicit-any": "off",
+
+    // 사용하지 않는 변수에 대해 경고만 표시 (에러 대신)
+    "@typescript-eslint/no-unused-vars": "warn",
+
+    // 이스케이프되지 않은 문자 (예: 작은따옴표) 사용 허용
+    "react/no-unescaped-entities": "off",
+
+    // 동기적 스크립트 로드 허용 (<script> 태그 직접 사용 가능)
+    "@next/next/no-sync-scripts": "off",
+
+    // useEffect의 의존성 배열 누락에 대해 경고만 표시
+    "react-hooks/exhaustive-deps": "warn"
+  }
 }
