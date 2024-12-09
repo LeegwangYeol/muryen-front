@@ -55,7 +55,7 @@ export default function Navigation() {
       <VideoModal
         isOpen={isVideoModalOpen}
         onClose={() => setIsVideoModalOpen(false)}
-        videoId="o9YtD1jw_Qw"
+        videoId="uEy7aQjDlnw"
       />
     </>
   );
