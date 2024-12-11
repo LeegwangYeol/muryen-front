@@ -32,31 +32,7 @@ export const LLAMIChatWidget = ({ theme }: LLAMIChatWidgetProps) => {
         import { initialize } from "https://static.llami.net/widget-v1.js";
         initialize({
           widgetId: "9afddf76-2d21-422c-a4fc-a369fcf21d09",
-          assistantId: "asst_PBO5LNOPwjd9r1R3s4wVSgTc",
-          theme: "${
-            pathname.startsWith("/catalog/llami-chat") ? "glassWhite" : theme
-          }",
-          customOptions: {
-            assistantName: "무련 AI",
-            theme: "${
-              pathname.startsWith("/catalog/llami-chat") ? "glassWhite" : theme
-            }",
-            assistantProfileImageUrl: "/images/hero.jpeg",
-            assistantStatusMessage: "24시간 즉시 답변 가능",
-            assistantWelcomeMessage: "안녕하세요! 어떻게 도와드릴까요?",
-            messageInputPlaceholder: "여기에 질문을 입력하기",
-            assistantDefaultQuestions: [
-              "무련은 뭘 하는 곳인가요?",
-              "무련애서 뭘 배울 수있죠?",
-              "무련을 통해서 성장하고 싶어요!",
-            ],
-            chatBubbleBottomPosition: 24,
-            chatBubbleRightPosition: 24,
-            chatBubbleSize: "48px",
-            labelOfCleanUp: "채팅 지우기",
-            labelOfMinimize: "최소화",
-            labelOfMaximize: "최대화",
-          },
+          
         });
       `;
       document.body.appendChild(script);
