@@ -16,7 +16,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState("philosophy");
 
   return (
-    <div className={`min-h-screen bg-slate-50 ${notoSansKR.className}`}>
+    <div className={`min-h-screen bg-transparent ${notoSansKR.className}`}>
       <div className="flex">
         <Navigation />
         <main className="flex-1">
@@ -27,9 +27,9 @@ export default function Home() {
             className="w-full"
           >
             <TabsList className="w-full justify-start bg-white border-b">
-              <TabsTrigger value="philosophy">Philosophy</TabsTrigger>
-              <TabsTrigger value="techniques">Techniques</TabsTrigger>
-              <TabsTrigger value="training">Training</TabsTrigger>
+              <TabsTrigger value="philosophy">대련</TabsTrigger>
+              <TabsTrigger value="techniques">기법</TabsTrigger>
+              <TabsTrigger value="training">훈련</TabsTrigger>
             </TabsList>
             <ScrollArea className="h-[calc(100vh-64px-48px)]">
               <TabsContent value="philosophy">

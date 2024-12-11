@@ -125,3 +125,8 @@ section {
   }
 }
 
+@layer utilities {
+  .pause-animation {
+    animation-play-state: paused;
+  }
+}

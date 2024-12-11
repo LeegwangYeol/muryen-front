@@ -11,8 +11,8 @@ export default function Hero() {
         className="absolute z-0"
       />
       <div className="relative z-10 text-center text-white">
-        <h1 className="text-4xl font-bold mb-2">The Way of the Warrior</h1>
-        <p className="text-xl">Discover the Art of Self-Mastery</p>
+        <h1 className="text-4xl font-bold mb-2">발끝에서 손끝까지 잇다</h1>
+        <p className="text-sm">' 자연스럽게, 깊이 있게, 부드럽게 '</p>
       </div>
     </section>
   );

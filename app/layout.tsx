@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 // import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
+import VantaBackground from "./component/vanta-main-background";
 
 export const metadata: Metadata = {
   title: "武로 緣을 잇다",
@@ -39,7 +40,9 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body>{children}</body>
+      <body>
+        <VantaBackground>{children}</VantaBackground>
+      </body>
     </html>
   );
 }
