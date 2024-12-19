@@ -26,7 +26,7 @@ export default function Training() {
   ];
 
   return (
-    <section className="py-16 px-4 bg-slate-100">
+    <section className="py-16 w-full px-4  ">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-6">Embark on Your Journey</h2>
         <p className="text-xl mb-8">

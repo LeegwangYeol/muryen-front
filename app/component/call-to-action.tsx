@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 export default function CallToAction() {
   return (
-    <section className="py-16 px-4 bg-red-600 text-white">
+    <section className="py-16 px-4  w-full bg-red-600 text-white min-h-[calc(77vh-8rem)]">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-6">
           Begin Your Martial Arts Journey Today

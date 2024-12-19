@@ -48,10 +48,16 @@ export default function Navigation() {
               href="/know-how"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700`}
+              } p-2 rounded hover:bg-slate-700 relative group`}
             >
               <Feather size={isExpanded ? 20 : 24} />
-              {isExpanded && <span className="ml-2">기초배경</span>}
+              {isExpanded ? (
+                <span className="ml-2">기초배경</span>
+              ) : (
+                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  기초배경
+                </span>
+              )}
             </Link>
           </li>
           <li>
@@ -59,10 +65,16 @@ export default function Navigation() {
               href="/component/know-how"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700`}
+              } p-2 rounded hover:bg-slate-700 relative group`}
             >
               <BookOpen size={isExpanded ? 20 : 24} />
-              {isExpanded && <span className="ml-2">기본</span>}
+              {isExpanded ? (
+                <span className="ml-2">기본</span>
+              ) : (
+                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  기본
+                </span>
+              )}
             </Link>
           </li>
           <li>
@@ -71,10 +83,16 @@ export default function Navigation() {
               onClick={() => setIsVideoModalOpen(true)}
               className={`w-full text-left flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700`}
+              } p-2 rounded hover:bg-slate-700 relative group`}
             >
               <Swords size={isExpanded ? 20 : 24} />
-              {isExpanded && <span className="ml-2">대련</span>}
+              {isExpanded ? (
+                <span className="ml-2">대련</span>
+              ) : (
+                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  대련
+                </span>
+              )}
             </button>
           </li>
           <li>
@@ -82,10 +100,16 @@ export default function Navigation() {
               href="/pattern"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700`}
+              } p-2 rounded hover:bg-slate-700 relative group`}
             >
               <Waypoints size={isExpanded ? 20 : 24} />
-              {isExpanded && <span className="ml-2">투로</span>}
+              {isExpanded ? (
+                <span className="ml-2">투로</span>
+              ) : (
+                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  투로
+                </span>
+              )}
             </Link>
           </li>
           <li>
@@ -93,10 +117,16 @@ export default function Navigation() {
               href="/cutting"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700`}
+              } p-2 rounded hover:bg-slate-700 relative group`}
             >
               <Scissors size={isExpanded ? 20 : 24} />
-              {isExpanded && <span className="ml-2">베기</span>}
+              {isExpanded ? (
+                <span className="ml-2">베기</span>
+              ) : (
+                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  베기
+                </span>
+              )}
             </Link>
           </li>
           <li>
@@ -104,10 +134,16 @@ export default function Navigation() {
               href="/daily"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700`}
+              } p-2 rounded hover:bg-slate-700 relative group`}
             >
               <Dumbbell size={isExpanded ? 20 : 24} />
-              {isExpanded && <span className="ml-2">수련일지</span>}
+              {isExpanded ? (
+                <span className="ml-2">수련일지</span>
+              ) : (
+                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  수련일지
+                </span>
+              )}
             </Link>
           </li>
           <li>
@@ -115,10 +151,16 @@ export default function Navigation() {
               href="/reference"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700`}
+              } p-2 rounded hover:bg-slate-700 relative group`}
             >
               <FileText size={isExpanded ? 20 : 24} />
-              {isExpanded && <span className="ml-2">참고 자료</span>}
+              {isExpanded ? (
+                <span className="ml-2">참고 자료</span>
+              ) : (
+                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  참고 자료
+                </span>
+              )}
             </Link>
           </li>
           <li>
@@ -126,10 +168,16 @@ export default function Navigation() {
               href="/equipment"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700`}
+              } p-2 rounded hover:bg-slate-700 relative group`}
             >
               <Shield size={isExpanded ? 20 : 24} />
-              {isExpanded && <span className="ml-2">장비와 무구</span>}
+              {isExpanded ? (
+                <span className="ml-2">장비와 무구</span>
+              ) : (
+                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                  장비와 무구
+                </span>
+              )}
             </Link>
           </li>
         </ul>

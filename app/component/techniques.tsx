@@ -151,7 +151,7 @@ export default function Techniques() {
   }) => (
     <div
       key={isClone ? `${technique.id}-clone` : technique.id}
-      className="break-inside-avoid mb-4 cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 relative hover:scale-[1.02] hover:-translate-y-1"
+      className="break-inside-avoid  mb-4 cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 relative hover:scale-[1.02] hover:-translate-y-1"
       onMouseEnter={() => handleMouseEnter(technique)}
       onMouseLeave={handleMouseLeave}
       onClick={() => setSelectedTechnique(technique)}
@@ -192,8 +192,8 @@ export default function Techniques() {
   );
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="overflow-hidden">
+    <div className="container mx-auto px-4 py-8 max-h-screen overflow-hidden">
+      <div className="h-[28rem] overflow-y-auto">
         <div className="animate-infinite-scroll-fast hover:pause-animation">
           <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-4 mb-4">
             {techniques.map((technique) => (

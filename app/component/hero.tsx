@@ -9,6 +9,7 @@ export default function Hero() {
         width={1820}
         height={980}
         className="absolute z-0"
+        priority
       />
       <div className="relative z-10 text-center text-white">
         <h1 className="text-4xl font-bold mb-2">발끝에서 손끝까지 잇다</h1>
