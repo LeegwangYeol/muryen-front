@@ -17,19 +17,24 @@ import {
 } from "lucide-react";
 import VideoModal from "./VideoModal";
 
-export default function Navigation() {
+export default function Navigation({ onExpand }: { onExpand?: (expanded: boolean) => void }) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
+
+  const handleExpand = (expanded: boolean) => {
+    setIsExpanded(expanded);
+    onExpand?.(expanded);
+  };
 
   return (
     <>
       <nav
         className={`${
           isExpanded ? "w-64" : "w-24"
-        } bg-slate-800 text-white h-screen p-4 relative transition-all duration-300`}
+        } bg-slate-800 text-white h-screen p-4 fixed top-0 left-0 z-50 transition-all duration-300`}
       >
         <button
-          onClick={() => setIsExpanded(!isExpanded)}
+          onClick={() => handleExpand(!isExpanded)}
           className="absolute -right-3 top-1/2 -translate-y-1/2 bg-slate-800 rounded-full p-1 hover:bg-slate-700"
         >
           {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}

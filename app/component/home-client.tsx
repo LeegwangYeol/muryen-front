@@ -17,6 +17,7 @@ const notoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 export default function HomeClient() {
   const [activeTab, setActiveTab] = useState("philosophy");
   const [isOpening, setIsOpening] = useState(true);
+  const [isNavExpanded, setIsNavExpanded] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -62,30 +63,46 @@ export default function HomeClient() {
       transition={{ duration: 0.5 }}
     >
       <div className="flex">
-        <Navigation />
-        <main className="flex-1">
+        <Navigation onExpand={setIsNavExpanded} />
+        <main
+          className={`flex-1 transition-all duration-300 ${
+            isNavExpanded ? "ml-64" : "ml-24"
+          }`}
+        >
           <Hero />
           <Tabs
             value={activeTab}
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="w-full justify-start bg-white border-b">
-              <TabsTrigger value="philosophy">무련이란?</TabsTrigger>
-              <TabsTrigger value="reason">어떻게 수련할까요?</TabsTrigger>
-              <TabsTrigger value="training">왜 수련을 해야하는가?</TabsTrigger>
-            </TabsList>
-            <ScrollArea className="">
-              <TabsContent value="philosophy">
-                <Philosophy />
-              </TabsContent>
-              <TabsContent value="reason" className="overflow-hidden">
-                <Techniques />
-              </TabsContent>
-              <TabsContent value="training">
-                <Training />
-              </TabsContent>
-            </ScrollArea>
+            <div
+              className="fixed top-64 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-300"
+              style={{
+                maxWidth: "600px",
+                marginLeft: isNavExpanded ? "8rem" : "3rem",
+              }}
+            >
+              <TabsList className="w-full justify-center bg-white/95 backdrop-blur-sm border-b shadow-sm rounded-full">
+                <TabsTrigger value="philosophy">무련이란?</TabsTrigger>
+                <TabsTrigger value="reason">어떻게 수련할까요?</TabsTrigger>
+                <TabsTrigger value="training">
+                  왜 수련을 해야하는가요?
+                </TabsTrigger>
+              </TabsList>
+            </div>
+            <div className="mt-12">
+              <ScrollArea>
+                <TabsContent value="philosophy">
+                  <Philosophy />
+                </TabsContent>
+                <TabsContent value="reason" className="overflow-hidden">
+                  <Techniques />
+                </TabsContent>
+                <TabsContent value="training">
+                  <Training />
+                </TabsContent>
+              </ScrollArea>
+            </div>
           </Tabs>
         </main>
       </div>
