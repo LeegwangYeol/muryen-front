@@ -36,7 +36,7 @@ export default function Philosophy() {
             움직임을 회복하고 자연스러운 신체의 지혜를 일꺠우고 있습니다.
           </p>
         </motion.div>
-
+        -
         <div className="space-y-32 py-16">
           {philosophies.map((philosophy, index) => (
             <motion.div

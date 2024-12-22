@@ -90,9 +90,9 @@ export default function HomeClient() {
                 </TabsTrigger>
               </TabsList>
             </div>
-            <div className="mt-12">
+            <div className="">
               <ScrollArea>
-                <TabsContent value="philosophy">
+                <TabsContent value="philosophy" className="overflow-hidden">
                   <Philosophy />
                 </TabsContent>
                 <TabsContent value="reason" className="overflow-hidden">
