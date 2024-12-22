@@ -14,12 +14,20 @@ import {
   Shield,
   Waypoints,
   Scissors,
+  Sun,
+  Moon,
 } from "lucide-react";
 import VideoModal from "./VideoModal";
+import { useTheme } from "../context/theme-context";
 
-export default function Navigation({ onExpand }: { onExpand?: (expanded: boolean) => void }) {
+export default function Navigation({
+  onExpand,
+}: {
+  onExpand?: (expanded: boolean) => void;
+}) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
+  const { theme, toggleTheme } = useTheme();
 
   const handleExpand = (expanded: boolean) => {
     setIsExpanded(expanded);
@@ -39,14 +47,23 @@ export default function Navigation({ onExpand }: { onExpand?: (expanded: boolean
         >
           {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
         </button>
-        <Link
-          href="/"
-          className="flex items-center space-x-2 p-2 rounded hover:bg-slate-700"
-        >
-          <div className="flex items-center w-full space-x-4  justify-center text-xl font-bold truncate">
-            {isExpanded ? "武緣" : "武"}
-          </div>
-        </Link>
+        <div className="flex items-center justify-between mb-4">
+          <Link
+            href="/"
+            className="flex items-center space-x-2 p-2 rounded hover:bg-slate-700"
+          >
+            <div className="flex items-center w-full space-x-4 justify-center text-xl font-bold truncate">
+              {isExpanded ? "武緣" : "武"}
+            </div>
+          </Link>
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full hover:bg-slate-700 transition-colors"
+            aria-label="Toggle theme"
+          >
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+        </div>
         <ul className="space-y-2">
           <li>
             <Link

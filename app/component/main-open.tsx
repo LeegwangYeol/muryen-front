@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import AnimatedImage from '../components/AnimatedImage'
+import AnimatedImage from "./animated-image";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false)

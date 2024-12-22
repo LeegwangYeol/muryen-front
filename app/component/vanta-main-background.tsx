@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 declare global {
   interface Window {
@@ -13,11 +13,13 @@ export default function VantaBackground({
 }: {
   children?: React.ReactNode;
 }) {
+  const vantaEffect = useRef<any>(null);
+
   useEffect(() => {
     const loadVanta = async () => {
       const initVanta = () => {
         if (window.VANTA) {
-          window.VANTA.NET({
+          vantaEffect.current = window.VANTA.NET({
             el: "#vanta-bg",
             mouseControls: true,
             touchControls: true,
@@ -58,8 +60,8 @@ export default function VantaBackground({
 
     // 클린업 함수
     return () => {
-      if (window.VANTA) {
-        window.VANTA.NET?.destroy();
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
       }
     };
   }, []);
