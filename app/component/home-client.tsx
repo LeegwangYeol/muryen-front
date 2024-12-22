@@ -71,15 +71,15 @@ export default function HomeClient() {
             className="w-full"
           >
             <TabsList className="w-full justify-start bg-white border-b">
-              <TabsTrigger value="philosophy">대련</TabsTrigger>
-              <TabsTrigger value="techniques">기법</TabsTrigger>
-              <TabsTrigger value="training">훈련</TabsTrigger>
+              <TabsTrigger value="philosophy">무련이란?</TabsTrigger>
+              <TabsTrigger value="reason">어떻게 수련할까요?</TabsTrigger>
+              <TabsTrigger value="training">왜 수련을 해야하는가?</TabsTrigger>
             </TabsList>
             <ScrollArea className="">
               <TabsContent value="philosophy">
                 <Philosophy />
               </TabsContent>
-              <TabsContent value="techniques" className="overflow-hidden">
+              <TabsContent value="reason" className="overflow-hidden">
                 <Techniques />
               </TabsContent>
               <TabsContent value="training">
