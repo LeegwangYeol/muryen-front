@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTheme } from "../context/theme-context";
 
 declare global {
   interface Window {
@@ -14,11 +15,15 @@ export default function VantaBackground({
   children?: React.ReactNode;
 }) {
   const vantaEffect = useRef<any>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const loadVanta = async () => {
       const initVanta = () => {
         if (window.VANTA) {
+          if (vantaEffect.current) {
+            vantaEffect.current.destroy();
+          }
           vantaEffect.current = window.VANTA.NET({
             el: "#vanta-bg",
             mouseControls: true,
@@ -28,10 +33,10 @@ export default function VantaBackground({
             minWidth: 200.0,
             scale: 1.0,
             scaleMobile: 1.0,
-            backgroundColor: 0x0,
+            backgroundColor: theme === 'dark' ? 0x1a1a1a : 0xffffff,
             points: 11.0,
             maxDistance: 29.0,
-            color: 0xd227bd,
+            color: theme === 'dark' ? 0x60a5fa : 0x3b82f6,
             spacing: 20.0,
             showDots: false,
           });
@@ -64,7 +69,7 @@ export default function VantaBackground({
         vantaEffect.current.destroy();
       }
     };
-  }, []);
+  }, [theme]);
 
   return (
     <>

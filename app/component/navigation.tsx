@@ -37,20 +37,24 @@ export default function Navigation({
   return (
     <>
       <nav
-        className={`${
-          isExpanded ? "w-64" : "w-24"
-        } bg-slate-800 text-white h-screen p-4 fixed top-0 left-0 z-50 transition-all duration-300`}
+        className={`${isExpanded ? "w-64" : "w-24"} ${
+          theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
+        } text-${
+          theme === "dark" ? "white" : "gray-900"
+        } h-screen p-4 fixed top-0 left-0 z-50 transition-all duration-300 rounded-r-lg`}
       >
         <button
           onClick={() => handleExpand(!isExpanded)}
-          className="absolute -right-3 top-1/2 -translate-y-1/2 bg-slate-800 rounded-full p-1 hover:bg-slate-700"
+          className={`absolute -right-3 top-1/2 -translate-y-1/2 ${
+            theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
+          } rounded-full p-1 hover:opacity-80 transition-opacity`}
         >
           {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
         </button>
         <div className="flex items-center justify-between mb-4">
           <Link
             href="/"
-            className="flex items-center space-x-2 p-2 rounded hover:bg-slate-700"
+            className="flex items-center space-x-2 p-2 rounded hover:opacity-80 transition-opacity"
           >
             <div className="flex items-center w-full space-x-4 justify-center text-xl font-bold truncate">
               {isExpanded ? "武緣" : "武"}
@@ -58,7 +62,7 @@ export default function Navigation({
           </Link>
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-slate-700 transition-colors"
+            className={`p-2 rounded-full hover:opacity-80 transition-opacity`}
             aria-label="Toggle theme"
           >
             {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
@@ -70,7 +74,7 @@ export default function Navigation({
               href="/know-how"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700 relative group`}
+              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
             >
               <Feather size={isExpanded ? 20 : 24} />
               {isExpanded ? (
@@ -87,7 +91,7 @@ export default function Navigation({
               href="/component/know-how"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700 relative group`}
+              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
             >
               <BookOpen size={isExpanded ? 20 : 24} />
               {isExpanded ? (
@@ -105,7 +109,7 @@ export default function Navigation({
               onClick={() => setIsVideoModalOpen(true)}
               className={`w-full text-left flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700 relative group`}
+              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
             >
               <Swords size={isExpanded ? 20 : 24} />
               {isExpanded ? (
@@ -122,7 +126,7 @@ export default function Navigation({
               href="/pattern"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700 relative group`}
+              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
             >
               <Waypoints size={isExpanded ? 20 : 24} />
               {isExpanded ? (
@@ -139,7 +143,7 @@ export default function Navigation({
               href="/cutting"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700 relative group`}
+              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
             >
               <Scissors size={isExpanded ? 20 : 24} />
               {isExpanded ? (
@@ -156,7 +160,7 @@ export default function Navigation({
               href="/daily"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700 relative group`}
+              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
             >
               <Dumbbell size={isExpanded ? 20 : 24} />
               {isExpanded ? (
@@ -173,7 +177,7 @@ export default function Navigation({
               href="/reference"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700 relative group`}
+              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
             >
               <FileText size={isExpanded ? 20 : 24} />
               {isExpanded ? (
@@ -190,7 +194,7 @@ export default function Navigation({
               href="/equipment"
               className={`flex items-center ${
                 isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:bg-slate-700 relative group`}
+              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
             >
               <Shield size={isExpanded ? 20 : 24} />
               {isExpanded ? (
