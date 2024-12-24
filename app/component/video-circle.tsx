@@ -19,7 +19,7 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
   useEffect(() => {
     // 초기 애니메이션
     if (initialAnimation) {
-      let startTime = Date.now();
+      const startTime = Date.now();
       const duration = 1500; // 2초 동안 진행
       const fastRotationDuration = 1000; // 빠른 회전 1초
 
