@@ -20,6 +20,44 @@ import {
 import VideoModal from "./VideoModal";
 import { useTheme } from "../context/theme-context";
 
+const menuItems = [
+  {
+    href: "/know-how",
+    icon: <Feather size={24} />,
+    label: "기초배경",
+  },
+  {
+    href: "/component/know-how",
+    icon: <BookOpen size={24} />,
+    label: "기본",
+  },
+  {
+    href: "/pattern",
+    icon: <Waypoints size={24} />,
+    label: "투로",
+  },
+  {
+    href: "/cutting",
+    icon: <Scissors size={24} />,
+    label: "베기",
+  },
+  {
+    href: "/daily",
+    icon: <Dumbbell size={24} />,
+    label: "수련일지",
+  },
+  {
+    href: "/reference",
+    icon: <FileText size={24} />,
+    label: "참고 자료",
+  },
+  {
+    href: "/equipment",
+    icon: <Shield size={24} />,
+    label: "장비와 무구",
+  },
+];
+
 export default function Navigation({
   onExpand,
 }: {
@@ -47,164 +85,76 @@ export default function Navigation({
           onClick={() => handleExpand(!isExpanded)}
           className={`absolute -right-3 top-1/2 -translate-y-1/2 ${
             theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-          } rounded-full p-1 hover:opacity-80 transition-opacity`}
+          } rounded-full p-1 hover:scale-110 transition-all duration-300`}
         >
           {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
         </button>
         <div className="flex items-center justify-between mb-4">
           <Link
             href="/"
-            className="flex items-center space-x-2 p-2 rounded hover:opacity-80 transition-opacity"
+            className={`flex items-center gap-4 p-4 rounded-lg mb-2 transition-all duration-300 group ${
+              theme === "dark"
+                ? "hover:bg-primary/90 hover:text-primary-foreground"
+                : "hover:bg-secondary/90 hover:text-secondary-foreground"
+            }`}
           >
-            <div className="flex items-center w-full space-x-4 justify-center text-xl font-bold truncate">
-              {isExpanded ? "武緣" : "武"}
+            <div className="group-hover:animate-shake">
+              <Home size={24} />
             </div>
+            {isExpanded && (
+              <span className="group-hover:animate-shake">홈</span>
+            )}
           </Link>
           <button
             onClick={toggleTheme}
-            className={`p-2 rounded-full hover:opacity-80 transition-opacity`}
-            aria-label="Toggle theme"
+            className={`flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 group ${
+              theme === "dark"
+                ? "bg-primary/10 hover:bg-primary/20 text-primary"
+                : "bg-secondary/10 hover:bg-secondary/20 text-secondary"
+            }`}
           >
-            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+            <div className="group-hover:animate-shake">
+              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+            </div>
           </button>
         </div>
         <ul className="space-y-2">
-          <li>
-            <Link
-              href="/know-how"
-              className={`flex items-center ${
-                isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
-            >
-              <Feather size={isExpanded ? 20 : 24} />
-              {isExpanded ? (
-                <span className="ml-2">기초배경</span>
-              ) : (
-                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  기초배경
-                </span>
-              )}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/component/know-how"
-              className={`flex items-center ${
-                isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
-            >
-              <BookOpen size={isExpanded ? 20 : 24} />
-              {isExpanded ? (
-                <span className="ml-2">기본</span>
-              ) : (
-                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  기본
-                </span>
-              )}
-            </Link>
-          </li>
+          {menuItems.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={`flex items-center gap-4 p-4 rounded-lg mb-2 transition-all duration-300 group ${
+                  theme === "dark"
+                    ? "hover:bg-primary/90 hover:text-primary-foreground"
+                    : "hover:bg-secondary/90 hover:text-secondary-foreground"
+                }`}
+              >
+                <div className="group-hover:animate-shake">{item.icon}</div>
+                {isExpanded && (
+                  <span className="group-hover:animate-shake">
+                    {item.label}
+                  </span>
+                )}
+              </Link>
+            </li>
+          ))}
           <li>
             <button
               type="button"
               onClick={() => setIsVideoModalOpen(true)}
-              className={`w-full text-left flex items-center ${
-                isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
+              className={`w-full text-left flex items-center gap-4 p-4 rounded-lg transition-all duration-300 group ${
+                theme === "dark"
+                  ? "hover:bg-primary/90 hover:text-primary-foreground"
+                  : "hover:bg-secondary/90 hover:text-secondary-foreground"
+              }`}
             >
-              <Swords size={isExpanded ? 20 : 24} />
-              {isExpanded ? (
-                <span className="ml-2">대련</span>
-              ) : (
-                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  대련
-                </span>
+              <div className="group-hover:animate-shake">
+                <Swords size={24} />
+              </div>
+              {isExpanded && (
+                <span className="group-hover:animate-shake">대련</span>
               )}
             </button>
-          </li>
-          <li>
-            <Link
-              href="/pattern"
-              className={`flex items-center ${
-                isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
-            >
-              <Waypoints size={isExpanded ? 20 : 24} />
-              {isExpanded ? (
-                <span className="ml-2">투로</span>
-              ) : (
-                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  투로
-                </span>
-              )}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/cutting"
-              className={`flex items-center ${
-                isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
-            >
-              <Scissors size={isExpanded ? 20 : 24} />
-              {isExpanded ? (
-                <span className="ml-2">베기</span>
-              ) : (
-                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  베기
-                </span>
-              )}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/daily"
-              className={`flex items-center ${
-                isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
-            >
-              <Dumbbell size={isExpanded ? 20 : 24} />
-              {isExpanded ? (
-                <span className="ml-2">수련일지</span>
-              ) : (
-                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  수련일지
-                </span>
-              )}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/reference"
-              className={`flex items-center ${
-                isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
-            >
-              <FileText size={isExpanded ? 20 : 24} />
-              {isExpanded ? (
-                <span className="ml-2">참고 자료</span>
-              ) : (
-                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  참고 자료
-                </span>
-              )}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/equipment"
-              className={`flex items-center ${
-                isExpanded ? "" : "justify-center"
-              } p-2 rounded hover:opacity-80 transition-opacity relative group`}
-            >
-              <Shield size={isExpanded ? 20 : 24} />
-              {isExpanded ? (
-                <span className="ml-2">장비와 무구</span>
-              ) : (
-                <span className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  장비와 무구
-                </span>
-              )}
-            </Link>
           </li>
         </ul>
       </nav>

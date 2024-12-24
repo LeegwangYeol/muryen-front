@@ -10,7 +10,9 @@ import Navigation from "./navigation";
 import Hero from "./hero";
 import Philosophy from "./philosophy";
 import Techniques from "./techniques";
-import Training from "./call-to-action";
+import Training from "./training";
+import VideoCircle from "./video-circle";
+import { mockVideos } from "./mock-data";
 
 const notoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -89,7 +91,7 @@ export default function HomeClient() {
                   <Techniques />
                 </TabsContent>
                 <TabsContent value="training">
-                  <Training />
+                  <VideoCircle videos={mockVideos} />
                 </TabsContent>
               </ScrollArea>
             </div>

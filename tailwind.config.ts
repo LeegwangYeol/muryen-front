@@ -61,6 +61,11 @@ const config: Config = {
           "0%": { transform: "translateY(0)" },
           "100%": { transform: "translateY(-50%)" },
         },
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '25%': { transform: 'translateX(-2px)' },
+          '75%': { transform: 'translateX(2px)' }
+        }
       },
       animation: {
         "infinite-scroll": "infiniteScroll 30s linear infinite",
@@ -68,6 +73,7 @@ const config: Config = {
         "infinite-scroll-slower": "infiniteScroll 90s linear infinite",
         "infinite-scroll-fast": "infiniteScroll 15s linear infinite",
         "infinite-scroll-faster": "infiniteScroll 10s linear infinite",
+        shake: 'shake 0.3s ease-in-out infinite'
       },
     },
   },
