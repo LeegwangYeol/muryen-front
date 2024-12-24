@@ -32,24 +32,15 @@ export default function HomeClient() {
         className="fixed inset-0 flex items-center justify-center bg-black"
         initial={{ opacity: 1 }}
         animate={{ opacity: 0 }}
-        transition={{ duration: 1.5, delay: 1 }}
+        transition={{ duration: 2.5, delay: 1 }}
       >
         <motion.div
           className="relative w-full h-full"
           initial={{ scale: 1.2, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 1.5 }}
         >
-          <Image
-            src="/images/hero.jpeg"
-            alt="Opening"
-            fill
-            className="object-cover"
-            priority
-            onError={(e) => {
-              setIsOpening(false);
-            }}
-          />
+          <Hero />
         </motion.div>
       </motion.div>
     );
@@ -69,14 +60,13 @@ export default function HomeClient() {
             isNavExpanded ? "ml-64" : "ml-24"
           }`}
         >
-          <Hero />
           <Tabs
             value={activeTab}
             onValueChange={setActiveTab}
             className="w-full"
           >
             <div
-              className="fixed top-64 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-300"
+              className="fixed top-6 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-300"
               style={{
                 maxWidth: "600px",
                 marginLeft: isNavExpanded ? "8rem" : "3rem",
