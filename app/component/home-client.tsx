@@ -13,10 +13,12 @@ import Techniques from "./techniques";
 import VideoCircle from "./video-circle";
 import HowWork from "./how-work";
 import { mockVideos } from "./mock-data";
+import { useTheme } from "../context/theme-context";
 
 const notoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
 export default function HomeClient() {
+  const { theme } = useTheme();
   const [activeTab, setActiveTab] = useState("philosophy");
   const [isOpening, setIsOpening] = useState(true);
   const [isNavExpanded, setIsNavExpanded] = useState(true);
@@ -74,10 +76,41 @@ export default function HomeClient() {
                 marginLeft: isNavExpanded ? "8rem" : "3rem",
               }}
             >
-              <TabsList className="w-full justify-center bg-white/95 backdrop-blur-sm border-b shadow-sm rounded-full">
-                <TabsTrigger value="philosophy">무련이란?</TabsTrigger>
-                <TabsTrigger value="reason">어떻게 수련할까요?</TabsTrigger>
-                <TabsTrigger value="training">
+              <TabsList
+                className={`w-full justify-center backdrop-blur-sm border shadow-sm rounded-full transition-colors duration-200 hover:animate-shake ${
+                  theme === "dark"
+                    ? "bg-gray-800/90 border-gray-700 text-gray-200"
+                    : "bg-white/95 border-gray-200 text-gray-800"
+                }`}
+              >
+                <TabsTrigger
+                  value="philosophy"
+                  className={`transition-all duration-200 ${
+                    theme === "dark"
+                      ? "data-[state=active]:bg-gray-700 hover:bg-gray-700/50"
+                      : "data-[state=active]:bg-gray-100 hover:bg-gray-50"
+                  }`}
+                >
+                  무련이란?
+                </TabsTrigger>
+                <TabsTrigger
+                  value="reason"
+                  className={`transition-all duration-200 ${
+                    theme === "dark"
+                      ? "data-[state=active]:bg-gray-700 hover:bg-gray-700/50"
+                      : "data-[state=active]:bg-gray-100 hover:bg-gray-50"
+                  }`}
+                >
+                  어떻게 수련할까요?
+                </TabsTrigger>
+                <TabsTrigger
+                  value="training"
+                  className={`transition-all duration-200 ${
+                    theme === "dark"
+                      ? "data-[state=active]:bg-gray-700 hover:bg-gray-700/50"
+                      : "data-[state=active]:bg-gray-100 hover:bg-gray-50"
+                  }`}
+                >
                   왜 수련을 해야하는가요?
                 </TabsTrigger>
               </TabsList>

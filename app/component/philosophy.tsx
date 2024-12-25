@@ -13,12 +13,13 @@ export default function Philosophy() {
         "검 속에서 잃어버린 자연스러운 움직임과 신체의 본질적 기능을 되찾는 과정을 밝고 있어요",
     },
     {
-      title: "야생 - 본질성",
-      description: "우리는 야생에서의 인간의 본성을 탐구해요",
+      title: "개인과 단체",
+      description:
+        "우리는 개개인을의 실력을 통합한 진을 짜고 그 안에서 유기적인 협동을 추구해요",
     },
     {
       title: "우리는 진행이이에요",
-      description: "항상 더 좋은 방향을 고민 하는 복원 무예",
+      description: "항상 더 좋은 방향을 고민 하는 무예를 추구해요",
     },
   ];
 
@@ -46,9 +47,9 @@ export default function Philosophy() {
               theme === "dark" ? "text-gray-200" : "text-gray-600"
             }`}
           >
-            무련은 무예 24반 경당 소속의 사회인 동아리입니다. 우리는
+            무련은 무예 24반 경당 소속의 사회인 동아리에요. 우리는
             무예도보통지의 가르침을 기초로 기술의 습득을 넘어, 인간 본연의
-            움직임을 회복하고 자연스러운 신체의 지혜를 일꺠우고 있습니다.
+            움직임을 회복하고 자연스러운 몸짓을 추구해요.
           </p>
         </motion.div>
         <div className="space-y-8">
