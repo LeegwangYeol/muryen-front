@@ -1,16 +1,12 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
+import React, { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { ChartContainer } from "@/components/ui/chart";
 import Image from "next/image";
 import { MainLayout } from "@/components/layout/main-layout";
+import { createPortal } from "react-dom";
 
 interface LabelProps {
   cx: number;
@@ -177,7 +173,7 @@ const muye24Data: Muye24DataType = {
       {
         name: "교전",
         description:
-          "조선의 검선 김체건이 왜검을 응용하여 격검하도록 만든 것이며, 무예24기 중 가장 늦게 완성된 검법이다. 압(壓)과 접(接)을 적절히 응용하여 상대의 검을 제압한다.",
+          "조선의 검선 김체건이 왜검을 응용하여 격검하도록 만든 것이며, 무예24기 가운데 가장 늦게 완성된 검법이다. 압(壓)과 접(接)을 적절히 응용하여 상대의 검을 제압한다.",
         image: "/images/foot/muye24ki_core_13_gyojun.gif",
       },
     ],
@@ -304,9 +300,28 @@ const CustomLabel = (props: LabelProps) => {
   );
 };
 
+const Tooltip = ({
+  name,
+  description,
+}: {
+  name: string;
+  description: string;
+}) => {
+  return createPortal(
+    <div className="fixed top-1/3 left-1/2 -translate-x-1/2 bg-black/80 text-white p-6 rounded-lg shadow-lg w-[500px] z-[9999]">
+      <h3 className="font-bold mb-3 text-xl text-white">{name}</h3>
+      <p className="text-lg leading-relaxed whitespace-pre-wrap">
+        {description}
+      </p>
+    </div>,
+    document.body
+  );
+};
+
 const CustomSectionContent = (props: any) => {
   const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, payload } =
     props;
+  const [isHovered, setIsHovered] = useState(false);
   const RADIAN = Math.PI / 180;
   const midAngle = (startAngle + endAngle) / 2;
   const radius = (innerRadius + outerRadius) / 2;
@@ -314,16 +329,86 @@ const CustomSectionContent = (props: any) => {
   const y = cy + radius * Math.sin(-midAngle * RADIAN) - 80;
 
   return (
-    <foreignObject x={x} y={y} width={160} height={160}>
-      <div className="relative w-full h-full">
-        <Image
-          src={payload.image}
-          alt={payload.name}
-          fill
-          className="object-contain opacity-20"
-        />
-      </div>
-    </foreignObject>
+    <>
+      <foreignObject x={x} y={y} width={160} height={160}>
+        <div className="relative w-full h-full">
+          <Image
+            src={payload.image}
+            alt={payload.name}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            fill
+            className="object-contain opacity-40 contrast-200 dark:invert"
+          />
+        </div>
+      </foreignObject>
+      {isHovered && (
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <Tooltip name={payload.name} description={payload.description} />
+        </div>
+      )}
+    </>
+  );
+};
+
+const DonutChart = ({ book }: { book: Book }) => {
+  const techniqueData = generateTechniqueData(book);
+  const allIndices = techniqueData.map((_, index) => index);
+
+  return (
+    <Card className="p-6">
+      <CardHeader>
+        <CardTitle>{book.title}</CardTitle>
+      </CardHeader>
+      <CardContent className="relative h-[800px]">
+        <div className="relative w-full h-full flex justify-center items-center">
+          <ResponsiveContainer width="100%" height={800}>
+            <PieChart>
+              <Pie
+                data={techniqueData}
+                cx="50%"
+                cy="50%"
+                innerRadius={120}
+                outerRadius={350}
+                paddingAngle={2}
+                startAngle={90}
+                endAngle={450}
+                dataKey="value"
+                label={CustomLabel}
+                labelLine={false}
+              >
+                {techniqueData.map((entry) => (
+                  <Cell
+                    key={`cell-${entry.index}`}
+                    fill="hsl(var(--card))"
+                    stroke="rgb(var(--card-foreground))"
+                    style={{
+                      filter: "brightness(0.98)",
+                    }}
+                  />
+                ))}
+              </Pie>
+              <Pie
+                data={techniqueData}
+                cx="50%"
+                cy="50%"
+                innerRadius={120}
+                outerRadius={350}
+                paddingAngle={2}
+                startAngle={90}
+                endAngle={450}
+                dataKey="value"
+                activeIndex={allIndices}
+                activeShape={CustomSectionContent}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -331,63 +416,9 @@ export default function Muye24Introduction() {
   return (
     <MainLayout>
       <div className="grid gap-4">
-        {Object.entries(muye24Data).map(([bookKey, book]) => {
-          const techniqueData = generateTechniqueData(book);
-          const allIndices = techniqueData.map((_, index) => index);
-
-          return (
-            <Card key={bookKey} className="p-6">
-              <CardHeader>
-                <CardTitle>{book.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="relative h-[800px]">
-                <div className="relative w-full h-full flex justify-center items-center">
-                  <ResponsiveContainer width="100%" height={800}>
-                    <PieChart>
-                      <Pie
-                        data={techniqueData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={120}
-                        outerRadius={350}
-                        paddingAngle={2}
-                        startAngle={90}
-                        endAngle={450}
-                        dataKey="value"
-                        label={CustomLabel}
-                        labelLine={false}
-                      >
-                        {techniqueData.map((entry) => (
-                          <Cell
-                            key={`cell-${entry.index}`}
-                            fill="hsl(var(--card))"
-                            stroke="rgb(var(--card-foreground))"
-                            style={{
-                              filter: "brightness(0.95)",
-                            }}
-                          />
-                        ))}
-                      </Pie>
-                      <Pie
-                        data={techniqueData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={120}
-                        outerRadius={350}
-                        paddingAngle={2}
-                        startAngle={90}
-                        endAngle={450}
-                        dataKey="value"
-                        activeIndex={allIndices}
-                        activeShape={CustomSectionContent}
-                      />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
+        {Object.entries(muye24Data).map(([bookKey, book]) => (
+          <DonutChart key={bookKey} book={book} />
+        ))}
       </div>
     </MainLayout>
   );
