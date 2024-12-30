@@ -19,6 +19,8 @@ interface LabelProps {
   innerRadius: number;
   outerRadius: number;
   percent: number;
+  index: number;
+  payload: any;
 }
 
 interface Technique {
@@ -37,6 +39,26 @@ interface Book {
 interface Muye24DataType {
   [key: string]: Book;
 }
+
+interface TechniqueData {
+  name: string;
+  value: number;
+  image: string;
+  description: string;
+  index: number;
+}
+
+const generateTechniqueData = (book: Book) => {
+  const total = book.techniques.length;
+  const data = book.techniques.map((technique, index) => ({
+    name: technique.name,
+    value: 100 / total,
+    image: technique.images?.[0] || technique.image || "",
+    description: technique.description,
+    index,
+  }));
+  return data;
+};
 
 const footTechniques = [
   { name: "도보 무예", value: 18, color: "hsl(var(--chart-1))" },
@@ -256,107 +278,116 @@ const muye24Data: Muye24DataType = {
   },
 };
 
+const CustomLabel = (props: LabelProps) => {
+  const { cx, cy, midAngle, outerRadius, payload } = props;
+  const RADIAN = Math.PI / 180;
+  const radius = outerRadius + 30;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <foreignObject x={x - 25} y={y - 25} width={50} height={50}>
+      <div className="relative w-full h-full group">
+        <Image
+          src={payload.image}
+          alt={payload.name}
+          fill
+          className="object-contain rounded-full border-2 border-white"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity duration-200 rounded-full flex items-center justify-center">
+          <div className="opacity-0 group-hover:opacity-100 text-white text-xs text-center p-1">
+            {payload.name}
+          </div>
+        </div>
+      </div>
+    </foreignObject>
+  );
+};
+
+const CustomSectionContent = (props: any) => {
+  const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, payload } =
+    props;
+  const RADIAN = Math.PI / 180;
+  const midAngle = (startAngle + endAngle) / 2;
+  const radius = (innerRadius + outerRadius) / 2;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN) - 80;
+  const y = cy + radius * Math.sin(-midAngle * RADIAN) - 80;
+
+  return (
+    <foreignObject x={x} y={y} width={160} height={160}>
+      <div className="relative w-full h-full">
+        <Image
+          src={payload.image}
+          alt={payload.name}
+          fill
+          className="object-contain opacity-20"
+        />
+      </div>
+    </foreignObject>
+  );
+};
+
 export default function Muye24Introduction() {
   return (
     <MainLayout>
       <div className="grid gap-4">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {/* Statistics Cards */}
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">총 무예 수</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">24</div>
-              <p className="text-xs text-muted-foreground">
-                조선시대 대표 무예 24가지
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">도보 무예</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">18</div>
-              <p className="text-xs text-muted-foreground">
-                맨땅에서 수련하는 무예
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">기마 무예</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">6</div>
-              <p className="text-xs text-muted-foreground">
-                말을 타고 수련하는 무예
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                무예도보통지
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">4</div>
-              <p className="text-xs text-muted-foreground">
-                무예를 정리한 책의 권 수
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-        {/* Muye24 Books */}
-        {Object.entries(muye24Data).map(([bookKey, book]) => (
-          <Card key={bookKey}>
-            <CardHeader>
-              <CardTitle>{book.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {book.techniques.map((technique) => (
-                  <Card key={technique.name} className="overflow-hidden">
-                    <div className="relative h-48 w-full">
-                      <Image
-                        src={technique.images?.[0] || technique.image || ""}
-                        alt={technique.name}
-                        fill
-                        className="object-contain"
+        {Object.entries(muye24Data).map(([bookKey, book]) => {
+          const techniqueData = generateTechniqueData(book);
+          const allIndices = techniqueData.map((_, index) => index);
+
+          return (
+            <Card key={bookKey} className="p-6">
+              <CardHeader>
+                <CardTitle>{book.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="relative h-[800px]">
+                <div className="relative w-full h-full flex justify-center items-center">
+                  <ResponsiveContainer width="100%" height={800}>
+                    <PieChart>
+                      <Pie
+                        data={techniqueData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={120}
+                        outerRadius={350}
+                        paddingAngle={2}
+                        startAngle={90}
+                        endAngle={450}
+                        dataKey="value"
+                        label={CustomLabel}
+                        labelLine={false}
+                      >
+                        {techniqueData.map((entry) => (
+                          <Cell
+                            key={`cell-${entry.index}`}
+                            fill="hsl(var(--card))"
+                            stroke="rgb(var(--card-foreground))"
+                            style={{
+                              filter: "brightness(0.95)",
+                            }}
+                          />
+                        ))}
+                      </Pie>
+                      <Pie
+                        data={techniqueData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={120}
+                        outerRadius={350}
+                        paddingAngle={2}
+                        startAngle={90}
+                        endAngle={450}
+                        dataKey="value"
+                        activeIndex={allIndices}
+                        activeShape={CustomSectionContent}
                       />
-                    </div>
-                    <CardHeader>
-                      <CardTitle className="text-lg">
-                        {technique.name}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        {technique.description}
-                      </p>
-                      {technique.images && (
-                        <div className="mt-4 grid grid-cols-4 gap-2">
-                          {technique.images.map((img, index) => (
-                            <div key={index} className="relative h-16 w-full">
-                              <Image
-                                src={img}
-                                alt={`${technique.name} variant ${index + 1}`}
-                                fill
-                                className="object-contain"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </MainLayout>
   );
