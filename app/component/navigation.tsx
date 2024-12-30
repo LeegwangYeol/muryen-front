@@ -22,7 +22,7 @@ import { useTheme } from "../context/theme-context";
 
 const menuItems = [
   {
-    href: "/know-how",
+    href: "/basic-sense",
     icon: <Feather size={24} />,
     label: "기초배경",
   },
