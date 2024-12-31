@@ -424,9 +424,7 @@ const DonutChart = ({ book }: { book: Book }) => {
                   <Cell
                     key={`cell-${entry.index}`}
                     fill={
-                      theme === "dark"
-                        ? "hsl(var(--card-dark))"
-                        : "hsl(var(--card))"
+                      theme === "dark" ? "hsl(var(--card))" : "hsl(var(--card))"
                     }
                     stroke={
                       theme === "dark"

@@ -24,12 +24,12 @@ const menuItems = [
   {
     href: "/basic-sense",
     icon: <Feather size={24} />,
-    label: "기초배경",
+    label: "24기",
   },
   {
     href: "/component/know-how",
     icon: <BookOpen size={24} />,
-    label: "기본",
+    label: "기본기",
   },
   {
     href: "/pattern",
