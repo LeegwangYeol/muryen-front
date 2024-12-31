@@ -324,8 +324,18 @@ const Tooltip = ({
           : "bg-white/95 border border-gray-200 text-gray-800"
       }`}
     >
-      <h3 className="font-bold mb-3 text-xl">{name}</h3>
-      <p className="text-lg leading-relaxed whitespace-pre-wrap">
+      <h3
+        className={`font-bold mb-3 text-xl ${
+          theme === "dark" ? "text-gray-100" : "text-gray-900"
+        }`}
+      >
+        {name}
+      </h3>
+      <p
+        className={`text-lg leading-relaxed whitespace-pre-wrap ${
+          theme === "dark" ? "text-gray-300" : "text-gray-700"
+        }`}
+      >
         {description}
       </p>
     </div>,
@@ -382,16 +392,20 @@ const DonutChart = ({ book }: { book: Book }) => {
   return (
     <Card
       className={`p-6 backdrop-blur-md shadow-lg border-0 ${
-        theme === "dark"
-          ? "bg-gray-900/30 text-gray-100"
-          : "bg-white/30 text-gray-900"
+        theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
       }`}
     >
-      <CardHeader>
-        <CardTitle>{book.title}</CardTitle>
+      <CardHeader className="text-center">
+        <CardTitle
+          className={`text-2xl font-bold ${
+            theme === "dark" ? "text-white" : "text-gray-900"
+          }`}
+        >
+          {book.title}
+        </CardTitle>
         <p
-          className={`text-lg ${
-            theme === "dark" ? "text-gray-300" : "text-gray-600"
+          className={`text-lg mt-2 ${
+            theme === "dark" ? "text-white" : "text-gray-900"
           }`}
         >
           {book.description}
@@ -403,7 +417,7 @@ const DonutChart = ({ book }: { book: Book }) => {
             width="100%"
             height={800}
             className={`rounded-lg ${
-              theme === "dark" ? "bg-gray-800/50" : "bg-white/50"
+              theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
             }`}
           >
             <PieChart>
