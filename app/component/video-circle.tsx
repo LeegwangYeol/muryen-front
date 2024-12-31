@@ -100,15 +100,19 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
               <div
                 className={`relative w-40 h-40 -translate-x-1/2 -translate-y-1/2 rounded-full overflow-hidden shadow-lg ${
                   theme === "dark"
-                    ? "glassmorphism-dark"
-                    : "glassmorphism-light"
+                    ? "glassmorphism-dark animate-[shine_3s_ease-in-out_infinite]"
+                    : "glassmorphism-light animate-[shineDark_3s_ease-in-out_infinite]"
                 }`}
               >
                 <Image
                   src={video.thumbnail}
                   alt={video.title}
                   fill
-                  className="object-cover"
+                  className={`object-cover ${
+                    theme === "dark"
+                      ? "animate-[imageGlow_3s_ease-in-out_infinite]"
+                      : "animate-[imageGlowDark_3s_ease-in-out_infinite]"
+                  }`}
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div className="text-white text-center p-4">
