@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import { Noto_Sans_KR } from "next/font/google";
 import Navigation from "@/app/component/navigation";
 
-const notoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
-
 interface MainLayoutProps {
   children: React.ReactNode;
 }
@@ -16,7 +14,7 @@ export function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <motion.div
-      className={`min-h-screen bg-transparent ${notoSansKR.className}`}
+      className={`min-h-screen bg-transparent `}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}

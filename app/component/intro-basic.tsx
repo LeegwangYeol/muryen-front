@@ -7,6 +7,7 @@ import { ChartContainer } from "@/components/ui/chart";
 import Image from "next/image";
 import { MainLayout } from "@/components/layout/main-layout";
 import { createPortal } from "react-dom";
+import { useTheme } from "../context/theme-context";
 
 interface LabelProps {
   cx: number;
@@ -29,6 +30,7 @@ interface Technique {
 
 interface Book {
   title: string;
+  description: string;
   techniques: Technique[];
 }
 
@@ -104,6 +106,7 @@ const chartConfig = {
 const muye24Data: Muye24DataType = {
   book1: {
     title: "무예도보통지 제1권",
+    description: "찌르는 기법",
     techniques: [
       {
         name: "장창",
@@ -145,6 +148,7 @@ const muye24Data: Muye24DataType = {
   },
   book2: {
     title: "무예도보통지 제2권",
+    description: "베는 기법 1번째",
     techniques: [
       {
         name: "쌍수도",
@@ -180,6 +184,7 @@ const muye24Data: Muye24DataType = {
   },
   book3: {
     title: "무예도보통지 제3권",
+    description: "베는 기법 2번째",
     techniques: [
       {
         name: "제독검",
@@ -233,6 +238,7 @@ const muye24Data: Muye24DataType = {
   },
   book4: {
     title: "무예도보통지 제4권",
+    description: "치는 기법",
     techniques: [
       {
         name: "권법",
@@ -307,9 +313,18 @@ const Tooltip = ({
   name: string;
   description: string;
 }) => {
+  const { theme } = useTheme();
+
   return createPortal(
-    <div className="fixed top-1/3 left-1/2 -translate-x-1/2 bg-black/80 text-white p-6 rounded-lg shadow-lg w-[500px] z-[9999]">
-      <h3 className="font-bold mb-3 text-xl text-white">{name}</h3>
+    <div
+      className={`fixed top-1/3 left-1/2 -translate-x-1/2 backdrop-blur-sm shadow-lg rounded-xl z-[9999] p-6 w-[500px] transition-colors duration-200
+      ${
+        theme === "dark"
+          ? "bg-gray-800/90 border border-gray-700 text-gray-200"
+          : "bg-white/95 border border-gray-200 text-gray-800"
+      }`}
+    >
+      <h3 className="font-bold mb-3 text-xl">{name}</h3>
       <p className="text-lg leading-relaxed whitespace-pre-wrap">
         {description}
       </p>
@@ -322,6 +337,7 @@ const CustomSectionContent = (props: any) => {
   const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, payload } =
     props;
   const [isHovered, setIsHovered] = useState(false);
+  const { theme } = useTheme();
   const RADIAN = Math.PI / 180;
   const midAngle = (startAngle + endAngle) / 2;
   const radius = (innerRadius + outerRadius) / 2;
@@ -338,7 +354,11 @@ const CustomSectionContent = (props: any) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             fill
-            className="object-contain opacity-40 contrast-200 dark:invert"
+            className={`object-contain transition-all duration-200 ${
+              theme === "dark"
+                ? "opacity-40 contrast-200 dark:invert"
+                : "opacity-60 contrast-150"
+            }`}
           />
         </div>
       </foreignObject>
@@ -355,17 +375,37 @@ const CustomSectionContent = (props: any) => {
 };
 
 const DonutChart = ({ book }: { book: Book }) => {
+  const { theme } = useTheme();
   const techniqueData = generateTechniqueData(book);
   const allIndices = techniqueData.map((_, index) => index);
 
   return (
-    <Card className="p-6">
+    <Card
+      className={`p-6 backdrop-blur-md shadow-lg border-0 ${
+        theme === "dark"
+          ? "bg-gray-900/30 text-gray-100"
+          : "bg-white/30 text-gray-900"
+      }`}
+    >
       <CardHeader>
         <CardTitle>{book.title}</CardTitle>
+        <p
+          className={`text-lg ${
+            theme === "dark" ? "text-gray-300" : "text-gray-600"
+          }`}
+        >
+          {book.description}
+        </p>
       </CardHeader>
       <CardContent className="relative h-[800px]">
         <div className="relative w-full h-full flex justify-center items-center">
-          <ResponsiveContainer width="100%" height={800}>
+          <ResponsiveContainer
+            width="100%"
+            height={800}
+            className={`rounded-lg ${
+              theme === "dark" ? "bg-gray-800/50" : "bg-white/50"
+            }`}
+          >
             <PieChart>
               <Pie
                 data={techniqueData}
@@ -383,8 +423,16 @@ const DonutChart = ({ book }: { book: Book }) => {
                 {techniqueData.map((entry) => (
                   <Cell
                     key={`cell-${entry.index}`}
-                    fill="hsl(var(--card))"
-                    stroke="rgb(var(--card-foreground))"
+                    fill={
+                      theme === "dark"
+                        ? "hsl(var(--card-dark))"
+                        : "hsl(var(--card))"
+                    }
+                    stroke={
+                      theme === "dark"
+                        ? "rgb(var(--card-foreground-dark))"
+                        : "rgb(var(--card-foreground))"
+                    }
                     style={{
                       filter: "brightness(0.98)",
                     }}
