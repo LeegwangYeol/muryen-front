@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, memo, useMemo, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { ChartContainer } from "@/components/ui/chart";
@@ -384,10 +384,38 @@ const CustomSectionContent = (props: any) => {
   );
 };
 
+const TechniqueImages = memo(({ images }: { images: { image: string }[] }) => {
+  return (
+    <>
+      {images.map((item, index) => (
+        <div key={`${item.image}-${index}`} className="hidden">
+          <Image
+            src={item.image}
+            alt=""
+            width={500}
+            height={500}
+            priority={index < 4} // First 4 images load with priority
+          />
+        </div>
+      ))}
+    </>
+  );
+});
+TechniqueImages.displayName = "TechniqueImages";
+
 const DonutChart = ({ book }: { book: Book }) => {
   const { theme } = useTheme();
-  const techniqueData = generateTechniqueData(book);
-  const allIndices = techniqueData.map((_, index) => index);
+  const techniqueData = useMemo(() => generateTechniqueData(book), [book]);
+
+  useEffect(() => {
+    const imageUrls = techniqueData.map((item) => item.image);
+    imageUrls.forEach((url) => {
+      if (url) {
+        const img: HTMLImageElement = new window.Image();
+        img.src = url;
+      }
+    });
+  }, [techniqueData]);
 
   return (
     <Card
@@ -461,12 +489,13 @@ const DonutChart = ({ book }: { book: Book }) => {
                 startAngle={90}
                 endAngle={450}
                 dataKey="value"
-                activeIndex={allIndices}
+                activeIndex={techniqueData.map((_, index) => index)}
                 activeShape={CustomSectionContent}
               />
             </PieChart>
           </ResponsiveContainer>
         </div>
+        <TechniqueImages images={techniqueData} />
       </CardContent>
     </Card>
   );
