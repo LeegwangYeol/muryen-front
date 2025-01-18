@@ -14,7 +14,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const equipmentData = [
+interface Equipment {
+  title: string;
+  description: string;
+  details: string;
+  materials: string;
+  purchase: string;
+  makingMethod: string;
+}
+
+const equipmentData: Equipment[] = [
   {
     title: "전통 갑옷",
     description: "조선시대 전통 갑옷 복원품",
@@ -46,10 +55,12 @@ const equipmentData = [
 ];
 
 export default function Equipment() {
-  const [selectedEquipment, setSelectedEquipment] = useState(null);
-  const modalRef = useRef(null);
+  const [selectedEquipment, setSelectedEquipment] = useState<Equipment | null>(
+    null
+  );
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const openModal = (equipment) => {
+  const openModal = (equipment: Equipment) => {
     setSelectedEquipment(equipment);
   };
 
