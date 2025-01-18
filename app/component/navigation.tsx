@@ -27,7 +27,7 @@ const menuItems = [
     label: "24기",
   },
   {
-    href: "/component/know-how",
+    href: "/basic",
     icon: <BookOpen size={24} />,
     label: "기본기",
   },
@@ -55,6 +55,11 @@ const menuItems = [
     href: "/equipment",
     icon: <Shield size={24} />,
     label: "장비와 무구",
+  },
+  {
+    href: "/sparring",
+    icon: <Shield size={24} />,
+    label: "대련",
   },
 ];
 
