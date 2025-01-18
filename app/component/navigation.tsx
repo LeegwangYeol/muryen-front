@@ -144,7 +144,7 @@ export default function Navigation({
             </li>
           ))}
           <li>
-            <button
+            {/* <button
               type="button"
               onClick={() => setIsVideoModalOpen(true)}
               className={`w-full text-left flex items-center gap-4 p-4 rounded-lg transition-all duration-300 group ${
@@ -159,7 +159,7 @@ export default function Navigation({
               {isExpanded && (
                 <span className="group-hover:animate-shake">대련</span>
               )}
-            </button>
+            </button> */}
           </li>
         </ul>
       </nav>
