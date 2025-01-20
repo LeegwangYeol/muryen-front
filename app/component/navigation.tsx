@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Home,
@@ -16,6 +16,7 @@ import {
   Scissors,
   Sun,
   Moon,
+  LogOut,
 } from "lucide-react";
 import VideoModal from "./VideoModal";
 import { useTheme } from "../context/theme-context";
@@ -71,6 +72,38 @@ export default function Navigation({
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const { theme, toggleTheme } = useTheme();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // 쿠키에서 accessToken 확인
+    console.log("accessToken", document.cookie);
+    const hasToken = document.cookie.includes("accessToken");
+    console.log("hasToken", hasToken);
+    setIsLoggedIn(hasToken);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("로그아웃 실패");
+      }
+
+      // 로그아웃 성공
+      setIsLoggedIn(false);
+      alert("로그아웃 되었습니다.");
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Logout error:", error);
+      alert("로그아웃 처리 중 오류가 발생했습니다.");
+    }
+  };
 
   const handleExpand = (expanded: boolean) => {
     setIsExpanded(expanded);
@@ -143,24 +176,25 @@ export default function Navigation({
               </Link>
             </li>
           ))}
-          <li>
-            {/* <button
-              type="button"
-              onClick={() => setIsVideoModalOpen(true)}
-              className={`w-full text-left flex items-center gap-4 p-4 rounded-lg transition-all duration-300 group ${
-                theme === "dark"
-                  ? "hover:bg-primary/90 hover:text-primary-foreground"
-                  : "hover:bg-secondary/90 hover:text-secondary-foreground"
-              }`}
-            >
-              <div className="group-hover:animate-shake">
-                <Swords size={24} />
-              </div>
-              {isExpanded && (
-                <span className="group-hover:animate-shake">대련</span>
-              )}
-            </button> */}
-          </li>
+          {isLoggedIn && (
+            <li>
+              <button
+                onClick={handleLogout}
+                className={`w-full flex items-center gap-4 p-4 rounded-lg mb-2 transition-all duration-300 group ${
+                  theme === "dark"
+                    ? "hover:bg-primary/90 hover:text-primary-foreground"
+                    : "hover:bg-secondary/90 hover:text-secondary-foreground"
+                }`}
+              >
+                <div className="group-hover:animate-shake">
+                  <LogOut size={24} />
+                </div>
+                {isExpanded && (
+                  <span className="group-hover:animate-shake">로그아웃</span>
+                )}
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
       <VideoModal
