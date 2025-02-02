@@ -117,17 +117,6 @@ export default function LoginPage() {
           ></div>
         </div>
 
-        <Button
-          className={`w-full mt-6 font-bold py-2 px-4 rounded-md flex items-center justify-center transition duration-300 ease-in-out ${
-            theme === "dark"
-              ? "bg-blue-600 hover:bg-blue-700 text-white"
-              : "bg-blue-600 hover:bg-blue-700 text-white"
-          }`}
-        >
-          <Apple className="mr-2" />
-          Apple로 로그인
-        </Button>
-
         <div className="mt-6 text-center">
           <a
             href="#"

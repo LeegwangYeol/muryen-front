@@ -8,7 +8,7 @@ const referenceData = [
   {
     title: "무예도보통지",
     overview: {
-      image: "/reference/muyedobotongji.jpg",
+      image: "/dobo.jpg",
       description:
         "조선 후기의 대표적인 무예 교범으로, 1790년(정조 14년)에 편찬되었습니다.",
     },
@@ -16,18 +16,6 @@ const referenceData = [
       "24반무예의 기본이 되는 교본",
       "조선시대 무예의 정수를 담고 있음",
       "실전적인 무예 기술을 체계적으로 정리",
-    ],
-  },
-  {
-    title: "조선무예교본",
-    overview: {
-      image: "/reference/joseon-martial-arts.jpg",
-      description: "현대적 관점에서 재해석한 조선시대 무예 교본입니다.",
-    },
-    details: [
-      "현대적 해석과 응용방법 수록",
-      "실용적인 훈련 방법론 제시",
-      "전통 무예의 현대화 방안 제안",
     ],
   },
 ];

@@ -25,7 +25,7 @@ const menuItems = [
   {
     href: "/basic-sense",
     icon: <Feather size={24} />,
-    label: "24기",
+    label: "24반",
   },
   {
     href: "/basic",
@@ -43,6 +43,11 @@ const menuItems = [
     label: "베기",
   },
   {
+    href: "/sparring",
+    icon: <Shield size={24} />,
+    label: "대련",
+  },
+  {
     href: "/daily",
     icon: <Dumbbell size={24} />,
     label: "수련일지",
@@ -52,16 +57,11 @@ const menuItems = [
     icon: <FileText size={24} />,
     label: "참고 자료",
   },
-  {
-    href: "/equipment",
-    icon: <Shield size={24} />,
-    label: "장비와 무구",
-  },
-  {
-    href: "/sparring",
-    icon: <Shield size={24} />,
-    label: "대련",
-  },
+  // {
+  //   href: "/equipment",
+  //   icon: <Shield size={24} />,
+  //   label: "장비와 무구",
+  // },
 ];
 
 export default function Navigation({
