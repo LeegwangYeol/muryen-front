@@ -45,58 +45,112 @@ export default function CuttingPage() {
 
   return (
     <MainLayout>
-      <motion.main
-        className={`flex min-h-screen flex-col items-center justify-between p-24 ${
-          theme === "light" ? "bg-white text-black" : "bg-gray-900 text-white"
-        }`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="text-4xl font-bold mb-8">{cuttingData.title}</h1>
+      <div className="container mx-auto px-4 py-8">
+        <motion.h1
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          className={`text-4xl font-bold mb-12 text-center ${
+            theme === "dark" ? "text-white" : "text-gray-900"
+          }`}
+        >
+          {cuttingData.title}
+        </motion.h1>
 
         <motion.section
-          className="mb-12 p-6 bg-opacity-20 bg-gray-200 rounded-lg shadow-lg w-full"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.1 }}
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className={`p-8 rounded-lg ${
+            theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
+          }`}
         >
-          <div className="flex flex-col md:flex-row items-center mb-4">
-            <Image
-              src={cuttingData.overview.image}
-              alt={cuttingData.title}
-              width={300}
-              height={200}
-              className="rounded-lg mb-4 md:mb-0 md:mr-6"
-            />
-            <p className="text-lg">{cuttingData.overview.description}</p>
+          <div className="flex flex-col md:flex-row items-start gap-8">
+            <div className="md:w-1/2">
+              <Image
+                src={cuttingData.overview.image}
+                alt={cuttingData.title}
+                width={500}
+                height={300}
+                className="rounded-lg object-cover"
+              />
+            </div>
+            <div className="md:w-1/2 space-y-6">
+              <p
+                className={`text-lg ${
+                  theme === "dark" ? "text-gray-200" : "text-gray-600"
+                }`}
+              >
+                {cuttingData.overview.description}
+              </p>
+            </div>
           </div>
+        </motion.section>
 
-          {cuttingData.sections.map((section, sectionIndex) => (
-            <div key={sectionIndex} className="mb-6">
-              <h2 className="text-2xl font-semibold mb-3">{section.title}</h2>
-              {section.subsections.map((subsection, subsectionIndex) => (
-                <div key={subsectionIndex} className="mb-4">
-                  <h3 className="text-xl font-medium mb-2">
+        {cuttingData.sections.map((section, index) => (
+          <motion.section
+            key={section.title}
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, delay: index * 0.1 }}
+            className={`mt-12 p-8 rounded-lg ${
+              theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
+            }`}
+          >
+            <h2
+              className={`text-2xl font-bold mb-6 ${
+                theme === "dark" ? "text-white" : "text-gray-900"
+              }`}
+            >
+              {section.title}
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {section.subsections.map((subsection, idx) => (
+                <motion.div
+                  key={subsection.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="space-y-3"
+                >
+                  <h3
+                    className={`text-xl font-semibold ${
+                      theme === "dark" ? "text-white" : "text-gray-900"
+                    }`}
+                  >
                     {subsection.title}
                   </h3>
                   {Array.isArray(subsection.content) ? (
-                    <ul className="list-disc list-inside">
-                      {subsection.content.map((item, itemIndex) => (
-                        <li key={itemIndex} className="mb-1">
+                    <ul className="space-y-2">
+                      {subsection.content.map((item, itemIdx) => (
+                        <li
+                          key={itemIdx}
+                          className={`${
+                            theme === "dark" ? "text-gray-200" : "text-gray-600"
+                          }`}
+                        >
                           {item}
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <p>{subsection.content}</p>
+                    <p
+                      className={`${
+                        theme === "dark" ? "text-gray-200" : "text-gray-600"
+                      }`}
+                    >
+                      {subsection.content}
+                    </p>
                   )}
-                </div>
+                </motion.div>
               ))}
             </div>
-          ))}
-        </motion.section>
-      </motion.main>
+          </motion.section>
+        ))}
+      </div>
     </MainLayout>
   );
 }
