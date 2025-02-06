@@ -3,6 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 import VantaBackground from "./component/vanta-main-background";
 import { ThemeProvider } from "./context/theme-context";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "武로 緣을 잇다",
@@ -41,9 +42,11 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <ThemeProvider>
-          <VantaBackground>{children}</VantaBackground>
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider>
+            <VantaBackground>{children}</VantaBackground>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
