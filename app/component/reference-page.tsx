@@ -97,7 +97,7 @@ export default function ReferencePage() {
                           viewport={{ once: true }}
                           transition={{
                             duration: 0.5,
-                            delay: detailIndex * 0.1,
+                            delay: detailIndex * 0.2,
                           }}
                           className={`flex items-center space-x-2 ${
                             theme === "dark" ? "text-gray-200" : "text-gray-600"

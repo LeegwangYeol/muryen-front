@@ -8,7 +8,7 @@ import { MainLayout } from "@/components/layout/main-layout";
 const basicPrinciplesData = {
   title: "기본기의 본질",
   overview: {
-    image: "/reference/basic-principles.jpg",
+    image: "/images/basic.avif",
     description:
       "기본기란 병기를 다루는 시작입니다. 치고 베는 것에 대한 내용을 담고 있습니다. 단병기(검)와 장병기(창)에 있어서 가장 중요한 것은 몸의 자연스러운 움직임이에요.",
   },
