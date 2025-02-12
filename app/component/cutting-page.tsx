@@ -8,7 +8,7 @@ import { MainLayout } from "@/components/layout/main-layout";
 const cuttingData = {
   title: "베기의 특성과 의미",
   overview: {
-    image: "/reference/cutting.jpg",
+    image: "/images/cutting.png",
     description:
       "베기는 24반 무예에서 기량을 키우는 핵심적인 수련 방법 중 하나예요 기본기와 투로를 바탕으로 실제 상황에서의 활용을 익히는 과정이랍니다.",
   },

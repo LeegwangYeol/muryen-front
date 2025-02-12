@@ -8,7 +8,7 @@ import { MainLayout } from "@/components/layout/main-layout";
 const sparringData = {
   title: "대련의 특성과 의미",
   overview: {
-    image: "/images/sparring.jpeg",
+    image: "/images/sparring.png",
     description:
       "대련은 실제 상황에서의 거리감과 타이밍을 익히는 중요한 과정이에요. 단순한 형식 수련을 넘어서 상황에 유동적으로 대응하는 능력을 키울 수 있어요.",
   },

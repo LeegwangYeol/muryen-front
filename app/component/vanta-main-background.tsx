@@ -24,7 +24,7 @@ export default function VantaBackground({
           if (vantaEffect.current) {
             vantaEffect.current.destroy();
           }
-          vantaEffect.current = window.VANTA.NET({
+          vantaEffect.current = window.VANTA.CELLS({
             el: "#vanta-bg",
             mouseControls: true,
             touchControls: true,
@@ -32,13 +32,8 @@ export default function VantaBackground({
             minHeight: 200.0,
             minWidth: 200.0,
             scale: 1.0,
-            scaleMobile: 1.0,
-            backgroundColor: theme === 'dark' ? 0x1a1a1a : 0xffffff,
-            points: 11.0,
-            maxDistance: 29.0,
-            color: theme === 'dark' ? 0x60a5fa : 0x3b82f6,
-            spacing: 20.0,
-            showDots: false,
+            color1: theme === "dark" ? 0x1a1a1a : 0xffffff,
+            color2: theme === "dark" ? 0x646027 : 0x4e7b00,
           });
         }
       };
@@ -54,7 +49,7 @@ export default function VantaBackground({
       threeScript.onload = () => {
         const vantaScript = document.createElement("script");
         vantaScript.src =
-          "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js";
+          "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js";
         vantaScript.async = true;
         vantaScript.onload = initVanta;
         document.body.appendChild(vantaScript);

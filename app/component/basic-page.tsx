@@ -8,7 +8,7 @@ import { MainLayout } from "@/components/layout/main-layout";
 const basicPrinciplesData = {
   title: "기본기의 본질",
   overview: {
-    image: "/images/basic.avif",
+    // image: "/images/basic.avif",
     description:
       "기본기란 병기를 다루는 시작입니다. 치고 베는 것에 대한 내용을 담고 있습니다. 단병기(검)와 장병기(창)에 있어서 가장 중요한 것은 몸의 자연스러운 움직임이에요.",
   },
@@ -91,13 +91,13 @@ export default function BasicPage() {
         >
           <div className="flex flex-col md:flex-row items-start gap-8">
             <div className="md:w-1/2">
-              <Image
+              {/* <Image
                 src={basicPrinciplesData.overview.image}
                 alt={basicPrinciplesData.title}
-                width={500}
-                height={300}
+                width={200}
+                height={200}
                 className="rounded-lg object-cover"
-              />
+              /> */}
             </div>
             <div className="md:w-1/2 space-y-6">
               <p
