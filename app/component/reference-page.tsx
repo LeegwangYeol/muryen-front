@@ -18,6 +18,20 @@ const referenceData = [
       "실전적인 무예 기술을 체계적으로 정리",
     ],
   },
+  {
+    title: "두정갑",
+    overview: {
+      image: "/images/armour.png",
+      description:
+        "브리간딘을 개조한 갑주. 기본 방호구 중 하나로 쓰고 있습니다.",
+    },
+    details: [
+      "본격적인 방호구",
+      "수련은 평상복 및 갑주를 입은 상태에서도 이뤄짐",
+      "평상복, 갑주 어느쪽을 입던 동일한 움직임이 나와야함",
+      "https://armours.pro/",
+    ],
+  },
 ];
 
 export default function ReferencePage() {

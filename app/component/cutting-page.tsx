@@ -62,7 +62,7 @@ export default function CuttingPage() {
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 1 }}
           className={`p-8 rounded-lg ${
             theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
           }`}
