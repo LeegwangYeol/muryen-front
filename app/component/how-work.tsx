@@ -218,10 +218,10 @@ export default function HowWork() {
             >
               <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
                 <Image
-                  src="/images/hero.jpeg"
+                  src="/images/cutting.png"
                   alt="베기 이미지"
                   fill
-                  className="object-cover hover:scale-110 transition-transform duration-300"
+                  className="object-contain hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <h3
@@ -243,12 +243,12 @@ export default function HowWork() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="p-6 rounded-lg"
             >
-              <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
+              <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
                 <Image
-                  src="/images/hero.jpeg"
+                  src="/images/pattern.png"
                   alt="투로 이미지"
                   fill
-                  className="object-cover hover:scale-110 transition-transform duration-300"
+                  className="object-contain hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <h3
@@ -272,10 +272,10 @@ export default function HowWork() {
             >
               <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
                 <Image
-                  src="/images/hero.jpeg"
+                  src="/images/sparring.png"
                   alt="대련 이미지"
                   fill
-                  className="object-cover hover:scale-110 transition-transform duration-300"
+                  className="object-contain hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <h3
@@ -303,7 +303,7 @@ export default function HowWork() {
                 src="/images/hero.jpeg"
                 alt="기본기 이미지"
                 fill
-                className="object-cover hover:scale-110 transition-transform duration-300"
+                className="object-contain hover:scale-110 transition-transform duration-300"
               />
             </div>
             <h3

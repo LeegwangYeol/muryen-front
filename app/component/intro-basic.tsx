@@ -331,6 +331,7 @@ const Tooltip = ({
       >
         {name}
       </h3>
+
       <p
         className={`text-lg leading-relaxed whitespace-pre-wrap ${
           theme === "dark" ? "text-gray-300" : "text-gray-700"
