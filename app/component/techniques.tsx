@@ -56,11 +56,11 @@ const techniques: Technique[] = [
   },
   {
     id: "6",
-    title: "대련 기초",
+    title: "<span className='highlight-word'>대련</span> 기초",
     description:
-      "실전 대련을 위한 기본 동작들을 배웁니다. 거리 조절, 타이밍, 그리고 상대방의 동작을 읽는 법을 익힙니다.",
+      "실전 <span className='highlight-word'>대련</span>을 위한 기본 동작들을 배웁니다. 거리 조절, 타이밍, 그리고 상대방의 동작을 읽는 법을 익힙니다.",
     imageUrl: "/images/sparring-basic.jpg",
-    category: "대련",
+    category: "<span className='highlight-word'>대련</span>",
   },
   {
     id: "7",
@@ -68,7 +68,7 @@ const techniques: Technique[] = [
     description:
       "상대의 공격을 막고 즉각적으로 반격하는 기술입니다. 빠른 판단력과 반응속도가 요구됩니다.",
     imageUrl: "/images/defense.jpg",
-    category: "대련",
+    category: "<span className='highlight-word'>대련</span>",
   },
   {
     id: "8",
@@ -76,7 +76,7 @@ const techniques: Technique[] = [
     description:
       "적절한 거리를 유지하며 공방을 주고받는 연습입니다. 무예에서 가장 중요한 거리감을 익힙니다.",
     imageUrl: "/images/distance.jpg",
-    category: "대련",
+    category: "<span className='highlight-word'>대련</span>",
   },
   {
     id: "9",
@@ -172,16 +172,19 @@ export default function Techniques() {
         )}
       </div>
       <div className="p-4 bg-white transition-colors duration-300 group-hover:bg-gray-50">
-        <h3 className="text-lg font-semibold mb-2 transition-colors duration-300 group-hover:text-blue-600">
-          {technique.title}
-        </h3>
-        <p className="text-sm text-gray-600 line-clamp-2 transition-colors duration-300 group-hover:text-gray-700">
-          {technique.description}
-        </p>
+        <h3
+          className="text-lg font-semibold mb-2 transition-colors duration-300 group-hover:text-blue-600"
+          dangerouslySetInnerHTML={{ __html: technique.title }}
+        />
+        <p
+          className="text-sm text-gray-600 line-clamp-2 transition-colors duration-300 group-hover:text-gray-700"
+          dangerouslySetInnerHTML={{ __html: technique.description }}
+        />
         <div className="mt-3 flex items-center justify-between text-gray-500">
-          <span className="text-xs bg-gray-100 px-2 py-1 rounded-full transition-all duration-300 group-hover:bg-blue-50 group-hover:text-blue-600">
-            {technique.category}
-          </span>
+          <span
+            className="text-xs bg-gray-100 px-2 py-1 rounded-full transition-all duration-300 group-hover:bg-blue-50 group-hover:text-blue-600"
+            dangerouslySetInnerHTML={{ __html: technique.category }}
+          />
           <div className="flex gap-2">
             <BookmarkPlus className="w-5 h-5 cursor-pointer hover:text-gray-700 transition-transform duration-300 hover:scale-110" />
             <Share2 className="w-5 h-5 cursor-pointer hover:text-gray-700 transition-transform duration-300 hover:scale-110" />
@@ -229,16 +232,23 @@ export default function Techniques() {
                 />
               </div>
               <div>
-                <DialogTitle className="text-2xl font-bold mb-4">
-                  {selectedTechnique.title}
-                </DialogTitle>
-                <p className="text-gray-600 mb-6">
-                  {selectedTechnique.description}
-                </p>
+                <DialogTitle
+                  className="text-2xl font-bold mb-4"
+                  dangerouslySetInnerHTML={{ __html: selectedTechnique.title }}
+                />
+                <p
+                  className="text-gray-600 mb-6"
+                  dangerouslySetInnerHTML={{
+                    __html: selectedTechnique.description,
+                  }}
+                />
                 <div className="flex items-center gap-4">
-                  <span className="bg-gray-100 px-3 py-1 rounded-full text-sm">
-                    {selectedTechnique.category}
-                  </span>
+                  <span
+                    className="bg-gray-100 px-3 py-1 rounded-full text-sm"
+                    dangerouslySetInnerHTML={{
+                      __html: selectedTechnique.category,
+                    }}
+                  />
                   <div className="flex gap-2">
                     <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
                       <BookmarkPlus className="w-5 h-5" />

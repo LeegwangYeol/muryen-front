@@ -56,7 +56,7 @@ export default function LoginPage() {
         <div className="flex flex-col items-center mb-6">
           <Activity className="w-16 h-16 text-[rgb(var(--accent))] mb-4 animate-pulse" />
           <h1 className="text-2xl font-bold text-[rgb(var(--foreground))]">
-            무련
+            <span className="highlight-word">무련</span>
           </h1>
         </div>
 

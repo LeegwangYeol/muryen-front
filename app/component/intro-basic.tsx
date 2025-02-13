@@ -177,7 +177,7 @@ const muye24Data: Muye24DataType = {
       {
         name: "교전",
         description:
-          "조선의 검선 김체건이 왜검을 응용하여 격검하도록 만든 것이며, 무예 24기 가운데 가장 늦게 완성된 검법이다. 압(壓)과 접(接)을 적절히 응용하여 상대의 검을 제압한다.",
+          "조선의 검선 김체건이 왜검을 응용하여 <span className='highlight-word'>격검</span>하도록 만든 것이며, 무예 24기 가운데 가장 늦게 완성된 검법이다. 압(壓)과 접(接)을 적절히 응용하여 상대의 검을 제압한다.",
         image: "/images/foot/muye24ki_core_13_gyojun.gif",
       },
     ],

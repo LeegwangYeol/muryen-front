@@ -6,11 +6,11 @@ import { useTheme } from "../context/theme-context";
 import { MainLayout } from "@/components/layout/main-layout";
 
 const sparringData = {
-  title: "대련의 특성과 의미",
+  title: "<span className='highlight-word'>대련</span>의 특성과 의미",
   overview: {
     image: "/images/sparring.png",
     description:
-      "대련은 실제 상황에서의 거리감과 타이밍을 익히는 중요한 과정이에요. 단순한 형식 수련을 넘어서 상황에 유동적으로 대응하는 능력을 키울 수 있어요.",
+      "<span className='highlight-word'>대련</span>은 실제 상황에서의 거리감과 타이밍을 익히는 중요한 과정이에요. 단순한 형식 수련을 넘어서 상황에 유동적으로 대응하는 능력을 키울 수 있어요.",
   },
   sections: [
     {
@@ -45,11 +45,11 @@ const sparringData = {
           ],
         },
         {
-          title: "대련의 단계",
+          title: "<span className='highlight-word'>대련</span>의 단계",
           content: [
-            "기본 대련: 정해진 동작 연습",
-            "자유 대련: 다양한 상황 대처",
-            "여러 상대와의 대련",
+            "기본 <span className='highlight-word'>대련</span>: 정해진 동작 연습",
+            "자유 <span className='highlight-word'>대련</span>: 다양한 상황 대처",
+            "여러 상대와의 <span className='highlight-word'>대련</span>",
             "불리한 조건 극복 훈련",
           ],
         },
@@ -61,7 +61,7 @@ const sparringData = {
         {
           title: "균형잡힌 접근",
           content:
-            "베기와 대련은 기본기와 투로를 바탕으로 해야 해요. 이를 통해 실제 상황에서도 자연스럽게 기술을 구사할 수 있게 되죠.",
+            "베기와 <span className='highlight-word'>대련</span>은 기본기와 투로를 바탕으로 해야 해요. 이를 통해 실제 상황에서도 자연스럽게 기술을 구사할 수 있게 되죠.",
         },
         {
           title: "항상 준비된 마음가짐",
@@ -75,7 +75,7 @@ const sparringData = {
         {
           title: "마음의 수련",
           content:
-            "전통 무예에서 베기와 대련은 단순한 기술 연마가 아닌, 마음을 닦는 과정이기도 해요. 힘든 수련과정을 통해 자신을 성찰하고, 더 나아가 내 앞의 상대 역시 나의 반대편에 서있기 위해 부단한 노력을 했음을 인정하고 존중할 줄 아는 사람이 되는 것 또한 성숙한 무예인의 자세랍니다.",
+            "전통 무예에서 베기와 <span className='highlight-word'>대련</span>은 단순한 기술 연마가 아닌, 마음을 닦는 과정이기도 해요. 힘든 수련과정을 통해 자신을 성찰하고, 더 나아가 내 앞의 상대 역시 나의 반대편에 서있기 위해 부단한 노력을 했음을 인정하고 존중할 줄 아는 사람이 되는 것 또한 성숙한 무예인의 자세랍니다.",
         },
       ],
     },
@@ -95,7 +95,7 @@ export default function SparringPage() {
             theme === "dark" ? "text-white" : "text-gray-900"
           }`}
         >
-          {sparringData.title}
+          <span className="highlight-word">{sparringData.title}</span>
         </motion.h1>
 
         <motion.section
@@ -123,7 +123,9 @@ export default function SparringPage() {
                   theme === "dark" ? "text-gray-200" : "text-gray-600"
                 }`}
               >
-                {sparringData.overview.description}
+                <span className="highlight-word">
+                  {sparringData.overview.description}
+                </span>
               </p>
             </div>
           </div>

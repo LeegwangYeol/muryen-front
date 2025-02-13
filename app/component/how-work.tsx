@@ -23,26 +23,26 @@ export default function HowWork() {
             isDark ? "text-white" : "text-gray-900"
           }`}
         >
-          어떻게 수련할까요?
+          어떻게 <span className="highlight-word">무련</span>할까요?
         </h2>
         <p
           className={`text-lg leading-relaxed max-w-2xl mb-4 ${
             isDark ? "text-gray-300" : "text-gray-700"
           }`}
         >
-          무련의 수련은 단순한 기술의 습득을 넘어, 몸과 마음의 조화로운 발전을
-          추구합니다. 우리는 이를 '수련의 삼각형'이라는 체계적인 방법론으로
-          구현하고 있습니다.
+          <span className="highlight-word">무련</span>의 수련은 단순한 기술의
+          습득을 넘어, 몸과 마음의 조화로운 발전을 추구합니다. 우리는 이를
+          '수련의 삼각형'이라는 체계적인 방법론으로 구현하고 있습니다.
         </p>
         <p
           className={`text-lg leading-relaxed max-w-2xl ${
             isDark ? "text-gray-300" : "text-gray-700"
           }`}
         >
-          베기, 투로, 대련이라는 세 가지 핵심 요소를 통해 수련자는 단계적으로
-          성장하며, 이 모든 것의 중심에는 견고한 기본기가 자리잡고 있습니다.
-          각각의 요소들은 독립적이면서도 서로 긴밀하게 연결되어 있어, 진정한
-          무예의 길을 열어줍니다.
+          베기, 투로, <span className="highlight-word">대련</span>이라는 세 가지
+          핵심 요소를 통해 수련자는 단계적으로 성장하며, 이 모든 것의 중심에는
+          견고한 기본기가 자리잡고 있습니다. 각각의 요소들은 독립적이면서도 서로
+          긴밀하게 연결되어 있어, 진정한 무예의 길을 열어줍니다.
         </p>
       </motion.div>
 
@@ -178,7 +178,7 @@ export default function HowWork() {
             className="text-lg font-semibold"
             dominantBaseline="middle"
           >
-            대련
+            <span className="highlight-word">대련</span>
           </text>
           <text
             x="250"
@@ -203,9 +203,11 @@ export default function HowWork() {
           }`}
         >
           <p className="text-lg leading-relaxed">
-            무련의 수련 체계는 베기, 투로, 대련의 세 가지 축을 중심으로 구성되어
-            있습니다. 이 세 가지 요소의 중심에는 기본기가 있으며, 이를 바탕으로
-            각 요소가 조화롭게 통합될 때 진정한 수련의 완성을 이룰 수 있습니다.
+            <span className="highlight-word">무련</span>의 수련 체계는 베기,
+            투로, <span className="highlight-word">대련</span>의 세 가지 축을
+            중심으로 구성되어 있습니다. 이 세 가지 요소의 중심에는 기본기가
+            있으며, 이를 바탕으로 각 요소가 조화롭게 통합될 때 진정한 수련의
+            완성을 이룰 수 있습니다.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
@@ -273,7 +275,7 @@ export default function HowWork() {
               <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
                 <Image
                   src="/images/sparring.png"
-                  alt="대련 이미지"
+                  alt={"대련 이미지"}
                   fill
                   className="object-contain hover:scale-110 transition-transform duration-300"
                 />
@@ -283,7 +285,7 @@ export default function HowWork() {
                   isDark ? "text-white" : "text-gray-900"
                 }`}
               >
-                대련
+                <span className="highlight-word">대련</span>
               </h3>
               <p className="text-base">
                 실전적인 상황에서 기술을 적용하며 실전 감각을 키웁니다.
@@ -315,7 +317,8 @@ export default function HowWork() {
             </h3>
             <p className="text-base">
               모든 수련의 근간이 되는 기본 동작과 자세를 연마합니다. 탄탄한
-              기본기는 베기, 투로, 대련의 모든 영역에서 필수적인 요소입니다.
+              기본기는 베기, 투로, <span className="highlight-word">대련</span>
+              의 모든 영역에서 필수적인 요소입니다.
             </p>
           </motion.div>
         </motion.div>

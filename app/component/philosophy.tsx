@@ -41,16 +41,17 @@ export default function Philosophy() {
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
-            무련이란?
+            <span className="highlight-word">무련</span>이란?
           </h2>
           <p
             className={`text-xl mb-12 max-w-2xl mx-auto leading-relaxed ${
               theme === "dark" ? "text-gray-200" : "text-gray-600"
             }`}
           >
-            무련은 무예 24반 경당 소속의 사회인 동아리에요. 우리는
-            무예도보통지의 가르침을 기초로 기술의 습득을 넘어, 이를 어떻게
-            계승하고 발전시켜 현대의 무예에 적응 및 적용할지를 고민해요.
+            <span className="highlight-word">무련</span>은 무예 24반 경당 소속의
+            사회인 동아리에요. 우리는 무예도보통지의 가르침을 기초로 기술의
+            습득을 넘어, 이를 어떻게 계승하고 발전시켜 현대의 무예에 적응 및
+            적용할지를 고민해요.
           </p>
         </motion.div>
         <div className="space-y-8">
