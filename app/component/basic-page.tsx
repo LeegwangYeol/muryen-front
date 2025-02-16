@@ -6,7 +6,7 @@ import { useTheme } from "../context/theme-context";
 import { MainLayout } from "@/components/layout/main-layout";
 
 const basicPrinciplesData = {
-  title: "기본기의 본질",
+  title: "기본기란?",
   overview: {
     // image: "/images/basic.avif",
     description:

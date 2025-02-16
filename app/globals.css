@@ -9,7 +9,7 @@
   --priㅌmary: 74, 74, 74;
   --secondary: 107, 107, 107;
   --accent: 59, 130, 246;
-  --highlight-color: #3b82f6; /* 파란색 */
+  --highlight-color: #096147; /* 파란색 */
 }
 
 .theme-dark {
@@ -161,7 +161,7 @@ body {
 
 .highlight-word {
   color: var(--highlight-color);
-  font-weight: 500;
+  font-weight: 700;
 }
 
 /* Custom styles for navigation */
