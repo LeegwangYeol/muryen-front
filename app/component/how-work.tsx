@@ -12,9 +12,8 @@ export default function HowWork() {
   return (
     <div className="container mx-auto px-4 py-16 min-h-screen flex flex-col items-center justify-center">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="text-center max-w-4xl mb-16"
       >
@@ -47,103 +46,49 @@ export default function HowWork() {
       </motion.div>
 
       <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className={`text-4xl font-bold mb-12 text-center ${
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className={`text-xl font-semibold mb-8 text-center ${
           isDark ? "text-white" : "text-gray-900"
         }`}
       >
         수련의 삼각형
       </motion.h1>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="flex flex-col items-center justify-center max-w-4xl mx-auto"
-      >
-        <svg
-          width="500"
+      <div className="relative w-full max-w-4xl">
+        {/* SVG Triangle */}
+        <motion.svg
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          width="100%"
           height="500"
           viewBox="0 0 500 500"
-          className="w-full max-w-2xl"
+          className="mb-10"
         >
           {/* Triangle */}
-          <polygon
-            points="250,50 50,450 450,450"
+          <motion.path
+            d="M250 50 L450 450 L50 450 Z"
             fill="none"
             stroke={isDark ? "#fff" : "#000"}
-            strokeWidth="3"
-            className="transition-colors duration-200"
+            strokeWidth="2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
           />
 
-          {/* Center circle */}
-          <circle
+          {/* Center Circle for 기본기 */}
+          <motion.circle
             cx="250"
-            cy="300"
-            r="40"
-            fill={isDark ? "#1a1a1a" : "#fff"}
-            stroke={isDark ? "#fff" : "#000"}
-            strokeWidth="3"
-            className="transition-colors duration-200"
-          />
-
-          {/* Axes */}
-          <line
-            x1="250"
-            y1="50"
-            x2="250"
-            y2="300"
-            stroke={isDark ? "#fff" : "#000"}
-            strokeWidth="2"
-            strokeDasharray="5,5"
-          />
-          <line
-            x1="50"
-            y1="450"
-            x2="250"
-            y2="300"
-            stroke={isDark ? "#fff" : "#000"}
-            strokeWidth="2"
-            strokeDasharray="5,5"
-          />
-          <line
-            x1="450"
-            y1="450"
-            x2="250"
-            y2="300"
-            stroke={isDark ? "#fff" : "#000"}
-            strokeWidth="2"
-            strokeDasharray="5,5"
-          />
-
-          {/* Circles at corners */}
-          <circle
-            cx="250"
-            cy="50"
+            cy="250"
             r="35"
             fill={isDark ? "#1a1a1a" : "#fff"}
             stroke={isDark ? "#fff" : "#000"}
             strokeWidth="3"
-          />
-          <circle
-            cx="50"
-            cy="450"
-            r="35"
-            fill={isDark ? "#1a1a1a" : "#fff"}
-            stroke={isDark ? "#fff" : "#000"}
-            strokeWidth="3"
-          />
-          <circle
-            cx="450"
-            cy="450"
-            r="35"
-            fill={isDark ? "#1a1a1a" : "#fff"}
-            stroke={isDark ? "#fff" : "#000"}
-            strokeWidth="3"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
           />
 
           {/* Labels */}
@@ -178,11 +123,11 @@ export default function HowWork() {
             className="text-lg font-semibold"
             dominantBaseline="middle"
           >
-            <span className="highlight-word">대련</span>
+            대련
           </text>
           <text
             x="250"
-            y="300"
+            y="250"
             dy="8"
             textAnchor="middle"
             fill={isDark ? "#fff" : "#000"}
@@ -191,119 +136,49 @@ export default function HowWork() {
           >
             기본기
           </text>
-        </svg>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className={`mt-24 space-y-8 text-center max-w-2xl ${
-            isDark ? "text-gray-300" : "text-gray-700"
-          }`}
-        >
-          <p className="text-lg leading-relaxed">
-            <span className="highlight-word">무련</span>의 수련 체계는 베기,
-            투로, <span className="highlight-word">대련</span>의 세 가지 축을
-            중심으로 구성되어 있습니다. 이 세 가지 요소의 중심에는 기본기가
-            있으며, 이를 바탕으로 각 요소가 조화롭게 통합될 때 진정한 수련의
-            완성을 이룰 수 있습니다.
-          </p>
+          {/* Connecting Lines */}
+          <line
+            x1="250"
+            y1="250"
+            x2="250"
+            y2="50"
+            stroke={isDark ? "#fff" : "#000"}
+            strokeWidth="1"
+            strokeDasharray="5,5"
+          />
+          <line
+            x1="250"
+            y1="250"
+            x2="50"
+            y2="450"
+            stroke={isDark ? "#fff" : "#000"}
+            strokeWidth="1"
+            strokeDasharray="5,5"
+          />
+          <line
+            x1="250"
+            y1="250"
+            x2="450"
+            y2="450"
+            stroke={isDark ? "#fff" : "#000"}
+            strokeWidth="1"
+            strokeDasharray="5,5"
+          />
+        </motion.svg>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="p-6 rounded-lg"
-            >
-              <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
-                <Image
-                  src="/images/cutting.png"
-                  alt="베기 이미지"
-                  fill
-                  className="object-contain hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <h3
-                className={`text-xl font-semibold mb-3 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                베기
-              </h3>
-              <p className="text-base">
-                검을 통한 절단의 기술을 연마하며, 정확성과 힘의 조절을 배웁니다.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="p-6 rounded-lg"
-            >
-              <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
-                <Image
-                  src="/images/pattern.png"
-                  alt="투로 이미지"
-                  fill
-                  className="object-contain hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <h3
-                className={`text-xl font-semibold mb-3 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                투로
-              </h3>
-              <p className="text-base">
-                정해진 형식 속에서 움직임의 완성도를 높이고 기술을 체화합니다.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="p-6 rounded-lg"
-            >
-              <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
-                <Image
-                  src="/images/sparring.png"
-                  alt={"대련 이미지"}
-                  fill
-                  className="object-contain hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <h3
-                className={`text-xl font-semibold mb-3 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                <span className="highlight-word">대련</span>
-              </h3>
-              <p className="text-base">
-                실전적인 상황에서 기술을 적용하며 실전 감각을 키웁니다.
-              </p>
-            </motion.div>
-          </div>
-
+        {/* Description Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-            className="mt-12 p-6 rounded-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.3 }}
+            className="p-6 rounded-lg"
           >
             <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
               <Image
-                src="/images/hero.jpeg"
-                alt="기본기 이미지"
+                src="/images/cutting.png"
+                alt="베기 이미지"
                 fill
                 className="object-contain hover:scale-110 transition-transform duration-300"
               />
@@ -313,16 +188,94 @@ export default function HowWork() {
                 isDark ? "text-white" : "text-gray-900"
               }`}
             >
-              기본기
+              <span className="highlight-word">베기</span>
             </h3>
             <p className="text-base">
-              모든 수련의 근간이 되는 기본 동작과 자세를 연마합니다. 탄탄한
-              기본기는 베기, 투로, <span className="highlight-word">대련</span>
-              의 모든 영역에서 필수적인 요소입니다.
+              검법의 핵심인 베기를 통해 무기의 특성과 그 원리를 이해합니다.
             </p>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.4 }}
+            className="p-6 rounded-lg"
+          >
+            <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
+              <Image
+                src="/images/hero.jpeg"
+                alt="투로 이미지"
+                fill
+                className="object-contain hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+            <h3
+              className={`text-xl font-semibold mb-3 ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
+              <span className="highlight-word">투로</span>
+            </h3>
+            <p className="text-base">
+              정형화된 동작 패턴을 통해 기본기와 응용기를 연마합니다.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.5 }}
+            className="p-6 rounded-lg"
+          >
+            <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
+              <Image
+                src="/images/sparring.png"
+                alt={"대련 이미지"}
+                fill
+                className="object-contain hover:scale-110 transition-transform duration-300"
+              />
+            </div>
+            <h3
+              className={`text-xl font-semibold mb-3 ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
+              <span className="highlight-word">대련</span>
+            </h3>
+            <p className="text-base">
+              실전적인 상황에서 기술을 적용하며 실전 감각을 키웁니다.
+            </p>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 1.6 }}
+          className="mt-12 p-6 rounded-lg"
+        >
+          <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
+            <Image
+              src="/images/hero.jpeg"
+              alt="기본기 이미지"
+              fill
+              className="object-contain hover:scale-110 transition-transform duration-300"
+            />
+          </div>
+          <h3
+            className={`text-xl font-semibold mb-3 ${
+              isDark ? "text-white" : "text-gray-900"
+            }`}
+          >
+            기본기
+          </h3>
+          <p className="text-base">
+            모든 수련의 근간이 되는 기본 동작과 자세를 연마합니다. 탄탄한
+            기본기는 베기, 투로, <span className="highlight-word">대련</span>
+            의 모든 영역에서 필수적인 요소입니다.
+          </p>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 }

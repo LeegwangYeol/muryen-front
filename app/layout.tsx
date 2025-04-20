@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
+// NOTE: root layout is a Server Component. We cannot use `dynamic(..., { ssr:false })` here.
+// VantaBackground itself is a client component, so importing it directly is fine.
 import VantaBackground from "./component/vanta-main-background";
 import { ThemeProvider } from "./context/theme-context";
 import { Providers } from "./providers";
@@ -19,8 +21,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="theme-light" suppressHydrationWarning>
       <head>
+        {/* Pre-hydration theme class injection to prevent FOUC */}
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  if (theme) {
+                    document.documentElement.classList.add('theme-' + theme);
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <link
           rel="stylesheet"
           type="text/css"

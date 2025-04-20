@@ -11,24 +11,32 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  // determine initial theme synchronously (on client) to avoid FOUC
+  const [theme, setTheme] = useState<Theme>(
+    ((): Theme => {
+      if (typeof window !== "undefined") {
+        const stored = localStorage.getItem("theme") as Theme | null;
+        if (stored === "dark" || stored === "light") return stored;
+      }
+      return "light";
+    })()
+  );
 
+  // keep <html> class in sync
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []);
+    const root = document.documentElement;
+    root.classList.remove("theme-light", "theme-dark");
+    root.classList.add(`theme-${theme}`);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {}
+  }, [theme]);
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
+  const toggleTheme = () => setTheme((prev) => (prev === "light" ? "dark" : "light"));
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className={`theme-${theme}`}>{children}</div>
+      {children}
     </ThemeContext.Provider>
   );
 }

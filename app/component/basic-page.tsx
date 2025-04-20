@@ -71,7 +71,7 @@ export default function BasicPage() {
     <MainLayout>
       <div className="container mx-auto px-4 py-8">
         <motion.h1
-          initial={{ opacity: 0, y: 50 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           className={`text-4xl font-bold mb-12 text-center ${
             theme === "dark" ? "text-white" : "text-gray-900"
@@ -81,9 +81,8 @@ export default function BasicPage() {
         </motion.h1>
 
         <motion.section
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          initial={false}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className={`p-8 rounded-lg ${
             theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
@@ -114,9 +113,8 @@ export default function BasicPage() {
         {basicPrinciplesData.sections.map((section, index) => (
           <motion.section
             key={section.title}
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: index * 0.1 }}
             className={`mt-12 p-8 rounded-lg ${
               theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
