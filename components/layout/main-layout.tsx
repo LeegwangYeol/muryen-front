@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Noto_Sans_KR } from "next/font/google";
 import Navigation from "@/app/component/navigation";
+import { useTheme } from "@/app/context/theme-context";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -11,10 +12,11 @@ interface MainLayoutProps {
 
 export function MainLayout({ children }: MainLayoutProps) {
   const [isNavExpanded, setIsNavExpanded] = useState(true);
+  const { theme } = useTheme();
 
   return (
     <motion.div
-      className={`min-h-screen bg-transparent `}
+      className={`min-h-screen ${theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
