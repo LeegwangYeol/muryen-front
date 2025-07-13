@@ -52,11 +52,11 @@ const menuItems = [
     icon: <Dumbbell size={24} />,
     label: "수련일지",
   },
-  {
-    href: "/reference",
-    icon: <FileText size={24} />,
-    label: "참고 자료",
-  },
+  // {
+  //   href: "/reference",
+  //   icon: <FileText size={24} />,
+  //   label: "참고 자료",
+  // },
   // {
   //   href: "/equipment",
   //   icon: <Shield size={24} />,

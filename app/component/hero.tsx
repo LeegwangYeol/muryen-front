@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section className="relative w-full h-screen">
       <Image
-        src="/images/hero.jpeg"
+        src="/images/announce/gumiAllone.webp"
         alt="Martial Arts"
         fill
         priority
