@@ -48,7 +48,7 @@ export default function Philosophy() {
               theme === "dark" ? "text-gray-200" : "text-gray-600"
             }`}
           >
-            <span className="highlight-word">무련</span>은 무예 24반 경당 소속의
+            <span className="highlight-word">무련</span>은 <span className="hightlight-word">무예 24반 경당</span>의
             사회인 동아리에요. 우리는 무예도보통지의 가르침을 기초로 기술의
             습득을 넘어, 이를 어떻게 계승하고 발전시켜 현대의 무예에 적응 및
             적용할지를 고민해요.
