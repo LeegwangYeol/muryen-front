@@ -113,7 +113,7 @@ export default function Navigation({
   return (
     <>
       <nav
-        className={`${isExpanded ? "w-64" : "w-24"} ${
+        className={`${isExpanded ? "w-44" : "w-24"} ${
           theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
         } text-${
           theme === "dark" ? "white" : "gray-900"

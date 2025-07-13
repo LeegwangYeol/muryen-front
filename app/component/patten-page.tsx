@@ -35,16 +35,19 @@ const turoData = {
           title: "움직임의 본질",
           content:
             "투로의 연속된 움직임은 기본기의 자연스러운 연장선이에요. 특히 창이나 검과 같은 병기를 다룰 때는 몸의 자연스러운 흐름이 특히 중요해요.",
+          image: "/images/announce/gumi1.webp",
         },
         {
           title: "실전 상황의 이해",
           content:
             "투로 하나만으로는 모든 상황을 해결할 수 없어요. 하지만 다양한 상황에서 병기를 어떻게 활용할지에 대한 좋은 지침이 될 수 있답니다.",
+          image: "/images/announce/gumi2.webp",
         },
         {
           title: "다양한 상황 대처",
           content:
             "투로는 계속 변하는 상대의 위치에 대응하는 법을 배우는 과정이에요. 여러 명을 상대하는 상황까지 고려한 종합적인 훈련 방법이랍니다.",
+          image: "/images/announce/gumi3.webp",
         },
       ],
     },
@@ -55,11 +58,13 @@ const turoData = {
           title: "단계적 접근",
           content:
             "투로는 실제 교전에서 써야 할 동작들을 엮어내어 반복 연습할 수 있게 해주는 방법이에요. 또한, 실제로 쓰일 수 있는 동작들 외에도 교전 상황에 도움이 될 수 있는 신체 및 정신 단련 동작이 섞여있기도 해요. 이러한 동작들을 소화해내기 위해선 혼자 연습할 때도 상대방이 있다고 생각하며 정확한 동작을 하는 것이 중요해요.",
+          image: "/images/announce/gumi4.webp",
         },
         {
           title: "교전 감각 유지",
           content:
             "투로는 실전에서 써야 할 기술들을 안전하게 연습할 수 있게 해주는 방법이에요. 혼자 연습할 때도 상대방이 있다고 생각하며 정확한 동작을 하는 것이 중요해요.",
+          // image: "/images/announce/gumi5.webp",
         },
       ],
     },
@@ -160,7 +165,19 @@ export default function PatternPage() {
                     >
                       {subsection.content}
                     </p>
-                  </motion.div>
+                   
+                   {subsection.image?
+                   <div className="md:w-1/2">
+                   <Image
+                     src={subsection.image}
+                     alt={subsection.title}
+                     width={500}
+                     height={300}
+             className="rounded-lg object-cover"
+           />
+           </div>
+                   :null}
+                                   </motion.div>
                 ))}
               </div>
             ) : (
