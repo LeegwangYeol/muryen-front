@@ -15,26 +15,24 @@ export const metadata: Metadata = {
   },
 };
 
+// app/layout.tsx
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="theme-light" suppressHydrationWarning>
+    <html lang="ko" className="light" suppressHydrationWarning>
       <head>
-        {/* Pre-hydration theme class injection to prevent FOUC */}
         <Script
           id="theme-init"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              (function () {
+              (function() {
                 try {
-                  var theme = localStorage.getItem('theme');
-                  if (theme) {
-                    document.documentElement.classList.add('theme-' + theme);
-                  }
+                  var theme = localStorage.getItem('theme') || 'light';
+                  document.documentElement.classList.add('theme-' + theme);
                 } catch (e) {}
               })();
             `,
@@ -62,9 +60,9 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <ThemeProvider>
-            <VantaBackground>{children}</VantaBackground>
-          </ThemeProvider>
+        <ThemeProvider>
+          <VantaBackground>{children}</VantaBackground>
+        </ThemeProvider>
         </Providers>
       </body>
     </html>

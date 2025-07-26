@@ -36,13 +36,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const toggleTheme = () =>
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
 
-  if (!theme) {
-    // 아직 테마 결정 전이면 아무것도 렌더하지 않음(로딩)
-    return null;
-  }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: theme ?? "light", toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
