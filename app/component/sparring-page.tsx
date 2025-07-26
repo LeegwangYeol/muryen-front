@@ -84,6 +84,7 @@ const sparringData = {
 
 export default function SparringPage() {
   const { theme } = useTheme();
+  if (!theme) return null;
 
   return (
     <MainLayout>
@@ -173,7 +174,7 @@ export default function SparringPage() {
                         {subsection.content.map((item, itemIdx) => (
                           <li
                             key={itemIdx}
-                            className={`${
+                            className={`$${
                               theme === "dark"
                                 ? "text-gray-200"
                                 : "text-gray-600"
@@ -185,7 +186,7 @@ export default function SparringPage() {
                       </ul>
                     ) : (
                       <p
-                        className={`${
+                        className={`$${
                           theme === "dark" ? "text-gray-200" : "text-gray-600"
                         }`}
                       >
@@ -202,7 +203,7 @@ export default function SparringPage() {
                     {section.content.map((item, itemIdx) => (
                       <li
                         key={itemIdx}
-                        className={`${
+                        className={`$${
                           theme === "dark" ? "text-gray-200" : "text-gray-600"
                         }`}
                       >
@@ -212,7 +213,7 @@ export default function SparringPage() {
                   </ul>
                 ) : (
                   <p
-                    className={`${
+                    className={`$${
                       theme === "dark" ? "text-gray-200" : "text-gray-600"
                     }`}
                   >

@@ -110,6 +110,9 @@ export default function Navigation({
     onExpand?.(expanded);
   };
 
+  // theme이 결정되지 않았으면 렌더하지 않음 (SSR/CSR mismatch 방지)
+  if (!theme) return null;
+
   return (
     <>
       <nav
@@ -161,47 +164,34 @@ export default function Navigation({
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`flex items-center gap-4 p-4 rounded-lg mb-2 transition-all duration-300 group ${
+                className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-300 ${
                   theme === "dark"
-                    ? "hover:bg-primary/90 hover:text-primary-foreground"
-                    : "hover:bg-secondary/90 hover:text-secondary-foreground"
+                    ? "hover:bg-primary/80 hover:text-primary-foreground"
+                    : "hover:bg-secondary/80 hover:text-secondary-foreground"
                 }`}
               >
-                <div className="group-hover:animate-shake">{item.icon}</div>
-                {isExpanded && (
-                  <span className="group-hover:animate-shake">
-                    {item.label}
-                  </span>
-                )}
+                {item.icon}
+                {isExpanded && <span>{item.label}</span>}
               </Link>
             </li>
           ))}
-          {isLoggedIn && (
-            <li>
-              <button
-                onClick={handleLogout}
-                className={`w-full flex items-center gap-4 p-4 rounded-lg mb-2 transition-all duration-300 group ${
-                  theme === "dark"
-                    ? "hover:bg-primary/90 hover:text-primary-foreground"
-                    : "hover:bg-secondary/90 hover:text-secondary-foreground"
-                }`}
-              >
-                <div className="group-hover:animate-shake">
-                  <LogOut size={24} />
-                </div>
-                {isExpanded && (
-                  <span className="group-hover:animate-shake">로그아웃</span>
-                )}
-              </button>
-            </li>
-          )}
         </ul>
+        <div className="absolute bottom-4 left-4 right-4 flex flex-col gap-2">
+          {isLoggedIn && (
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-all duration-300"
+            >
+              <LogOut size={18} /> 로그아웃
+            </button>
+          )}
+          <VideoModal
+            isOpen={isVideoModalOpen}
+            onClose={() => setIsVideoModalOpen(false)}
+            videoId=""
+          />
+        </div>
       </nav>
-      <VideoModal
-        isOpen={isVideoModalOpen}
-        onClose={() => setIsVideoModalOpen(false)}
-        videoId="uEy7aQjDlnw"
-      />
     </>
   );
 }
