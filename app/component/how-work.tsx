@@ -22,7 +22,7 @@ export default function HowWork() {
             isDark ? "text-white" : "text-gray-900"
           }`}
         >
-          어떻게 <span className="highlight-word">무련</span>할까요?
+          어떻게 <span className="highlight-word">수련</span>할까요?
         </h2>
         <p
           className={`text-lg leading-relaxed max-w-2xl mb-4 ${

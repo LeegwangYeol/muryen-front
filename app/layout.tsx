@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "武로 緣을 잇다",
   description: "武緣 메인",
   icons: {
-    // icon: "/favicon.ico",
+    icon: "/images/icon/muryeon.ico",
   },
 };
 
