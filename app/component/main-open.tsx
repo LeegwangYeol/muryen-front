@@ -46,7 +46,7 @@ export default function Home() {
       
       {!isWhiteBackground && (
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={false}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="mt-4 text-white text-2xl font-bold"
@@ -58,7 +58,7 @@ export default function Home() {
       <AnimatePresence>
         {showText && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}

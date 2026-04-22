@@ -47,11 +47,11 @@ export default function CuttingPage() {
 
   return (
     <MainLayout>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
         <motion.h1
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`text-4xl font-bold mb-12 text-center ${
+          className={`text-2xl sm:text-xl sm:text-2xl md:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center ${
             theme === "dark" ? "text-white" : "text-gray-900"
           }`}
         >
@@ -59,11 +59,11 @@ export default function CuttingPage() {
         </motion.h1>
 
         <motion.section
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1 }}
-          className={`p-8 rounded-lg ${
+          className={`p-5 sm:p-8 rounded-lg ${
             theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
           }`}
         >
@@ -92,16 +92,16 @@ export default function CuttingPage() {
         {cuttingData.sections.map((section, index) => (
           <motion.section
             key={section.title}
-            initial={{ opacity: 0, y: 100 }}
+            initial={{ y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, delay: index * 0.1 }}
-            className={`mt-12 p-8 rounded-lg ${
+            className={`mt-12 p-5 sm:p-8 rounded-lg ${
               theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
             }`}
           >
             <h2
-              className={`text-2xl font-bold mb-6 ${
+              className={`text-2xl font-bold mb-4 sm:mb-6 ${
                 theme === "dark" ? "text-white" : "text-gray-900"
               }`}
             >
@@ -112,7 +112,7 @@ export default function CuttingPage() {
               {section.subsections.map((subsection, idx) => (
                 <motion.div
                   key={subsection.title}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}

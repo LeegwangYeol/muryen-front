@@ -42,7 +42,7 @@ export default function LoginPage() {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center p-4 ml-24 ${
+      className={`min-h-screen flex items-center justify-center p-4 md:ml-24 ${
         theme === "dark"
           ? "bg-[rgb(var(--background))]"
           : "bg-[rgb(var(--background))]"

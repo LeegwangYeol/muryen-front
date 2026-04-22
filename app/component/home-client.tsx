@@ -9,6 +9,8 @@ import Hero from "./hero";
 import Philosophy from "./philosophy";
 import VideoCircle from "./video-circle";
 import HowWork from "./how-work";
+import WhyMuryeon from "./why-muryeon";
+import InquirySection from "./inquiry-section";
 import { mockVideos } from "./mock-data";
 import { useTheme } from "../context/theme-context";
 
@@ -34,8 +36,8 @@ export default function HomeClient() {
       >
         <motion.div
           className="relative w-full h-full"
-          initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          initial={{ scale: 1.2 }}
+          animate={{ scale: 1 }}
           transition={{ duration: 1.5 }}
         >
           <Hero />
@@ -47,15 +49,9 @@ export default function HomeClient() {
   return (
     <MainLayout>
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <div
-          className="fixed top-6 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-300"
-          style={{
-            maxWidth: "600px",
-            marginLeft: "8rem",
-          }}
-        >
+        <div className="fixed top-16 md:top-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:ml-32 z-40 transition-all duration-300 max-w-[96vw] md:max-w-[600px] px-2">
           <TabsList
-            className={`w-full justify-center backdrop-blur-sm border shadow-sm rounded-full transition-colors duration-200 hover:animate-shake ${
+            className={`w-full justify-center backdrop-blur-sm border shadow-sm rounded-full transition-colors duration-200 text-[11px] sm:text-sm gap-0.5 sm:gap-1 px-1 sm:px-2 ${
               theme === "dark"
                 ? "bg-gray-800/90 border-gray-700 text-gray-200"
                 : "bg-white/95 border-gray-200 text-gray-800"
@@ -63,33 +59,36 @@ export default function HomeClient() {
           >
             <TabsTrigger
               value="philosophy"
-              className={`transition-all duration-200 ${
+              className={`transition-all duration-200 px-2 sm:px-3 py-1.5 ${
                 theme === "dark"
                   ? "data-[state=active]:bg-gray-700 hover:bg-gray-700/50"
                   : "data-[state=active]:bg-gray-100 hover:bg-gray-50"
               }`}
             >
-              무련이란?
+              <span className="sm:hidden">무련</span>
+              <span className="hidden sm:inline">무련이란?</span>
             </TabsTrigger>
             <TabsTrigger
               value="reason"
-              className={`transition-all duration-200 ${
+              className={`transition-all duration-200 px-2 sm:px-3 py-1.5 ${
                 theme === "dark"
                   ? "data-[state=active]:bg-gray-700 hover:bg-gray-700/50"
                   : "data-[state=active]:bg-gray-100 hover:bg-gray-50"
               }`}
             >
-              어떻게 수련할까요?
+              <span className="sm:hidden">수련법</span>
+              <span className="hidden sm:inline">어떻게 수련할까요?</span>
             </TabsTrigger>
             <TabsTrigger
               value="training"
-              className={`transition-all duration-200 ${
+              className={`transition-all duration-200 px-2 sm:px-3 py-1.5 ${
                 theme === "dark"
                   ? "data-[state=active]:bg-gray-700 hover:bg-gray-700/50"
                   : "data-[state=active]:bg-gray-100 hover:bg-gray-50"
               }`}
             >
-              왜 수련을 해야하는가요?
+              <span className="sm:hidden">의미</span>
+              <span className="hidden sm:inline">왜 수련을 해야하는가요?</span>
             </TabsTrigger>
           </TabsList>
         </div>
@@ -107,6 +106,9 @@ export default function HomeClient() {
           </ScrollArea>
         </div>
       </Tabs>
+
+      <WhyMuryeon />
+      <InquirySection />
     </MainLayout>
   );
 }

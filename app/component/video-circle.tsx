@@ -59,8 +59,8 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center">
       {selectedVideo && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="relative w-[800px] h-[450px]">
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+          <div className="relative w-full max-w-4xl aspect-video">
             <ReactPlayer
               url={selectedVideo.url}
               width="100%"
@@ -70,7 +70,7 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
             />
             <button
               onClick={() => setSelectedVideo(null)}
-              className="absolute top-4 right-4 text-white bg-red-600 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-700"
+              className="absolute top-2 right-2 text-white bg-red-600 rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-700"
             >
               ✕
             </button>
@@ -78,7 +78,7 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
         </div>
       )}
 
-      <div className="relative w-[600px] h-[600px]">
+      <div className="relative w-[600px] h-[600px] scale-[0.55] sm:scale-75 md:scale-100 origin-center">
         {videos.map((video, index) => {
           const angle =
             (index / totalVideos) * 2 * Math.PI + (rotation * Math.PI) / 180;

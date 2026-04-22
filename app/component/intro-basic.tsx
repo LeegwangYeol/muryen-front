@@ -317,7 +317,7 @@ const Tooltip = ({
 
   return createPortal(
     <div
-      className={`fixed top-1/3 left-1/2 -translate-x-1/2 backdrop-blur-sm shadow-lg rounded-xl z-[9999] p-6 w-[500px] transition-colors duration-200
+      className={`fixed top-1/3 left-1/2 -translate-x-1/2 backdrop-blur-sm shadow-lg rounded-xl z-[9999] p-4 sm:p-6 w-[500px] transition-colors duration-200
       ${
         theme === "dark"
           ? "bg-gray-800/90 border border-gray-700 text-gray-200"
@@ -333,7 +333,7 @@ const Tooltip = ({
       </h3>
 
       <p
-        className={`text-lg leading-relaxed whitespace-pre-wrap ${
+        className={`text-sm sm:text-base md:text-lg leading-relaxed whitespace-pre-wrap ${
           theme === "dark" ? "text-gray-300" : "text-gray-700"
         }`}
       >
@@ -420,7 +420,7 @@ const DonutChart = ({ book }: { book: Book }) => {
 
   return (
     <Card
-      className={`p-6 backdrop-blur-md shadow-lg border-0 ${
+      className={`p-4 sm:p-6 backdrop-blur-md shadow-lg border-0 ${
         theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
       }`}
     >

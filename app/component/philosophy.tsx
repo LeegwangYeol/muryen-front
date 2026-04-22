@@ -28,23 +28,23 @@ export default function Philosophy() {
     <section className="w-full">
       <div className="max-w-4xl mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className={`py-16 text-center ${
+          className={`py-10 sm:py-16 text-center ${
             theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-          } rounded-lg mb-8`}
+          } rounded-lg mb-6 sm:mb-8`}
         >
           <h2
-            className={`text-4xl font-bold mb-6 ${
+            className={`text-2xl sm:text-xl sm:text-2xl md:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 ${
               theme === "dark" ? "text-white" : "text-gray-900"
             }`}
           >
             <span className="highlight-word">무련</span>이란?
           </h2>
           <p
-            className={`text-xl mb-12 max-w-2xl mx-auto leading-relaxed ${
+            className={`text-xl mb-6 sm:mb-12 max-w-2xl mx-auto leading-relaxed ${
               theme === "dark" ? "text-gray-200" : "text-gray-600"
             }`}
           >
@@ -58,7 +58,7 @@ export default function Philosophy() {
           {philosophies.map((philosophy, index) => (
             <motion.div
               key={philosophy.title}
-              initial={{ opacity: 0, y: 100 }}
+              initial={{ y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{
@@ -67,10 +67,10 @@ export default function Philosophy() {
               }}
               className={`flex flex-col items-center text-center ${
                 theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-              } p-8 rounded-lg`}
+              } p-5 sm:p-8 rounded-lg`}
             >
               <h3
-                className={`text-3xl font-bold mb-6 ${
+                className={`text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 ${
                   theme === "dark" ? "text-white" : "text-gray-900"
                 }`}
               >

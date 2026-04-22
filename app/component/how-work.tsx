@@ -10,22 +10,22 @@ export default function HowWork() {
   const isDark = theme === "dark";
 
   return (
-    <div className="container mx-auto px-4 py-16 min-h-screen flex flex-col items-center justify-center">
+    <div className="container mx-auto px-4 py-10 sm:py-16 min-h-screen flex flex-col items-center justify-center">
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={false}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="text-center max-w-4xl mb-16"
+        className="text-center max-w-4xl mb-10 sm:mb-16"
       >
         <h2
-          className={`text-2xl font-bold mb-6 ${
+          className={`text-2xl font-bold mb-4 sm:mb-6 ${
             isDark ? "text-white" : "text-gray-900"
           }`}
         >
           어떻게 <span className="highlight-word">수련</span>할까요?
         </h2>
         <p
-          className={`text-lg leading-relaxed max-w-2xl mb-4 ${
+          className={`text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mb-4 ${
             isDark ? "text-gray-300" : "text-gray-700"
           }`}
         >
@@ -34,7 +34,7 @@ export default function HowWork() {
           '수련의 삼각형'이라는 체계적인 방법론으로 구현하고 있습니다.
         </p>
         <p
-          className={`text-lg leading-relaxed max-w-2xl ${
+          className={`text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl ${
             isDark ? "text-gray-300" : "text-gray-700"
           }`}
         >
@@ -46,10 +46,10 @@ export default function HowWork() {
       </motion.div>
 
       <motion.h1
-        initial={{ opacity: 0 }}
+        initial={false}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className={`text-xl font-semibold mb-8 text-center ${
+        className={`text-xl font-semibold mb-6 sm:mb-8 text-center ${
           isDark ? "text-white" : "text-gray-900"
         }`}
       >
@@ -59,7 +59,7 @@ export default function HowWork() {
       <div className="relative w-full max-w-4xl">
         {/* SVG Triangle */}
         <motion.svg
-          initial={{ opacity: 0 }}
+          initial={false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
           width="100%"
@@ -86,7 +86,7 @@ export default function HowWork() {
             fill={isDark ? "#1a1a1a" : "#fff"}
             stroke={isDark ? "#fff" : "#000"}
             strokeWidth="3"
-            initial={{ scale: 0 }}
+            initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 1.2 }}
           />
@@ -170,10 +170,10 @@ export default function HowWork() {
         {/* Description Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.3 }}
-            className="p-6 rounded-lg"
+            className="p-4 sm:p-6 rounded-lg"
           >
             <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
               <Image
@@ -196,10 +196,10 @@ export default function HowWork() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.4 }}
-            className="p-6 rounded-lg"
+            className="p-4 sm:p-6 rounded-lg"
           >
             <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
               <Image
@@ -222,10 +222,10 @@ export default function HowWork() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.5 }}
-            className="p-6 rounded-lg"
+            className="p-4 sm:p-6 rounded-lg"
           >
             <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
               <Image
@@ -249,10 +249,10 @@ export default function HowWork() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.6 }}
-          className="mt-12 p-6 rounded-lg"
+          className="mt-12 p-4 sm:p-6 rounded-lg"
         >
           <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
             <Image

@@ -70,8 +70,8 @@ export default function Equipment() {
 
   return (
     <MainLayout>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">전통 무예 장비 소개</h1>
+      <div className="container mx-auto px-4 py-6 sm:py-8">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8">전통 무예 장비 소개</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {equipmentData.map((item, index) => (
             <Card
@@ -106,7 +106,7 @@ export default function Equipment() {
           ref={modalRef}
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
         >
-          <div className="bg-white p-8 rounded-lg max-w-2xl w-full">
+          <div className="bg-white p-5 sm:p-8 rounded-lg max-w-2xl w-full">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">{selectedEquipment.title}</h2>
               <Button onClick={closeModal} variant="ghost">

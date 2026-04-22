@@ -17,9 +17,13 @@ import {
   Sun,
   Moon,
   LogOut,
+  Mail,
+  Youtube,
+  Instagram,
 } from "lucide-react";
 import VideoModal from "./VideoModal";
 import { useTheme } from "../context/theme-context";
+import { CONTACT } from "@/lib/contact";
 
 const menuItems = [
   {
@@ -51,6 +55,11 @@ const menuItems = [
     href: "/daily",
     icon: <Dumbbell size={24} />,
     label: "수련일지",
+  },
+  {
+    href: "/#inquiry",
+    icon: <Mail size={24} />,
+    label: "입회 안내",
   },
   // {
   //   href: "/reference",
@@ -126,37 +135,31 @@ export default function Navigation({
           onClick={() => handleExpand(!isExpanded)}
           className={`absolute -right-3 top-1/2 -translate-y-1/2 ${
             theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-          } rounded-full p-1 hover:scale-110 transition-all duration-300`}
+          } rounded-full p-1 transition-all duration-300`}
         >
           {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
         </button>
         <div className="flex items-center justify-between mb-4">
           <Link
             href="/"
-            className={`flex items-center gap-4 p-4 rounded-lg mb-2 transition-all duration-300 group ${
+            className={`flex items-center gap-4 p-4 rounded-lg mb-2 transition-colors duration-300 ${
               theme === "dark"
                 ? "hover:bg-primary/90 hover:text-primary-foreground"
                 : "hover:bg-secondary/90 hover:text-secondary-foreground"
             }`}
           >
-            <div className="group-hover:animate-shake">
-              <Home size={24} />
-            </div>
-            {isExpanded && (
-              <span className="group-hover:animate-shake">홈</span>
-            )}
+            <Home size={24} />
+            {isExpanded && <span>홈</span>}
           </Link>
           <button
             onClick={toggleTheme}
-            className={`flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 group ${
+            className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-300 ${
               theme === "dark"
                 ? "bg-primary/10 hover:bg-primary/20 text-primary"
                 : "bg-secondary/10 hover:bg-secondary/20 text-secondary"
             }`}
           >
-            <div className="group-hover:animate-shake">
-              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-            </div>
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
           </button>
         </div>
         <ul className="space-y-2">
@@ -164,7 +167,7 @@ export default function Navigation({
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-300 ${
+                className={`flex items-center gap-3 p-3 rounded-lg transition-colors duration-300 ${
                   theme === "dark"
                     ? "hover:bg-primary/80 hover:text-primary-foreground"
                     : "hover:bg-secondary/80 hover:text-secondary-foreground"
@@ -177,6 +180,47 @@ export default function Navigation({
           ))}
         </ul>
         <div className="absolute bottom-4 left-4 right-4 flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <a
+              href={CONTACT.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube @muryeon"
+              className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 ${
+                theme === "dark"
+                  ? "bg-white/10 hover:bg-white/20"
+                  : "bg-gray-900/5 hover:bg-gray-900/10"
+              }`}
+            >
+              <Youtube size={18} />
+            </a>
+            {CONTACT.instagram ? (
+              <a
+                href={CONTACT.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 ${
+                  theme === "dark"
+                    ? "bg-white/10 hover:bg-white/20"
+                    : "bg-gray-900/5 hover:bg-gray-900/10"
+                }`}
+              >
+                <Instagram size={18} />
+              </a>
+            ) : (
+              <span
+                aria-label="Instagram (준비 중)"
+                aria-disabled="true"
+                title="Instagram 계정 준비 중"
+                className={`flex items-center justify-center w-10 h-10 rounded-full opacity-40 cursor-not-allowed ${
+                  theme === "dark" ? "bg-white/10" : "bg-gray-900/5"
+                }`}
+              >
+                <Instagram size={18} />
+              </span>
+            )}
+          </div>
           {isLoggedIn && (
             <button
               onClick={handleLogout}
