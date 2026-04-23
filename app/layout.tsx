@@ -124,6 +124,78 @@ const websiteJsonLd = {
   publisher: { "@id": `${SITE.url}/#organization` },
 };
 
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": ["SportsClub", "LocalBusiness"],
+  "@id": `${SITE.url}/#localbusiness`,
+  name: SITE.name,
+  alternateName: [SITE.hanja, SITE.fullName],
+  description: SITE.description,
+  url: SITE.url,
+  logo: `${SITE.url}/images/icon/muryeon.ico`,
+  image: [
+    `${SITE.url}/images/announce/gumiAllone.webp`,
+    `${SITE.url}/images/armour.png`,
+    `${SITE.url}/images/sparring.png`,
+  ],
+  slogan: SITE.slogan,
+  sport: [
+    "24반 무예",
+    "갑주 대련",
+    "조선 무예",
+    "한국 전통무예",
+    "Korean Traditional Martial Arts",
+  ],
+  keywords: [...KEYWORDS].join(", "),
+  isAccessibleForFree: true,
+  priceRange: "Free",
+  currenciesAccepted: "KRW",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "서울특별시",
+    addressRegion: "서울",
+    addressCountry: "KR",
+  },
+  areaServed: [
+    { "@type": "City", name: "서울" },
+    { "@type": "City", name: "Seoul" },
+    { "@type": "AdministrativeArea", name: "수도권" },
+  ],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "14:00",
+      closes: "18:00",
+      description: "토요일 오후 수련",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Sunday",
+      opens: "09:00",
+      closes: "12:00",
+      description: "일요일 오전 수련",
+    },
+  ],
+  audience: {
+    "@type": "Audience",
+    audienceType: "일반 성인 · 숙련도 무관 · 전통무예 관심자",
+  },
+  knowsAbout: [
+    "무예도보통지",
+    "24반 무예",
+    "갑주 대련",
+    "본국검",
+    "쌍수도",
+    "제독검",
+    "월도",
+    "장창",
+    "대학경당 계보",
+  ],
+  sameAs: [CONTACT.youtube, CONTACT.instagram].filter(Boolean),
+  parentOrganization: { "@id": `${SITE.url}/#organization` },
+};
+
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -227,29 +299,25 @@ export default function RootLayout({
             run("9afddf76-2d21-422c-a4fc-a369fcf21d09");
           `}
         </Script>
-        <Script
+        <script
           id="org-jsonld"
           type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <Script
+        <script
           id="website-jsonld"
           type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteJsonLd),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
-        <Script
+        <script
           id="faq-jsonld"
           type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqJsonLd),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+        <script
+          id="localbusiness-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
         <meta name="naver-site-verification" content="2cce48a339c16bb7335a20dc643ac93bcb8efe9a" />
         <meta name="google-site-verification" content="atTkk_hkH8HFattE-OcHmpSNTwwRphdqaaHZKsuwOuk" />
