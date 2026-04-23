@@ -1,18 +1,18 @@
 import Script from "next/script";
+import { ANALYTICS } from "@/lib/contact";
 
 /**
  * Google Analytics 4 + Naver Analytics 통합 로더.
  *
- * 활성화 방법 — Vercel 프로젝트 환경변수에 추가:
- *   NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX       (https://analytics.google.com 에서 발급)
- *   NEXT_PUBLIC_NAVER_ANALYTICS_ID=...   (https://analytics.naver.com 에서 발급)
+ * ID는 {@link ANALYTICS}에 하드코딩되어 있으며,
+ * 필요 시 환경변수(NEXT_PUBLIC_GA_ID, NEXT_PUBLIC_NAVER_ANALYTICS_ID)로 오버라이드 가능합니다.
  *
- * 둘 중 하나만 설정해도 해당 서비스만 활성화됩니다.
- * 환경변수 없으면 아무것도 로드하지 않음 (개발·프리뷰 트래픽 오염 방지).
+ * ID가 비어 있으면 해당 서비스 스크립트는 아예 로드되지 않습니다 (개발·프리뷰 트래픽 오염 방지).
  */
 export function Analytics() {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
-  const naverId = process.env.NEXT_PUBLIC_NAVER_ANALYTICS_ID;
+  const gaId = process.env.NEXT_PUBLIC_GA_ID ?? ANALYTICS.ga4;
+  const naverId =
+    process.env.NEXT_PUBLIC_NAVER_ANALYTICS_ID ?? ANALYTICS.naver;
 
   return (
     <>

@@ -23,6 +23,13 @@ export const CONTACT = {
     "입회 문의는 현재 YouTube 채널 댓글 또는 메시지로 받고 있습니다. 오픈채팅방은 준비 중입니다.",
 } as const;
 
+export const ANALYTICS = {
+  /** Google Analytics 4 측정 ID (G-로 시작). 공개 환경변수로도 오버라이드 가능. */
+  ga4: "G-78SSBDLD14",
+  /** Naver Analytics 사이트 ID. 발급받으면 아래에 입력. */
+  naver: null as string | null,
+} as const;
+
 export const KEYWORDS = [
   "무련",
   "武聯",
