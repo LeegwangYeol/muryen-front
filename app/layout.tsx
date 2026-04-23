@@ -232,6 +232,7 @@ export default function RootLayout({
             __html: JSON.stringify(faqJsonLd),
           }}
         />
+        <meta name="naver-site-verification" content="2cce48a339c16bb7335a20dc643ac93bcb8efe9a" />
         <meta name="google-site-verification" content="atTkk_hkH8HFattE-OcHmpSNTwwRphdqaaHZKsuwOuk" />
       </head>
       <body>
