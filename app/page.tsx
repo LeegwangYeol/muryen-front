@@ -13,6 +13,24 @@ export const metadata: Metadata = {
     description:
       "조선 24반 무예를 갑주 입고 대련합니다. 대학경당 계보를 잇는 서울 수련 동호회. 회비 무료·숙련도 무관.",
     url: "/",
+    type: "website",
+    locale: "ko_KR",
+    siteName: "무련",
+    images: [
+      {
+        url: "/images/announce/gumiAllone.webp",
+        width: 1920,
+        height: 2560,
+        alt: "무련 24반 무예 · 전국무예대제전",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "무련 — 武로 緣을 잇다",
+    description:
+      "조선 24반 무예를 갑주 입고 대련합니다. 대학경당 계보를 잇는 서울 수련 동호회.",
+    images: ["/images/announce/gumiAllone.webp"],
   },
 };
 

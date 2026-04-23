@@ -48,6 +48,9 @@ export default function HomeClient() {
 
   return (
     <MainLayout>
+      <h1 className="sr-only">
+        무련 — 조선 24반 무예 · 갑주 대련 · 대학경당 계보를 잇는 서울 수련 동호회
+      </h1>
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <div className="fixed top-16 md:top-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:ml-32 z-40 transition-all duration-300 max-w-[96vw] md:max-w-[600px] px-2">
           <TabsList
