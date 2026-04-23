@@ -7,6 +7,7 @@ import VantaBackground from "./component/vanta-main-background";
 import { ThemeProvider } from "./context/theme-context";
 import { Providers } from "./providers";
 import { AppShell } from "@/components/layout/app-shell";
+import { Analytics } from "./component/analytics";
 import { SITE, KEYWORDS, CONTACT } from "@/lib/contact";
 
 export const metadata: Metadata = {
@@ -330,6 +331,7 @@ export default function RootLayout({
           </VantaBackground>
         </ThemeProvider>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

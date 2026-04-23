@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Muye24Introduction from "../component/intro-basic";
+import { BreadcrumbJsonLd } from "../component/breadcrumb-jsonld";
 
 const PUBLISHED = "2026-01-01T00:00:00+09:00";
 const MODIFIED = "2026-04-23T00:00:00+09:00";
@@ -27,5 +28,10 @@ export const metadata: Metadata = {
 };
 
 export default function BasicSensePage() {
-  return <Muye24Introduction />;
+  return (
+    <>
+      <BreadcrumbJsonLd items={[{ name: "24반 무예 소개", path: "/basic-sense" }]} />
+      <Muye24Introduction />
+    </>
+  );
 }

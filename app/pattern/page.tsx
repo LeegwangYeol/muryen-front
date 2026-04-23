@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PatternPage from "../component/patten-page";
+import { BreadcrumbJsonLd } from "../component/breadcrumb-jsonld";
 
 const PUBLISHED = "2026-01-01T00:00:00+09:00";
 const MODIFIED = "2026-04-23T00:00:00+09:00";
@@ -26,5 +27,10 @@ export const metadata: Metadata = {
 };
 
 export default function Pattern() {
-  return <PatternPage />;
+  return (
+    <>
+      <BreadcrumbJsonLd items={[{ name: "투로", path: "/pattern" }]} />
+      <PatternPage />
+    </>
+  );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ReferencePage from "../component/reference-page";
+import { BreadcrumbJsonLd } from "../component/breadcrumb-jsonld";
 
 const PUBLISHED = "2026-01-01T00:00:00+09:00";
 const MODIFIED = "2026-04-23T00:00:00+09:00";
@@ -26,5 +27,10 @@ export const metadata: Metadata = {
 };
 
 export default function Reference() {
-  return <ReferencePage />;
+  return (
+    <>
+      <BreadcrumbJsonLd items={[{ name: "참고 자료", path: "/reference" }]} />
+      <ReferencePage />
+    </>
+  );
 }
