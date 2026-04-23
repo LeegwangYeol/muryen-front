@@ -1,0 +1,25 @@
+{
+  "name": "무련 — 24반 무예 · 갑주 대련 · 대학경당 계보",
+  "short_name": "무련",
+  "description": "조선 24반 무예를 갑주 입고 대련합니다. 대학경당 계보를 잇는 서울 수련 동호회.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b5027",
+  "lang": "ko-KR",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/images/icon/muryeon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/images/announce/gumiAllone.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["sports", "education", "lifestyle"]
+}
