@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Muye24Introduction from "../component/intro-basic";
 import { BreadcrumbJsonLd } from "../component/breadcrumb-jsonld";
+import { ArticleJsonLd } from "../component/article-jsonld";
 
 const PUBLISHED = "2026-01-01T00:00:00+09:00";
 const MODIFIED = "2026-04-23T00:00:00+09:00";
@@ -31,6 +32,15 @@ export default function BasicSensePage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "24반 무예 소개", path: "/basic-sense" }]} />
+      <ArticleJsonLd
+        headline="24반 무예 소개 · 무예도보통지 24기"
+        description="조선 정조 때 편찬된 무예도보통지(1790)의 24가지 국방무예를 소개합니다. 지상무예 18기 + 마상무예 6기."
+        path="/basic-sense"
+        datePublished={PUBLISHED}
+        dateModified={MODIFIED}
+        section="24반 무예"
+        tags={["24반 무예", "무예도보통지", "조선 무예", "장용영", "수원 화성", "지상무예", "마상무예"]}
+      />
       <Muye24Introduction />
     </>
   );

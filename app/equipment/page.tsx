@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Equipment from "../component/equipment";
 import { BreadcrumbJsonLd } from "../component/breadcrumb-jsonld";
+import { ArticleJsonLd } from "../component/article-jsonld";
 
 const PUBLISHED = "2026-01-01T00:00:00+09:00";
 const MODIFIED = "2026-04-23T00:00:00+09:00";
@@ -30,6 +31,15 @@ export default function EquipmentPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "장비", path: "/equipment" }]} />
+      <ArticleJsonLd
+        headline="전통 무기·갑주 · 장비 소개"
+        description="두정갑·목검·목창·대도 등 24반 무예 수련에 쓰이는 전통 병기와 방호구를 소개합니다."
+        path="/equipment"
+        datePublished={PUBLISHED}
+        dateModified={MODIFIED}
+        section="장비"
+        tags={["장비", "갑주", "두정갑", "목검", "목창", "대도", "병기"]}
+      />
       <Equipment />
     </>
   );

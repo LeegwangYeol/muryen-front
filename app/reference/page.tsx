@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ReferencePage from "../component/reference-page";
 import { BreadcrumbJsonLd } from "../component/breadcrumb-jsonld";
+import { ArticleJsonLd } from "../component/article-jsonld";
 
 const PUBLISHED = "2026-01-01T00:00:00+09:00";
 const MODIFIED = "2026-04-23T00:00:00+09:00";
@@ -30,6 +31,15 @@ export default function Reference() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "참고 자료", path: "/reference" }]} />
+      <ArticleJsonLd
+        headline="참고 자료 · 무예도보통지"
+        description="무예도보통지(1790) 원전과 현대 복원 연구, 관련 문헌을 모은 무련의 참고 자료실."
+        path="/reference"
+        datePublished={PUBLISHED}
+        dateModified={MODIFIED}
+        section="참고"
+        tags={["참고 자료", "무예도보통지", "복원 연구", "조선 무예", "이덕무", "박제가", "백동수"]}
+      />
       <ReferencePage />
     </>
   );

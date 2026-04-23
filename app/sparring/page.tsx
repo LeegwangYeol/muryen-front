@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SparringPage from "../component/sparring-page";
 import { BreadcrumbJsonLd } from "../component/breadcrumb-jsonld";
+import { ArticleJsonLd } from "../component/article-jsonld";
 
 const PUBLISHED = "2026-01-01T00:00:00+09:00";
 const MODIFIED = "2026-04-23T00:00:00+09:00";
@@ -36,6 +37,15 @@ export default function Sparring() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ name: "대련", path: "/sparring" }]} />
+      <ArticleJsonLd
+        headline="갑주 대련 · 조선 무예 실전 수련"
+        description="두정갑을 입고 실제 타격이 오가는 갑주 대련 — 시연이 아닌 실전. 대학경당 계보를 잇는 무련의 대련 방식과 철학."
+        path="/sparring"
+        datePublished={PUBLISHED}
+        dateModified={MODIFIED}
+        section="갑주 대련"
+        tags={["갑주 대련", "24반 무예", "무예도보통지", "조선 무예", "대학경당", "실전 대련"]}
+      />
       <SparringPage />
     </>
   );

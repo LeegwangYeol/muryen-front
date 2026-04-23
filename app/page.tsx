@@ -18,10 +18,11 @@ export const metadata: Metadata = {
     siteName: "무련",
     images: [
       {
-        url: "/images/announce/gumiAllone.webp",
-        width: 1920,
-        height: 2560,
-        alt: "무련 24반 무예 · 전국무예대제전",
+        url: "/og-image.webp",
+        width: 1200,
+        height: 630,
+        alt: "무련 24반 무예 · 갑주 대련",
+        type: "image/webp",
       },
     ],
   },
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     title: "무련 — 武로 緣을 잇다",
     description:
       "조선 24반 무예를 갑주 입고 대련합니다. 대학경당 계보를 잇는 서울 수련 동호회.",
-    images: ["/images/announce/gumiAllone.webp"],
+    images: ["/og-image.webp"],
   },
 };
 

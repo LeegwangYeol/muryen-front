@@ -8,6 +8,7 @@ import { ThemeProvider } from "./context/theme-context";
 import { Providers } from "./providers";
 import { AppShell } from "@/components/layout/app-shell";
 import { Analytics } from "./component/analytics";
+import { WebVitals } from "./component/web-vitals";
 import { SITE, KEYWORDS, CONTACT } from "@/lib/contact";
 
 export const metadata: Metadata = {
@@ -56,8 +57,11 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: "/images/announce/gumiAllone.webp",
-        alt: "무련 24반 무예",
+        url: "/og-image.webp",
+        width: 1200,
+        height: 630,
+        alt: "무련 24반 무예 · 갑주 대련",
+        type: "image/webp",
       },
     ],
   },
@@ -65,7 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.name} | 24반 무예 · 갑주 대련`,
     description: SITE.description,
-    images: ["/images/announce/gumiAllone.webp"],
+    images: ["/og-image.webp"],
   },
   robots: {
     index: true,
@@ -332,6 +336,7 @@ export default function RootLayout({
         </ThemeProvider>
         </Providers>
         <Analytics />
+        <WebVitals />
       </body>
     </html>
   );

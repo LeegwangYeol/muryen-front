@@ -1,0 +1,18 @@
+/* TEAM */
+  이름: 무련 (武聯)
+  역할: 24반 무예 동호회 · 갑주 대련 · 대학경당 계보
+  위치: 서울, 대한민국
+  유튜브: https://www.youtube.com/@muryeon
+
+/* THANKS */
+  대학경당
+  무예도보통지 (1790) — 이덕무, 박제가, 백동수
+  장용영 군사들
+
+/* SITE */
+  언어: 한국어
+  표준: HTML5, CSS3
+  프레임워크: Next.js 15, React 18, TailwindCSS, TypeScript
+  구성요소: Radix UI, Framer Motion, lucide-react
+  호스팅: Vercel
+  라이선스: 콘텐츠 © 무련 / 코드는 해당 저장소 라이선스 준수
