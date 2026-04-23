@@ -120,6 +120,7 @@ export function SubHeading({
 interface BodyProps extends HTMLAttributes<HTMLParagraphElement> {
   size?: "xs" | "sm" | "base" | "lg";
   muted?: boolean;
+  as?: ElementType;
 }
 
 const BODY_SIZE = {
@@ -129,22 +130,23 @@ const BODY_SIZE = {
   lg: "text-base sm:text-lg md:text-xl",
 } as const;
 
-/** 본문 문단. size로 크기 조절, muted로 보조 색상. */
+/** 본문 문단. size로 크기 조절, muted로 보조 색상, as로 렌더 태그(span 등). */
 export function Body({
   size = "base",
   muted = false,
+  as: Tag = "p",
   className = "",
   children,
   ...rest
 }: BodyProps & { children: ReactNode }) {
   const c = useColors();
   return (
-    <p
+    <Tag
       className={`leading-relaxed ${BODY_SIZE[size]} ${muted ? c.muted : c.body} ${className}`}
       {...rest}
     >
       {children}
-    </p>
+    </Tag>
   );
 }
 

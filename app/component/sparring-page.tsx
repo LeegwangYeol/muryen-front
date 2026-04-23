@@ -4,6 +4,15 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/theme-context";
 import { MainLayout } from "@/components/layout/main-layout";
+import {
+  PageHeading,
+  SectionHeading,
+  SubHeading,
+  Body,
+  CardContainer,
+  ProseContainer,
+  Divider,
+} from "@/components/ui/typography";
 
 const sparringData = {
   title: "대련의 특성과 의미",
@@ -114,160 +123,145 @@ export default function SparringPage() {
   return (
     <MainLayout>
       <div className="container mx-auto px-4 py-6 sm:py-8">
-        <motion.h1
-          initial={{ y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`text-2xl sm:text-xl sm:text-2xl md:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center ${
-            theme === "dark" ? "text-white" : "text-gray-900"
-          }`}
-        >
-          <span className="highlight-word">{sparringData.title}</span>
-        </motion.h1>
+        <motion.div initial={{ y: 50 }} animate={{ opacity: 1, y: 0 }}>
+          <PageHeading size="lg">
+            <span className="highlight-word">{sparringData.title}</span>
+          </PageHeading>
+        </motion.div>
 
         <motion.section
           initial={{ y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7 }}
-          className={`p-5 sm:p-8 rounded-lg ${
-            theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-          }`}
         >
-          <div className="flex flex-col md:flex-row items-start gap-8">
-            <div className="md:w-1/2">
-              <Image
-                src={sparringData.overview.image}
-                alt={sparringData.title}
-                width={500}
-                height={300}
-                className="rounded-lg object-cover"
-              />
+          <CardContainer>
+            <div className="flex flex-col md:flex-row items-start gap-6 sm:gap-8">
+              <div className="md:w-1/2">
+                <Image
+                  src={sparringData.overview.image}
+                  alt={sparringData.title}
+                  width={500}
+                  height={300}
+                  className="rounded-lg object-cover w-full h-auto"
+                />
+              </div>
+              <div className="md:w-1/2">
+                <Body size="base">
+                  <span className="highlight-word">
+                    {sparringData.overview.description}
+                  </span>
+                </Body>
+              </div>
             </div>
-            <div className="md:w-1/2 space-y-6">
-              <p
-                className={`text-lg ${
-                  theme === "dark" ? "text-gray-200" : "text-gray-600"
-                }`}
-              >
-                <span className="highlight-word">
-                  {sparringData.overview.description}
-                </span>
-              </p>
-            </div>
-          </div>
+          </CardContainer>
         </motion.section>
 
         {sparringData.sections.map((section, index) => {
           // 짝수(0,2,4) = 글(프로즈), 홀수(1,3,5) = 카드(그리드)
           const isProse = index % 2 === 0;
-          const isDark = theme === "dark";
-          const glass = isDark ? "glassmorphism-dark" : "glassmorphism-light";
-          const textBody = isDark ? "text-gray-200" : "text-gray-600";
-          const textHead = isDark ? "text-white" : "text-gray-900";
-          const rule = isDark ? "border-white/15" : "border-gray-300/60";
-
-          const wrapperClass = isProse
-            ? `mt-14 sm:mt-20 max-w-3xl mx-auto px-4 text-center`
-            : `mt-12 p-5 sm:p-8 rounded-lg ${glass}`;
-
-          const h2Class = isProse
-            ? `text-2xl sm:text-3xl font-bold mb-5 sm:mb-7 ${textHead}`
-            : `text-2xl font-bold mb-4 sm:mb-6 ${textHead}`;
 
           return (
-            <motion.section
+            <motion.div
               key={section.title}
               initial={{ y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, delay: index * 0.1 }}
-              className={wrapperClass}
+              className="mt-12 sm:mt-16"
             >
-              {isProse && (
-                <div className={`w-12 h-px mx-auto mb-5 ${rule} border-t`} />
-              )}
-              <h2 className={h2Class}>{section.title}</h2>
+              {isProse ? (
+                <ProseContainer className="text-center">
+                  <Divider />
+                  <SectionHeading align="center" size="lg" className="mb-5 sm:mb-7">
+                    {section.title}
+                  </SectionHeading>
 
-              {section.subsections ? (
-                isProse ? (
-                  <div className="space-y-6 text-left">
-                    {section.subsections.map((sub) => (
-                      <div key={sub.title}>
-                        <h3 className={`text-lg sm:text-xl font-semibold mb-2 ${textHead}`}>
-                          {sub.title}
-                        </h3>
-                        {Array.isArray(sub.content) ? (
-                          <ul className={`list-disc pl-5 space-y-1 ${textBody} text-base sm:text-lg leading-relaxed`}>
-                            {sub.content.map((item, i) => (
-                              <li key={i}>{item}</li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <p className={`text-base sm:text-lg leading-relaxed ${textBody}`}>
-                            {sub.content}
-                          </p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {section.subsections.map((subsection, idx) => (
-                      <motion.div
-                        key={subsection.title}
-                        initial={{ x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: idx * 0.1 }}
-                        className="space-y-3"
-                      >
-                        <h3 className={`text-xl font-semibold ${textHead}`}>
-                          {subsection.title}
-                        </h3>
-                        {Array.isArray(subsection.content) ? (
-                          <ul className={`space-y-2 ${textBody}`}>
-                            {subsection.content.map((item, itemIdx) => (
-                              <li key={itemIdx}>{item}</li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <p className={textBody}>{subsection.content}</p>
-                        )}
-                      </motion.div>
-                    ))}
-                  </div>
-                )
-              ) : isProse ? (
-                <div className="space-y-4">
-                  {Array.isArray(section.content) ? (
-                    section.content.map((item, itemIdx) => (
-                      <p
-                        key={itemIdx}
-                        className={`text-base sm:text-lg leading-relaxed ${textBody}`}
-                      >
-                        {item}
-                      </p>
-                    ))
-                  ) : (
-                    <p className={`text-base sm:text-lg leading-relaxed ${textBody}`}>
-                      {section.content}
-                    </p>
-                  )}
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {Array.isArray(section.content) ? (
-                    <ul className={`space-y-2 ${textBody}`}>
+                  {section.subsections ? (
+                    <div className="space-y-6 text-left">
+                      {section.subsections.map((sub) => (
+                        <div key={sub.title}>
+                          <SubHeading size="md" className="mb-2">
+                            {sub.title}
+                          </SubHeading>
+                          {Array.isArray(sub.content) ? (
+                            <ul className="list-disc pl-5 space-y-1">
+                              {sub.content.map((item, i) => (
+                                <li key={i}>
+                                  <Body as="span" size="base">
+                                    {item}
+                                  </Body>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <Body size="base">{sub.content}</Body>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  ) : Array.isArray(section.content) ? (
+                    <div className="space-y-4">
                       {section.content.map((item, itemIdx) => (
-                        <li key={itemIdx}>{item}</li>
+                        <Body key={itemIdx} size="base">
+                          {item}
+                        </Body>
+                      ))}
+                    </div>
+                  ) : (
+                    <Body size="base">{section.content}</Body>
+                  )}
+                </ProseContainer>
+              ) : (
+                <CardContainer>
+                  <SectionHeading size="md" className="mb-4 sm:mb-6">
+                    {section.title}
+                  </SectionHeading>
+
+                  {section.subsections ? (
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {section.subsections.map((subsection, idx) => (
+                        <motion.div
+                          key={subsection.title}
+                          initial={{ x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.5, delay: idx * 0.1 }}
+                          className="space-y-3"
+                        >
+                          <SubHeading size="md">{subsection.title}</SubHeading>
+                          {Array.isArray(subsection.content) ? (
+                            <ul className="space-y-2 list-disc pl-5">
+                              {subsection.content.map((item, itemIdx) => (
+                                <li key={itemIdx}>
+                                  <Body as="span" size="sm">
+                                    {item}
+                                  </Body>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <Body size="sm">{subsection.content}</Body>
+                          )}
+                        </motion.div>
+                      ))}
+                    </div>
+                  ) : Array.isArray(section.content) ? (
+                    <ul className="space-y-2 list-disc pl-5">
+                      {section.content.map((item, itemIdx) => (
+                        <li key={itemIdx}>
+                          <Body as="span" size="sm">
+                            {item}
+                          </Body>
+                        </li>
                       ))}
                     </ul>
                   ) : (
-                    <p className={textBody}>{section.content}</p>
+                    <Body size="sm">{section.content}</Body>
                   )}
-                </div>
+                </CardContainer>
               )}
-            </motion.section>
+            </motion.div>
           );
         })}
       </div>
