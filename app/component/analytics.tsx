@@ -39,7 +39,7 @@ export function Analytics() {
       {naverId ? (
         <>
           <Script
-            src="//wcs.naver.net/wcslog.js"
+            src="//wcs.pstatic.net/wcslog.js"
             strategy="afterInteractive"
           />
           <Script id="naver-analytics-init" strategy="afterInteractive">

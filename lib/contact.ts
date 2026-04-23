@@ -26,8 +26,8 @@ export const CONTACT = {
 export const ANALYTICS = {
   /** Google Analytics 4 측정 ID (G-로 시작). 공개 환경변수로도 오버라이드 가능. */
   ga4: "G-78SSBDLD14",
-  /** Naver Analytics 사이트 ID. 발급받으면 아래에 입력. */
-  naver: null as string | null,
+  /** Naver Analytics 사이트 ID (analytics.naver.com 발급). */
+  naver: "1c35b7d72227160" as string | null,
 } as const;
 
 export const KEYWORDS = [
