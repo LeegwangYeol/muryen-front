@@ -21,12 +21,25 @@ export const metadata: Metadata = {
   authors: [{ name: SITE.name }],
   creator: SITE.name,
   publisher: SITE.name,
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": [{ url: "/feed.xml", title: `${SITE.name} RSS` }],
+    },
+  },
   icons: {
     icon: "/images/icon/muryeon.ico",
     apple: "/apple-icon.png",
   },
   manifest: "/manifest.json",
+  category: "Sports · Education · Korean Traditional Martial Arts",
+  other: {
+    // Naver 및 구형 검색 엔진용 보조 메타
+    subject: "24반 무예 · 갑주 대련 · 대학경당 계보를 잇는 서울 수련 동호회 무련",
+    classification: "Sports, Martial Arts, Education",
+    "article:author": SITE.name,
+    "article:section": "24반 무예",
+  },
   verification: {
     // Google Search Console 인증: https://search.google.com/search-console 에서 발급받은 토큰을 아래에 넣으세요.
     // google: "your-google-site-verification-token-here",
@@ -193,6 +206,12 @@ export default function RootLayout({
           rel="stylesheet"
           type="text/css"
           href="https://static.llami.net/widget-v1.css"
+        />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${SITE.name} RSS`}
+          href="/feed.xml"
         />
         <Script
           src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.14.0/dist/ort.js"

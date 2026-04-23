@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
 import ReferencePage from "../component/reference-page";
 
+const PUBLISHED = "2026-01-01T00:00:00+09:00";
+const MODIFIED = "2026-04-23T00:00:00+09:00";
+
 export const metadata: Metadata = {
   title: "참고 자료 · 무예도보통지",
   description:
     "무예도보통지(1790) 원전과 현대 복원 연구, 관련 문헌을 모은 무련의 참고 자료실.",
   alternates: { canonical: "/reference" },
   openGraph: {
+    type: "article",
     title: "참고 자료 · 무예도보통지 | 무련",
     description: "무예도보통지 원전과 복원 연구 자료.",
     url: "/reference",
+    siteName: "무련",
+    locale: "ko_KR",
+    publishedTime: PUBLISHED,
+    modifiedTime: MODIFIED,
+    authors: ["무련"],
+    section: "참고",
+    tags: ["참고 자료", "무예도보통지", "복원 연구", "조선 무예", "이덕무", "박제가", "백동수"],
+    images: [{ url: "/images/announce/gumiAllone.webp", alt: "무련 참고 자료" }],
   },
 };
 

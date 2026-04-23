@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
 import Equipment from "../component/equipment";
 
+const PUBLISHED = "2026-01-01T00:00:00+09:00";
+const MODIFIED = "2026-04-23T00:00:00+09:00";
+
 export const metadata: Metadata = {
   title: "전통 무기·갑주 · 장비 소개",
   description:
     "두정갑·목검·목창·대도 등 24반 무예 수련에 쓰이는 전통 병기와 방호구를 소개합니다.",
   alternates: { canonical: "/equipment" },
   openGraph: {
+    type: "article",
     title: "전통 무기·갑주 · 장비 소개 | 무련",
     description: "두정갑·목검·목창 — 무련이 쓰는 조선 전통 병기와 갑주.",
     url: "/equipment",
+    siteName: "무련",
+    locale: "ko_KR",
+    publishedTime: PUBLISHED,
+    modifiedTime: MODIFIED,
+    authors: ["무련"],
+    section: "장비",
+    tags: ["장비", "갑주", "두정갑", "목검", "목창", "대도", "병기"],
+    images: [{ url: "/images/announce/gumiAllone.webp", alt: "무련 전통 병기 · 갑주" }],
   },
 };
 
