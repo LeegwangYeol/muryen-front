@@ -108,7 +108,7 @@ export default function Equipment() {
         >
           <div className="bg-white p-5 sm:p-8 rounded-lg max-w-2xl w-full">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">{selectedEquipment.title}</h2>
+              <h2 className="text-xl sm:text-2xl font-bold">{selectedEquipment.title}</h2>
               <Button onClick={closeModal} variant="ghost">
                 <X className="h-6 w-6" />
               </Button>

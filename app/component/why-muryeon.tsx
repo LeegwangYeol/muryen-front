@@ -3,6 +3,15 @@
 import { motion } from "framer-motion";
 import { Shield, ScrollText, Coins } from "lucide-react";
 import { useTheme } from "../context/theme-context";
+import {
+  Section,
+  SectionHeading,
+  SubHeading,
+  Body,
+  Eyebrow,
+  CardContainer,
+  CardGrid,
+} from "@/components/ui/typography";
 
 const cards = [
   {
@@ -30,77 +39,47 @@ const cards = [
 
 export default function WhyMuryeon() {
   const { theme } = useTheme();
-  return (
-    <section className="w-full py-16 sm:py-24 px-4 sm:px-6 md:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <p
-            className={`text-xs sm:text-sm tracking-[0.3em] mb-3 ${
-              theme === "dark" ? "text-white/60" : "text-gray-500"
-            }`}
-          >
-            WHY MURYEON
-          </p>
-          <h2
-            className={`text-2xl sm:text-3xl md:text-4xl font-bold ${
-              theme === "dark" ? "text-white" : "text-gray-900"
-            }`}
-          >
-            왜 무련인가?
-          </h2>
-        </div>
+  const isDark = theme === "dark";
+  const iconBg = isDark ? "bg-white/10 text-white" : "bg-gray-900/5 text-gray-900";
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          {cards.map((c, i) => {
-            const Icon = c.icon;
-            return (
-              <motion.div
-                key={c.title}
-                initial={{ y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`rounded-2xl p-6 sm:p-8 border transition-colors duration-200 ${
-                  theme === "dark"
-                    ? "glassmorphism-dark border-white/10"
-                    : "glassmorphism-light border-gray-200"
-                }`}
-              >
+  return (
+    <Section width="wide" padding="loose">
+      <div className="text-center mb-8 sm:mb-12">
+        <Eyebrow className="mb-3 text-center">WHY MURYEON</Eyebrow>
+        <SectionHeading align="center" size="lg" className="mb-0">
+          왜 무련인가?
+        </SectionHeading>
+      </div>
+
+      <CardGrid cols={3}>
+        {cards.map((c, i) => {
+          const Icon = c.icon;
+          return (
+            <motion.div
+              key={c.title}
+              initial={{ y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <CardContainer padding="loose" className="transition-colors duration-200">
                 <div
-                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5 ${
-                    theme === "dark"
-                      ? "bg-white/10 text-white"
-                      : "bg-gray-900/5 text-gray-900"
-                  }`}
+                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5 ${iconBg}`}
                 >
                   <Icon size={22} />
                 </div>
-                <h3
-                  className={`text-lg sm:text-xl font-bold mb-1 ${
-                    theme === "dark" ? "text-white" : "text-gray-900"
-                  }`}
-                >
+                <SubHeading size="md" className="mb-1">
                   {c.title}
-                </h3>
-                <p
-                  className={`text-xs sm:text-sm mb-3 ${
-                    theme === "dark" ? "text-white/60" : "text-gray-500"
-                  }`}
-                >
+                </SubHeading>
+                <Body size="xs" muted className="mb-3">
                   {c.subtitle}
-                </p>
-                <p
-                  className={`text-sm leading-relaxed ${
-                    theme === "dark" ? "text-white/80" : "text-gray-700"
-                  }`}
-                >
-                  {c.body}
-                </p>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+                </Body>
+                <Body size="sm">{c.body}</Body>
+              </CardContainer>
+            </motion.div>
+          );
+        })}
+      </CardGrid>
+    </Section>
   );
 }

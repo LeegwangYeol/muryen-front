@@ -157,98 +157,119 @@ export default function SparringPage() {
           </div>
         </motion.section>
 
-        {sparringData.sections.map((section, index) => (
-          <motion.section
-            key={section.title}
-            initial={{ y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, delay: index * 0.1 }}
-            className={`mt-12 p-5 sm:p-8 rounded-lg ${
-              theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-            }`}
-          >
-            <h2
-              className={`text-2xl font-bold mb-4 sm:mb-6 ${
-                theme === "dark" ? "text-white" : "text-gray-900"
-              }`}
-            >
-              {section.title}
-            </h2>
+        {sparringData.sections.map((section, index) => {
+          // 짝수(0,2,4) = 글(프로즈), 홀수(1,3,5) = 카드(그리드)
+          const isProse = index % 2 === 0;
+          const isDark = theme === "dark";
+          const glass = isDark ? "glassmorphism-dark" : "glassmorphism-light";
+          const textBody = isDark ? "text-gray-200" : "text-gray-600";
+          const textHead = isDark ? "text-white" : "text-gray-900";
+          const rule = isDark ? "border-white/15" : "border-gray-300/60";
 
-            {section.subsections ? (
-              <div className="grid md:grid-cols-2 gap-6">
-                {section.subsections.map((subsection, idx) => (
-                  <motion.div
-                    key={subsection.title}
-                    initial={{ x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className="space-y-3"
-                  >
-                    <h3
-                      className={`text-xl font-semibold ${
-                        theme === "dark" ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      {subsection.title}
-                    </h3>
-                    {Array.isArray(subsection.content) ? (
-                      <ul className="space-y-2">
-                        {subsection.content.map((item, itemIdx) => (
-                          <li
-                            key={itemIdx}
-                            className={`$${
-                              theme === "dark"
-                                ? "text-gray-200"
-                                : "text-gray-600"
-                            }`}
-                          >
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p
-                        className={`$${
-                          theme === "dark" ? "text-gray-200" : "text-gray-600"
-                        }`}
+          const wrapperClass = isProse
+            ? `mt-14 sm:mt-20 max-w-3xl mx-auto px-4 text-center`
+            : `mt-12 p-5 sm:p-8 rounded-lg ${glass}`;
+
+          const h2Class = isProse
+            ? `text-2xl sm:text-3xl font-bold mb-5 sm:mb-7 ${textHead}`
+            : `text-2xl font-bold mb-4 sm:mb-6 ${textHead}`;
+
+          return (
+            <motion.section
+              key={section.title}
+              initial={{ y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, delay: index * 0.1 }}
+              className={wrapperClass}
+            >
+              {isProse && (
+                <div className={`w-12 h-px mx-auto mb-5 ${rule} border-t`} />
+              )}
+              <h2 className={h2Class}>{section.title}</h2>
+
+              {section.subsections ? (
+                isProse ? (
+                  <div className="space-y-6 text-left">
+                    {section.subsections.map((sub) => (
+                      <div key={sub.title}>
+                        <h3 className={`text-lg sm:text-xl font-semibold mb-2 ${textHead}`}>
+                          {sub.title}
+                        </h3>
+                        {Array.isArray(sub.content) ? (
+                          <ul className={`list-disc pl-5 space-y-1 ${textBody} text-base sm:text-lg leading-relaxed`}>
+                            {sub.content.map((item, i) => (
+                              <li key={i}>{item}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className={`text-base sm:text-lg leading-relaxed ${textBody}`}>
+                            {sub.content}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {section.subsections.map((subsection, idx) => (
+                      <motion.div
+                        key={subsection.title}
+                        initial={{ x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                        className="space-y-3"
                       >
-                        {subsection.content}
-                      </p>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {Array.isArray(section.content) ? (
-                  <ul className="space-y-2">
-                    {section.content.map((item, itemIdx) => (
-                      <li
+                        <h3 className={`text-xl font-semibold ${textHead}`}>
+                          {subsection.title}
+                        </h3>
+                        {Array.isArray(subsection.content) ? (
+                          <ul className={`space-y-2 ${textBody}`}>
+                            {subsection.content.map((item, itemIdx) => (
+                              <li key={itemIdx}>{item}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className={textBody}>{subsection.content}</p>
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+                )
+              ) : isProse ? (
+                <div className="space-y-4">
+                  {Array.isArray(section.content) ? (
+                    section.content.map((item, itemIdx) => (
+                      <p
                         key={itemIdx}
-                        className={`$${
-                          theme === "dark" ? "text-gray-200" : "text-gray-600"
-                        }`}
+                        className={`text-base sm:text-lg leading-relaxed ${textBody}`}
                       >
                         {item}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p
-                    className={`$${
-                      theme === "dark" ? "text-gray-200" : "text-gray-600"
-                    }`}
-                  >
-                    {section.content}
-                  </p>
-                )}
-              </div>
-            )}
-          </motion.section>
-        ))}
+                      </p>
+                    ))
+                  ) : (
+                    <p className={`text-base sm:text-lg leading-relaxed ${textBody}`}>
+                      {section.content}
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {Array.isArray(section.content) ? (
+                    <ul className={`space-y-2 ${textBody}`}>
+                      {section.content.map((item, itemIdx) => (
+                        <li key={itemIdx}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className={textBody}>{section.content}</p>
+                  )}
+                </div>
+              )}
+            </motion.section>
+          );
+        })}
       </div>
     </MainLayout>
   );

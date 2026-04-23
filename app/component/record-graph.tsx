@@ -92,7 +92,7 @@ const RecordGraph: React.FC = () => {
   return (
     <MainLayout>
       <div className="p-4 bg-white rounded-lg shadow">
-        <h2 className="text-2xl font-bold mb-4">Commit History</h2>
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Commit History</h2>
         <div className="flex flex-col space-y-4">
           {years.map((year) => (
             <div key={year} className="flex flex-col">
