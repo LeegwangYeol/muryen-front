@@ -1,9 +1,11 @@
 "use client";
 
+import { Fragment } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/theme-context";
 import { MainLayout } from "@/components/layout/main-layout";
+import PatternCurriculumTable from "./pattern-curriculum-table";
 
 const turoData = {
   title: "투로의 의미",
@@ -13,6 +15,11 @@ const turoData = {
       "투로는 동작 반복을 통해 겉으로 보이는 동작을 완벽하게 소화해내고 체화하기 위해 수련한다고들 믿습니다. 분명히 그런 목적도 존재하지만, 무련은 투로를 익힌다는 것은 하나의 무술서를 읽어내는 것과 같다는 생각 하에 수련을 진행하고 있어요. 우리가 책을 읽으면서 작가가 독자에게 무엇을 전달하고 싶어하는지를 생각하면서 읽듯이, 우리는 이 투로를 엮어낸 분께서 후학들에게 어떤 것들을 깨닫고 연습하기를 원하시는지를 생각하며 수련합니다.",
   },
   sections: [
+    {
+      title: "투로 수련의 철학",
+      content:
+        "단순히 투로를 암기하고 따라하는 것을 넘어, 각 동작의 이유와 원리를 함께 가르침으로써 수련생의 연무 능력과 동기를 동시에 끌어올립니다. 왜 이 동작이 이 순서인지, 어떤 상황을 가정한 움직임인지를 이해하고 연습하는 것이 무련의 방식이에요.",
+    },
     {
       title: "투로의 구성",
       subsections: [
@@ -52,33 +59,6 @@ const turoData = {
       ],
     },
     {
-      title: "수련의 방향",
-      subsections: [
-        {
-          title: "단계적 접근",
-          content:
-            "투로는 실제 교전에서 써야 할 동작들을 엮어내어 반복 연습할 수 있게 해주는 방법이에요. 또한, 실제로 쓰일 수 있는 동작들 외에도 교전 상황에 도움이 될 수 있는 신체 및 정신 단련 동작이 섞여있기도 해요. 이러한 동작들을 소화해내기 위해선 혼자 연습할 때도 상대방이 있다고 생각하며 정확한 동작을 하는 것이 중요해요.",
-          image: "/images/announce/gumi4.webp",
-        },
-        {
-          title: "교전 감각 유지",
-          content:
-            "투로는 실전에서 써야 할 기술들을 안전하게 연습할 수 있게 해주는 방법이에요. 혼자 연습할 때도 상대방이 있다고 생각하며 정확한 동작을 하는 것이 중요해요.",
-          // image: "/images/announce/gumi5.webp",
-        },
-      ],
-    },
-    {
-      title: "현대적 의미",
-      content:
-        "투로는 오랜 시간 동안 많은 무예인들의 경험이 담긴 소중한 수련 방법이에요. 혼자서도 꾸준히 연습할 수 있고, 기본기를 탄탄히 다질 수 있는 효과적인 방법이랍니다.",
-    },
-    {
-      title: "투로 수련의 철학",
-      content:
-        "단순히 투로를 암기하고 따라하는 것을 넘어, 각 동작의 이유와 원리를 함께 가르침으로써 수련생의 연무 능력과 동기를 동시에 끌어올립니다. 왜 이 동작이 이 순서인지, 어떤 상황을 가정한 움직임인지를 이해하고 연습하는 것이 무련의 방식이에요.",
-    },
-    {
       title: "투로 수련 과정",
       subsections: [
         {
@@ -102,6 +82,28 @@ const turoData = {
             "등패 → 곤방 → 월도 → 기창 순으로 단계적 학습. 검술에서 다져진 원리를 바탕으로 서로 다른 병기의 특성과 쓰임을 몸에 익힙니다.",
         },
       ],
+    },
+    {
+      title: "수련의 방향",
+      subsections: [
+        {
+          title: "단계적 접근",
+          content:
+            "투로는 실제 교전에서 써야 할 동작들을 엮어내어 반복 연습할 수 있게 해주는 방법이에요. 또한, 실제로 쓰일 수 있는 동작들 외에도 교전 상황에 도움이 될 수 있는 신체 및 정신 단련 동작이 섞여있기도 해요. 이러한 동작들을 소화해내기 위해선 혼자 연습할 때도 상대방이 있다고 생각하며 정확한 동작을 하는 것이 중요해요.",
+          image: "/images/announce/gumi4.webp",
+        },
+        {
+          title: "교전 감각 유지",
+          content:
+            "투로는 실전에서 써야 할 기술들을 안전하게 연습할 수 있게 해주는 방법이에요. 혼자 연습할 때도 상대방이 있다고 생각하며 정확한 동작을 하는 것이 중요해요.",
+          // image: "/images/announce/gumi5.webp",
+        },
+      ],
+    },
+    {
+      title: "현대적 의미",
+      content:
+        "투로는 오랜 시간 동안 많은 무예인들의 경험이 담긴 소중한 수련 방법이에요. 혼자서도 꾸준히 연습할 수 있고, 기본기를 탄탄히 다질 수 있는 효과적인 방법이랍니다.",
     },
   ],
 };
@@ -153,8 +155,8 @@ export default function PatternPage() {
         </motion.section>
 
         {turoData.sections.map((section, index) => (
+          <Fragment key={section.title}>
           <motion.section
-            key={section.title}
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: index * 0.1 }}
@@ -220,6 +222,8 @@ export default function PatternPage() {
               </p>
             )}
           </motion.section>
+          {section.title === "투로 수련 과정" && <PatternCurriculumTable />}
+          </Fragment>
         ))}
       </div>
     </MainLayout>

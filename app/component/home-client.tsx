@@ -10,6 +10,7 @@ import Philosophy from "./philosophy";
 import VideoCircle from "./video-circle";
 import HowWork from "./how-work";
 import WhyMuryeon from "./why-muryeon";
+import TrainingSystem from "./training-system";
 import InquirySection from "./inquiry-section";
 import { mockVideos } from "./mock-data";
 import { useTheme } from "../context/theme-context";
@@ -111,6 +112,7 @@ export default function HomeClient() {
       </Tabs>
 
       <WhyMuryeon />
+      <TrainingSystem />
       <InquirySection />
     </MainLayout>
   );
