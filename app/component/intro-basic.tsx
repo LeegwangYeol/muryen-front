@@ -325,7 +325,7 @@ const Tooltip = ({
       }`}
     >
       <h3
-        className={`font-bold mb-3 text-xl ${
+        className={`font-bold mb-3 text-lg sm:text-xl md:text-2xl ${
           theme === "dark" ? "text-gray-100" : "text-gray-900"
         }`}
       >
@@ -426,14 +426,14 @@ const DonutChart = ({ book }: { book: Book }) => {
     >
       <CardHeader className="text-center">
         <CardTitle
-          className={`text-2xl font-bold ${
+          className={`text-xl sm:text-2xl md:text-3xl font-bold ${
             theme === "dark" ? "text-white" : "text-gray-900"
           }`}
         >
           {book.title}
         </CardTitle>
         <p
-          className={`text-lg mt-2 ${
+          className={`text-sm sm:text-base md:text-lg mt-2 ${
             theme === "dark" ? "text-white" : "text-gray-900"
           }`}
         >

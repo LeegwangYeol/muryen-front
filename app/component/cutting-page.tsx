@@ -2,8 +2,14 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useTheme } from "../context/theme-context";
 import { MainLayout } from "@/components/layout/main-layout";
+import {
+  PageHeading,
+  SectionHeading,
+  SubHeading,
+  Body,
+  CardContainer,
+} from "@/components/ui/typography";
 
 const cuttingData = {
   title: "베기의 특성과 의미",
@@ -43,114 +49,80 @@ const cuttingData = {
 };
 
 export default function CuttingPage() {
-  const { theme } = useTheme();
-
   return (
     <MainLayout>
       <div className="container mx-auto px-4 py-6 sm:py-8">
-        <motion.h1
-          initial={{ y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`text-2xl sm:text-xl sm:text-2xl md:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center ${
-            theme === "dark" ? "text-white" : "text-gray-900"
-          }`}
-        >
-          {cuttingData.title}
-        </motion.h1>
+        <motion.div initial={{ y: 50 }} animate={{ opacity: 1, y: 0 }}>
+          <PageHeading size="lg">{cuttingData.title}</PageHeading>
+        </motion.div>
 
         <motion.section
           initial={{ y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1 }}
-          className={`p-5 sm:p-8 rounded-lg ${
-            theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-          }`}
         >
-          <div className="flex flex-col md:flex-row items-start gap-8">
-            <div className="md:w-1/2">
-              <Image
-                src={cuttingData.overview.image}
-                alt={cuttingData.title}
-                width={500}
-                height={300}
-                className="rounded-lg object-cover"
-              />
+          <CardContainer>
+            <div className="flex flex-col md:flex-row items-start gap-6 sm:gap-8">
+              <div className="md:w-1/2">
+                <Image
+                  src={cuttingData.overview.image}
+                  alt={cuttingData.title}
+                  width={500}
+                  height={300}
+                  className="rounded-lg object-cover w-full h-auto"
+                />
+              </div>
+              <div className="md:w-1/2">
+                <Body size="base">{cuttingData.overview.description}</Body>
+              </div>
             </div>
-            <div className="md:w-1/2 space-y-6">
-              <p
-                className={`text-lg ${
-                  theme === "dark" ? "text-gray-200" : "text-gray-600"
-                }`}
-              >
-                {cuttingData.overview.description}
-              </p>
-            </div>
-          </div>
+          </CardContainer>
         </motion.section>
 
         {cuttingData.sections.map((section, index) => (
-          <motion.section
+          <motion.div
             key={section.title}
             initial={{ y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, delay: index * 0.1 }}
-            className={`mt-12 p-5 sm:p-8 rounded-lg ${
-              theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-            }`}
+            className="mt-12 sm:mt-16"
           >
-            <h2
-              className={`text-2xl font-bold mb-4 sm:mb-6 ${
-                theme === "dark" ? "text-white" : "text-gray-900"
-              }`}
-            >
-              {section.title}
-            </h2>
+            <CardContainer>
+              <SectionHeading size="md" className="mb-4 sm:mb-6">
+                {section.title}
+              </SectionHeading>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {section.subsections.map((subsection, idx) => (
-                <motion.div
-                  key={subsection.title}
-                  initial={{ x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="space-y-3"
-                >
-                  <h3
-                    className={`text-xl font-semibold ${
-                      theme === "dark" ? "text-white" : "text-gray-900"
-                    }`}
+              <div className="grid md:grid-cols-2 gap-6">
+                {section.subsections.map((subsection, idx) => (
+                  <motion.div
+                    key={subsection.title}
+                    initial={{ x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    className="space-y-3"
                   >
-                    {subsection.title}
-                  </h3>
-                  {Array.isArray(subsection.content) ? (
-                    <ul className="space-y-2">
-                      {subsection.content.map((item, itemIdx) => (
-                        <li
-                          key={itemIdx}
-                          className={`${
-                            theme === "dark" ? "text-gray-200" : "text-gray-600"
-                          }`}
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p
-                      className={`${
-                        theme === "dark" ? "text-gray-200" : "text-gray-600"
-                      }`}
-                    >
-                      {subsection.content}
-                    </p>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </motion.section>
+                    <SubHeading size="md">{subsection.title}</SubHeading>
+                    {Array.isArray(subsection.content) ? (
+                      <ul className="list-disc pl-5 space-y-2">
+                        {subsection.content.map((item, itemIdx) => (
+                          <li key={itemIdx}>
+                            <Body as="span" size="sm">
+                              {item}
+                            </Body>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <Body size="sm">{subsection.content}</Body>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </CardContainer>
+          </motion.div>
         ))}
       </div>
     </MainLayout>

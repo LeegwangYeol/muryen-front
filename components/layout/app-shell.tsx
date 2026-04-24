@@ -12,7 +12,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`min-h-screen ${
-        theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
+        theme === "dark" ? "bg-[#410707]/90" : "bg-[#b3a6a6]/90"
       }`}
     >
       <MobileNav />

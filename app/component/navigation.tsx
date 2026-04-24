@@ -20,12 +20,18 @@ import {
   Mail,
   Youtube,
   Instagram,
+  Info,
 } from "lucide-react";
 import VideoModal from "./VideoModal";
 import { useTheme } from "../context/theme-context";
 import { CONTACT } from "@/lib/contact";
 
 const menuItems = [
+  {
+    href: "/about",
+    icon: <Info size={24} />,
+    label: "소개",
+  },
   {
     href: "/basic-sense",
     icon: <Feather size={24} />,
@@ -126,16 +132,20 @@ export default function Navigation({
     <>
       <nav
         className={`${isExpanded ? "w-44" : "w-24"} ${
-          theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
+          theme === "dark"
+            ? "bg-[#280505] border-r border-white/10"
+            : "bg-[#d9d0d0] border-r border-gray-200"
         } text-${
           theme === "dark" ? "white" : "gray-900"
-        } h-screen p-4 fixed top-0 left-0 z-50 transition-all duration-300 rounded-r-lg`}
+        } h-screen p-4 fixed top-0 left-0 z-50 transition-all duration-300 rounded-r-lg shadow-lg`}
       >
         <button
           onClick={() => handleExpand(!isExpanded)}
           className={`absolute -right-3 top-1/2 -translate-y-1/2 ${
-            theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-          } rounded-full p-1 transition-all duration-300`}
+            theme === "dark"
+              ? "bg-[#280505] border border-white/10"
+              : "bg-[#d9d0d0] border border-gray-200"
+          } rounded-full p-1 transition-colors duration-300 shadow`}
         >
           {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
         </button>

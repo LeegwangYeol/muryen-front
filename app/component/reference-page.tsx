@@ -4,6 +4,14 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/theme-context";
 import { MainLayout } from "@/components/layout/main-layout";
+import {
+  PageHeading,
+  SectionHeading,
+  SubHeading,
+  Body,
+  CardContainer,
+} from "@/components/ui/typography";
+
 const referenceData = [
   {
     title: "무예도보통지",
@@ -36,96 +44,77 @@ const referenceData = [
 
 export default function ReferencePage() {
   const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const dividerBorder = isDark ? "border-white/15" : "border-gray-200";
 
   return (
     <MainLayout>
       <div className="container mx-auto px-4 py-6 sm:py-8">
-        <motion.h1
-          initial={{ y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`text-2xl sm:text-xl sm:text-2xl md:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center ${
-            theme === "dark" ? "text-white" : "text-gray-900"
-          }`}
-        >
-          무예 참고 자료
-        </motion.h1>
+        <motion.div initial={{ y: 50 }} animate={{ opacity: 1, y: 0 }}>
+          <PageHeading size="lg">무예 참고 자료</PageHeading>
+        </motion.div>
 
-        <div className="space-y-24">
+        <div className="space-y-12 sm:space-y-16">
           {referenceData.map((item, index) => (
-            <motion.section
+            <motion.div
               key={item.title}
               initial={{ y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7 }}
-              className={`p-5 sm:p-8 rounded-lg ${
-                theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-              }`}
             >
-              <div
-                className={`flex flex-col ${
-                  index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                } items-start gap-8`}
-              >
-                <div className="md:w-1/2">
-                  <Image
-                    src={item.overview.image}
-                    alt={item.title}
-                    width={500}
-                    height={300}
-                    className="rounded-lg object-cover"
-                  />
-                </div>
-                <div className="md:w-1/2 space-y-6">
-                  <div>
-                    <h2
-                      className={`text-xl sm:text-2xl md:text-3xl font-bold mb-4 ${
-                        theme === "dark" ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      {item.title}
-                    </h2>
-                    <p
-                      className={`text-lg ${
-                        theme === "dark" ? "text-gray-200" : "text-gray-600"
-                      }`}
-                    >
-                      {item.overview.description}
-                    </p>
+              <CardContainer>
+                <div
+                  className={`flex flex-col ${
+                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                  } items-start gap-6 sm:gap-8`}
+                >
+                  <div className="md:w-1/2">
+                    <Image
+                      src={item.overview.image}
+                      alt={item.title}
+                      width={500}
+                      height={300}
+                      className="rounded-lg object-cover w-full h-auto"
+                    />
                   </div>
+                  <div className="md:w-1/2 space-y-6">
+                    <div>
+                      <SectionHeading size="md" className="mb-3 sm:mb-4">
+                        {item.title}
+                      </SectionHeading>
+                      <Body size="base">{item.overview.description}</Body>
+                    </div>
 
-                  <div className="pt-6 border-t border-gray-200 dark:border-gray-700">
-                    <h3
-                      className={`text-xl font-semibold mb-4 ${
-                        theme === "dark" ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      주요 특징
-                    </h3>
-                    <ul className="space-y-3">
-                      {item.details.map((detail, detailIndex) => (
-                        <motion.li
-                          key={detailIndex}
-                          initial={{ x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{
-                            duration: 0.5,
-                            delay: detailIndex * 0.2,
-                          }}
-                          className={`flex items-center space-x-2 ${
-                            theme === "dark" ? "text-gray-200" : "text-gray-600"
-                          }`}
-                        >
-                          <span className="w-2 h-2 rounded-full bg-blue-500" />
-                          <span>{detail}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
+                    <div className={`pt-6 border-t ${dividerBorder}`}>
+                      <SubHeading size="md" className="mb-3 sm:mb-4">
+                        주요 특징
+                      </SubHeading>
+                      <ul className="space-y-3">
+                        {item.details.map((detail, detailIndex) => (
+                          <motion.li
+                            key={detailIndex}
+                            initial={{ x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{
+                              duration: 0.5,
+                              delay: detailIndex * 0.2,
+                            }}
+                            className="flex items-center gap-2"
+                          >
+                            <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
+                            <Body as="span" size="sm">
+                              {detail}
+                            </Body>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.section>
+              </CardContainer>
+            </motion.div>
           ))}
         </div>
       </div>

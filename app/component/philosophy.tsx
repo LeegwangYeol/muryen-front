@@ -1,11 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTheme } from "../context/theme-context";
+import {
+  Section,
+  SectionHeading,
+  SubHeading,
+  Body,
+  CardContainer,
+  Divider,
+} from "@/components/ui/typography";
 
 export default function Philosophy() {
-  const { theme } = useTheme();
-
   const philosophies = [
     {
       title: "우리는 원리의 깨달음을 추구해요",
@@ -25,73 +30,51 @@ export default function Philosophy() {
   ];
 
   return (
-    <section className="w-full">
-      <div className="max-w-4xl mx-auto px-4">
-        <motion.div
-          initial={{ y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className={`py-10 sm:py-16 text-center ${
-            theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-          } rounded-lg mb-6 sm:mb-8`}
-        >
-          <h2
-            className={`text-2xl sm:text-xl sm:text-2xl md:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 ${
-              theme === "dark" ? "text-white" : "text-gray-900"
-            }`}
-          >
+    <Section width="narrow" padding="compact">
+      <motion.div
+        initial={{ y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+        className="mb-6 sm:mb-8"
+      >
+        <CardContainer padding="loose" className="text-center">
+          <SectionHeading align="center" size="lg">
             <span className="highlight-word">무련</span>이란?
-          </h2>
-          <p
-            className={`text-xl mb-6 sm:mb-12 max-w-2xl mx-auto leading-relaxed ${
-              theme === "dark" ? "text-gray-200" : "text-gray-600"
-            }`}
+          </SectionHeading>
+          <Body size="base" className="max-w-2xl mx-auto">
+            <span className="highlight-word">무련</span>은{" "}
+            <span className="highlight-word">무예 24반 경당</span>의 사회인
+            동아리에요. 우리는 무예도보통지의 가르침을 기초로 기술의 습득을
+            넘어, 이를 어떻게 계승하고 발전시켜 현대의 무예에 적응 및 적용할지를
+            고민해요.
+          </Body>
+        </CardContainer>
+      </motion.div>
+
+      <div className="space-y-6 sm:space-y-8">
+        {philosophies.map((philosophy) => (
+          <motion.div
+            key={philosophy.title}
+            initial={{ y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <span className="highlight-word">무련</span>은 <span className="hightlight-word">무예 24반 경당</span>의
-            사회인 동아리에요. 우리는 무예도보통지의 가르침을 기초로 기술의
-            습득을 넘어, 이를 어떻게 계승하고 발전시켜 현대의 무예에 적응 및
-            적용할지를 고민해요.
-          </p>
-        </motion.div>
-        <div className="space-y-8">
-          {philosophies.map((philosophy, index) => (
-            <motion.div
-              key={philosophy.title}
-              initial={{ y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{
-                duration: 0.8,
-                ease: "easeOut",
-              }}
-              className={`flex flex-col items-center text-center ${
-                theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light"
-              } p-5 sm:p-8 rounded-lg`}
-            >
-              <h3
-                className={`text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 ${
-                  theme === "dark" ? "text-white" : "text-gray-900"
-                }`}
-              >
+            <CardContainer padding="loose" className="text-center">
+              <SubHeading align="center" size="lg" className="mb-4 sm:mb-6">
                 {philosophy.title}
-              </h3>
-              <p
-                className={`text-xl max-w-2xl leading-relaxed ${
-                  theme === "dark" ? "text-gray-200" : "text-gray-600"
-                }`}
-              >
+              </SubHeading>
+              <Body size="base" className="max-w-2xl mx-auto">
                 {philosophy.description}
-              </p>
-              <div
-                className={`w-1/3 h-px mt-16 ${
-                  theme === "dark" ? "bg-gray-700" : "bg-gray-200"
-                }`}
-              />
-            </motion.div>
-          ))}
-        </div>
+              </Body>
+              <div className="mt-10 sm:mt-14">
+                <Divider align="center" width="md" />
+              </div>
+            </CardContainer>
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

@@ -135,11 +135,11 @@ body {
 
 .glassmorphism-light {
   background: rgba(179 166 166 / 0.75);
-  box-shadow: 0 8px 32px 0 rgba(121 124 171 / 0.37);
+  box-shadow: 0 4px 12px 0 rgba(121 124 171 / 0.2);
   backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(3px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .glassmorphism-light:hover {
@@ -148,11 +148,11 @@ body {
 
 .glassmorphism-dark {
   background: rgba(65, 7, 7, 0.5);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(11.5px);
-  -webkit-backdrop-filter: blur(11.5px);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .glassmorphism-dark:hover {

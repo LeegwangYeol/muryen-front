@@ -26,12 +26,13 @@ export default function VantaBackground({
           }
           vantaEffect.current = window.VANTA.CELLS({
             el: "#vanta-bg",
-            mouseControls: true,
-            touchControls: true,
+            mouseControls: false,
+            touchControls: false,
             gyroControls: false,
             minHeight: 200.0,
             minWidth: 200.0,
             scale: 1.0,
+            speed: 0.3,
             color1: theme === "dark" ? 0x1a1a1a : 0xffffff,
             color2: theme === "dark" ? 0x646027 : 0x4e7b00,
           });

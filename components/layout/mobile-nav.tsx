@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Home,
+  Info,
   Feather,
   BookOpen,
   Waypoints,
@@ -26,6 +27,7 @@ import { CONTACT } from "@/lib/contact";
 
 const menuItems = [
   { href: "/", icon: Home, label: "홈" },
+  { href: "/about", icon: Info, label: "소개" },
   { href: "/basic-sense", icon: Feather, label: "24반" },
   { href: "/basic", icon: BookOpen, label: "기본기" },
   { href: "/pattern", icon: Waypoints, label: "투로" },
@@ -67,7 +69,9 @@ export function MobileNav() {
   };
 
   const glass =
-    theme === "dark" ? "glassmorphism-dark" : "glassmorphism-light";
+    theme === "dark"
+      ? "bg-[#280505] border-white/10"
+      : "bg-[#d9d0d0] border-gray-200";
   const textColor = theme === "dark" ? "text-white" : "text-gray-900";
   const hoverBg =
     theme === "dark"
