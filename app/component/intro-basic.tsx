@@ -1,6 +1,13 @@
 "use client";
 
-import React, { useState, memo, useMemo, useEffect } from "react";
+import React, {
+  useState,
+  memo,
+  useMemo,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { ChartContainer } from "@/components/ui/chart";
@@ -309,18 +316,45 @@ const CustomLabel = (props: LabelProps) => {
 const Tooltip = ({
   name,
   description,
+  x,
+  y,
 }: {
   name: string;
   description: string;
+  x: number;
+  y: number;
 }) => {
   const { theme } = useTheme();
+  const ref = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState<{ left: number; top: number }>({
+    left: x + 20,
+    top: y + 20,
+  });
+
+  useLayoutEffect(() => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const padding = 12;
+    const offset = 18;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    let left = x + offset;
+    let top = y + offset;
+    if (left + rect.width + padding > vw) left = x - rect.width - offset;
+    if (left < padding) left = padding;
+    if (top + rect.height + padding > vh) top = y - rect.height - offset;
+    if (top < padding) top = padding;
+    setPos({ left, top });
+  }, [x, y]);
 
   return createPortal(
     <div
-      className={`fixed top-1/3 left-1/2 -translate-x-1/2 backdrop-blur-sm shadow-lg rounded-xl z-[9999] p-4 sm:p-6 w-[500px] transition-colors duration-200
+      ref={ref}
+      style={{ position: "fixed", top: pos.top, left: pos.left, pointerEvents: "none" }}
+      className={`shadow-lg rounded-xl z-[9999] p-4 sm:p-6 w-[min(90vw,500px)] transition-colors duration-200
       ${
         theme === "dark"
-          ? "bg-gray-800/90 border border-gray-700 text-gray-200"
+          ? "bg-gray-800/95 border border-gray-700 text-gray-200"
           : "bg-white/95 border border-gray-200 text-gray-800"
       }`}
     >
@@ -348,12 +382,25 @@ const CustomSectionContent = (props: any) => {
   const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, payload } =
     props;
   const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const { theme } = useTheme();
   const RADIAN = Math.PI / 180;
   const midAngle = (startAngle + endAngle) / 2;
   const radius = (innerRadius + outerRadius) / 2;
   const x = cx + radius * Math.cos(-midAngle * RADIAN) - 80;
   const y = cy + radius * Math.sin(-midAngle * RADIAN) - 80;
+
+  useEffect(() => {
+    if (!isHovered) return;
+    const onMove = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [isHovered]);
+
+  const handleEnter = (e: React.MouseEvent) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+    setIsHovered(true);
+  };
 
   return (
     <>
@@ -362,7 +409,7 @@ const CustomSectionContent = (props: any) => {
           <Image
             src={payload.image}
             alt={payload.name}
-            onMouseEnter={() => setIsHovered(true)}
+            onMouseEnter={handleEnter}
             onMouseLeave={() => setIsHovered(false)}
             fill
             className={`object-contain transition-all duration-200 ${
@@ -374,12 +421,12 @@ const CustomSectionContent = (props: any) => {
         </div>
       </foreignObject>
       {isHovered && (
-        <div
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <Tooltip name={payload.name} description={payload.description} />
-        </div>
+        <Tooltip
+          name={payload.name}
+          description={payload.description}
+          x={mousePos.x}
+          y={mousePos.y}
+        />
       )}
     </>
   );
