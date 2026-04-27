@@ -291,6 +291,28 @@ p {
   }
 }
 
+/* 라우트 로딩 인디케이터 — 좌→우로 미끄러지는 진행바 */
+@keyframes loadingBar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+/* 안내 텍스트의 점 3개 — 순차 깜박임 */
+@keyframes loadingDot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
 /* 모션 줄이기 환경설정 존중 — 어지럼증/멀미 회피 */
 @media (prefers-reduced-motion: reduce) {
   *,
