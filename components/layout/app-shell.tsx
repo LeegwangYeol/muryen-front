@@ -30,7 +30,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
         <main
           id="main"
-          className={`flex-1 transition-all duration-300 pt-14 md:pt-0 ${
+          style={{
+            paddingTop: "calc(3.5rem + env(safe-area-inset-top))",
+          }}
+          className={`flex-1 transition-all duration-300 md:!pt-0 ${
             isNavExpanded ? "md:ml-64" : "md:ml-24"
           }`}
         >

@@ -80,11 +80,12 @@ export function MobileNav() {
 
   return (
     <>
-      {/* Top bar */}
+      {/* Top bar — 노치 대응 safe-area */}
       <div
-        className={`md:hidden fixed top-0 left-0 right-0 z-50 ${glass} ${textColor} h-14 flex items-center justify-between px-4 border-b ${
+        className={`md:hidden fixed top-0 left-0 right-0 z-50 ${glass} ${textColor} h-14 flex items-center justify-between px-4 border-b pt-[env(safe-area-inset-top)] pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] ${
           theme === "dark" ? "border-white/10" : "border-gray-200"
         }`}
+        style={{ height: "calc(3.5rem + env(safe-area-inset-top))" }}
       >
         <Link href="/" className="flex items-center gap-2 font-semibold text-base tracking-wide">
           <Home size={18} />
