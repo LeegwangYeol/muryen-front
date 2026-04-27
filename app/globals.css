@@ -34,6 +34,31 @@
 body {
   color: rgb(var(--foreground));
   background: rgb(var(--background));
+  font-family:
+    var(--font-sans),
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Apple SD Gothic Neo",
+    "Malgun Gothic",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  /* 헤딩만 serif로 가져가고 싶으면 아래 주석 해제
+  font-family: var(--font-serif), ui-serif, Georgia, serif;
+  */
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+}
+
+p {
+  word-break: keep-all;
 }
 
 /* Eastern-inspired pattern */

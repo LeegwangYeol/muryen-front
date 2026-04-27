@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
+import { Noto_Sans_KR, Hahmlet } from "next/font/google";
 // NOTE: root layout is a Server Component. We cannot use `dynamic(..., { ssr:false })` here.
 // VantaBackground itself is a client component, so importing it directly is fine.
 import VantaBackground from "./component/vanta-main-background";
@@ -10,6 +11,31 @@ import { AppShell } from "@/components/layout/app-shell";
 import { Analytics } from "./component/analytics";
 import { WebVitals } from "./component/web-vitals";
 import { SITE, KEYWORDS, CONTACT } from "@/lib/contact";
+
+/**
+ * 전역 글자체.
+ * 다른 한글 폰트로 바꾸고 싶으면 여기 import만 교체하면 사이트 전체 반영됨.
+ *
+ * 추천 대안:
+ *  - Pretendard       (한국 웹 표준급, 단 google fonts에 없어서 self-host 필요)
+ *  - Noto_Serif_KR    (전통적인 진중한 느낌)
+ *  - Gowun_Dodum      (부드러운 둥근 산세리프)
+ *  - IBM_Plex_Sans_KR (현대적·기업스러움)
+ *  - Black_Han_Sans   (디스플레이 전용 — 헤딩에만)
+ */
+const fontSans = Noto_Sans_KR({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "900"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const fontSerif = Hahmlet({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -263,7 +289,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className="light" suppressHydrationWarning>
+    <html
+      lang="ko"
+      className={`light ${fontSans.variable} ${fontSerif.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <Script
           id="theme-init"
