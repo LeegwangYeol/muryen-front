@@ -12,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: [HERO_IMAGE],
     },
     {
+      path: "/about",
+      priority: 0.9,
+      changeFrequency: "monthly" as const,
+      images: [HERO_IMAGE],
+    },
+    {
       path: "/basic-sense",
       priority: 0.9,
       changeFrequency: "monthly" as const,
