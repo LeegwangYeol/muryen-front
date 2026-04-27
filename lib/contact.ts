@@ -10,7 +10,7 @@ export const SITE = {
   description:
     "조선 24반 무예를 갑주 입고 대련합니다. 대학경당 계보를 잇는 서울 수련 동호회 '무련'. 회비 무료, 숙련도 무관, 주말 수련.",
   location: "서울",
-  schedule: "주말 수련 (토 오후 2시 또는 일 오전)",
+  schedule: "주말 수련 (토 오후 2시)",
   fee: "회비 없음",
   entryBarrier: "숙련도 무관 · 누구나",
 } as const;

@@ -31,10 +31,11 @@ export default function HomeClient() {
   if (isOpening) {
     return (
       <motion.div
-        className="fixed inset-0 flex items-center justify-center bg-black"
+        className="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden"
         initial={{ opacity: 1 }}
         animate={{ opacity: 0 }}
         transition={{ duration: 2.5, delay: 1 }}
+        aria-hidden="true"
       >
         <motion.div
           className="relative w-full h-full"
