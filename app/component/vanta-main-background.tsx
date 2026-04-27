@@ -9,6 +9,12 @@ declare global {
   }
 }
 
+/**
+ * Vanta CELLS 배경 — 데스크탑 한정.
+ * - 모바일(<= 768px): 배터리/성능을 위해 로드하지 않음
+ * - prefers-reduced-motion: 사용자 환경 존중, 로드하지 않음
+ * - 두 경우 모두 정적 그라데이션 배경(globals.css)이 노출됨
+ */
 export default function VantaBackground({
   children,
 }: {
@@ -18,51 +24,76 @@ export default function VantaBackground({
   const { theme } = useTheme();
 
   useEffect(() => {
-    const loadVanta = async () => {
-      const initVanta = () => {
-        if (window.VANTA) {
-          if (vantaEffect.current) {
-            vantaEffect.current.destroy();
-          }
-          vantaEffect.current = window.VANTA.CELLS({
-            el: "#vanta-bg",
-            mouseControls: false,
-            touchControls: false,
-            gyroControls: false,
-            minHeight: 200.0,
-            minWidth: 200.0,
-            scale: 1.0,
-            speed: 0.3,
-            color1: theme === "dark" ? 0x1a1a1a : 0xffffff,
-            color2: theme === "dark" ? 0x646027 : 0x4e7b00,
-          });
-        }
-      };
+    if (typeof window === "undefined") return;
 
-      // Three.js 로드
-      const threeScript = document.createElement("script");
-      threeScript.src =
-        "https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js";
-      threeScript.async = true;
-      document.body.appendChild(threeScript);
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (isMobile || reducedMotion) return;
 
-      // Vanta.js 로드
-      threeScript.onload = () => {
-        const vantaScript = document.createElement("script");
-        vantaScript.src =
-          "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js";
-        vantaScript.async = true;
-        vantaScript.onload = initVanta;
-        document.body.appendChild(vantaScript);
-      };
-    };
+    let cancelled = false;
 
-    loadVanta();
-
-    // 클린업 함수
-    return () => {
+    const initVanta = () => {
+      if (cancelled) return;
+      if (!window.VANTA) return;
       if (vantaEffect.current) {
         vantaEffect.current.destroy();
+      }
+      vantaEffect.current = window.VANTA.CELLS({
+        el: "#vanta-bg",
+        mouseControls: false,
+        touchControls: false,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        speed: 0.3,
+        color1: theme === "dark" ? 0x1a1a1a : 0xffffff,
+        color2: theme === "dark" ? 0x646027 : 0x4e7b00,
+      });
+    };
+
+    const ensureScript = (src: string) =>
+      new Promise<void>((resolve, reject) => {
+        const existing = document.querySelector(`script[src="${src}"]`);
+        if (existing) {
+          if ((existing as HTMLScriptElement).dataset.loaded === "true")
+            return resolve();
+          existing.addEventListener("load", () => resolve(), { once: true });
+          existing.addEventListener("error", () => reject(), { once: true });
+          return;
+        }
+        const s = document.createElement("script");
+        s.src = src;
+        s.async = true;
+        s.onload = () => {
+          s.dataset.loaded = "true";
+          resolve();
+        };
+        s.onerror = () => reject();
+        document.body.appendChild(s);
+      });
+
+    (async () => {
+      try {
+        await ensureScript(
+          "https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"
+        );
+        await ensureScript(
+          "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"
+        );
+        initVanta();
+      } catch {
+        // CDN 실패 시 그냥 정적 배경
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+        vantaEffect.current = null;
       }
     };
   }, [theme]);
@@ -71,15 +102,8 @@ export default function VantaBackground({
     <>
       <div
         id="vanta-bg"
-        className="fixed inset-0 z-[-1]"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-        }}
+        aria-hidden="true"
+        className="fixed inset-0 z-[-1] pointer-events-none"
       />
       <div className="relative z-0">{children}</div>
     </>

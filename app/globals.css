@@ -219,15 +219,8 @@ p {
   @apply bg-slate-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-slate-700 transition-colors duration-300;
 }
 
-/* Custom styles for headings */
-h1, h2, h3 {
-  @apply font-bold text-slate-800;
-}
-
-/* Add a subtle shadow to sections */
-section {
-  @apply shadow-md;
-}
+/* 헤딩 색상은 컴포넌트가 테마에 맞게 결정. 전역 강제 색상 X. */
+/* 섹션 그림자는 카드 단위에서만 적용. */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -296,4 +289,23 @@ section {
   .pause-animation {
     animation-play-state: paused;
   }
+}
+
+/* 모션 줄이기 환경설정 존중 — 어지럼증/멀미 회피 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 키보드 포커스 — 마우스 사용자에게는 안 보이고 키보드 사용자에게만 표시 */
+*:focus-visible {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 2px;
+  border-radius: 4px;
 }

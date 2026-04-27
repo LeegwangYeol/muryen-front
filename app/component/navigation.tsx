@@ -90,11 +90,7 @@ export default function Navigation({
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // 쿠키에서 accessToken 확인
-    console.log("accessToken", document.cookie);
-    const hasToken = document.cookie.includes("accessToken");
-    console.log("hasToken", hasToken);
-    setIsLoggedIn(hasToken);
+    setIsLoggedIn(document.cookie.includes("accessToken"));
   }, []);
 
   const handleLogout = async () => {
