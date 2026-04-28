@@ -153,6 +153,15 @@ const websiteJsonLd = {
   description: SITE.description,
   inLanguage: "ko-KR",
   publisher: { "@id": `${SITE.url}/#organization` },
+  // Sitelinks Search Box (Google) — 사이트 검색 박스가 검색 결과에 등장할 수 있게
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${SITE.url}/?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 const localBusinessJsonLd = {
