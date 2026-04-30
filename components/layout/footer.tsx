@@ -123,7 +123,7 @@ export function Footer() {
           className={`mt-10 sm:mt-12 pt-6 border-t ${divider} flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3`}
         >
           <Body size="xs" muted>
-            © {new Date().getFullYear()} {SITE.name} {SITE.hanja} · {SITE.location} · {SITE.schedule}
+            © {new Date().getFullYear()} 무련(武緣) · {SITE.location} · {SITE.schedule}
           </Body>
           <Body size="xs" muted className="italic">
             &ldquo;{SITE.slogan}&rdquo;

@@ -52,7 +52,7 @@ export default function HomeClient() {
   return (
     <MainLayout>
       <h1 className="sr-only">
-        무련 — 조선 24반 무예 · 갑주 대련 · 대학경당 계보를 잇는 서울 수련 동호회
+        무련(武緣) — 조선 24반 무예 · 갑주 대련 · 대학경당 계보를 잇는 서울 수련 동호회. 무련은 무예도보통지의 기록을 몸으로 읽어내는 방식으로 24반 무예를 수련합니다.
       </h1>
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <div className="sticky top-14 md:top-4 z-40 flex justify-center px-2 py-3 pointer-events-none isolate [transform:translateZ(0)]">
