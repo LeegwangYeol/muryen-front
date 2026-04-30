@@ -27,7 +27,7 @@ function useColors() {
   const dark = theme === "dark";
   return {
     head: dark ? "text-white" : "text-gray-900",
-    body: dark ? "text-gray-200" : "text-gray-600",
+    body: dark ? "text-gray-200" : "text-gray-700",
     muted: dark ? "text-white/60" : "text-gray-500",
     divider: dark ? "border-white/15" : "border-gray-300/60",
     glass: dark ? "glassmorphism-dark" : "glassmorphism-light",

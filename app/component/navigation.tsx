@@ -129,18 +129,16 @@ export default function Navigation({
       <nav
         className={`${isExpanded ? "w-44" : "w-24"} ${
           theme === "dark"
-            ? "bg-[#280505] border-r border-white/10"
-            : "bg-[#d9d0d0] border-r border-gray-200"
-        } text-${
-          theme === "dark" ? "white" : "gray-900"
+            ? "bg-[#280505] border-r border-white/10 text-white"
+            : "bg-[#f5efef] border-r border-gray-300 text-gray-900"
         } h-screen p-4 fixed top-0 left-0 z-50 transition-all duration-300 rounded-r-lg shadow-lg`}
       >
         <button
           onClick={() => handleExpand(!isExpanded)}
           className={`absolute -right-3 top-1/2 -translate-y-1/2 ${
             theme === "dark"
-              ? "bg-[#280505] border border-white/10"
-              : "bg-[#d9d0d0] border border-gray-200"
+              ? "bg-[#280505] border border-white/10 text-white"
+              : "bg-[#f5efef] border border-gray-300 text-gray-900"
           } rounded-full p-1 transition-colors duration-300 shadow`}
         >
           {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
@@ -150,8 +148,8 @@ export default function Navigation({
             href="/"
             className={`flex items-center gap-4 p-4 rounded-lg mb-2 transition-colors duration-300 ${
               theme === "dark"
-                ? "hover:bg-primary/90 hover:text-primary-foreground"
-                : "hover:bg-secondary/90 hover:text-secondary-foreground"
+                ? "hover:bg-white/10"
+                : "hover:bg-gray-900/5"
             }`}
           >
             <Home size={24} />
@@ -159,15 +157,33 @@ export default function Navigation({
           </Link>
           <button
             onClick={toggleTheme}
-            className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-300 ${
+            aria-label={theme === "light" ? "다크 모드로 전환" : "라이트 모드로 전환"}
+            title={theme === "light" ? "다크 모드로 전환" : "라이트 모드로 전환"}
+            className={`flex items-center justify-center w-10 h-10 rounded-full border transition-colors duration-300 ${
               theme === "dark"
-                ? "bg-primary/10 hover:bg-primary/20 text-primary"
-                : "bg-secondary/10 hover:bg-secondary/20 text-secondary"
+                ? "bg-white/10 hover:bg-white/20 text-white border-white/20"
+                : "bg-gray-900/5 hover:bg-gray-900/10 text-gray-900 border-gray-300"
             }`}
           >
             {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
           </button>
         </div>
+
+        {/* 테마 토글 — 확장 시 라벨로 강조 */}
+        {isExpanded && (
+          <button
+            onClick={toggleTheme}
+            aria-label={theme === "light" ? "다크 모드로 전환" : "라이트 모드로 전환"}
+            className={`w-full flex items-center justify-center gap-2 px-3 py-2 mb-3 rounded-lg text-xs font-medium border transition-colors duration-300 ${
+              theme === "dark"
+                ? "bg-white/5 hover:bg-white/10 text-white/90 border-white/15"
+                : "bg-gray-900/5 hover:bg-gray-900/10 text-gray-800 border-gray-300"
+            }`}
+          >
+            {theme === "light" ? <Moon size={14} /> : <Sun size={14} />}
+            <span>{theme === "light" ? "다크 모드" : "라이트 모드"}</span>
+          </button>
+        )}
         <ul className="space-y-2">
           {menuItems.map((item) => (
             <li key={item.href}>
@@ -175,8 +191,8 @@ export default function Navigation({
                 href={item.href}
                 className={`flex items-center gap-3 p-3 rounded-lg transition-colors duration-300 ${
                   theme === "dark"
-                    ? "hover:bg-primary/80 hover:text-primary-foreground"
-                    : "hover:bg-secondary/80 hover:text-secondary-foreground"
+                    ? "hover:bg-white/10"
+                    : "hover:bg-gray-900/10"
                 }`}
               >
                 {item.icon}

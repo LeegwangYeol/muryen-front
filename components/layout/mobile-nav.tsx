@@ -71,12 +71,12 @@ export function MobileNav() {
   const glass =
     theme === "dark"
       ? "bg-[#280505] border-white/10"
-      : "bg-[#d9d0d0] border-gray-200";
+      : "bg-[#f5efef] border-gray-300";
   const textColor = theme === "dark" ? "text-white" : "text-gray-900";
   const hoverBg =
     theme === "dark"
-      ? "hover:bg-primary/80 hover:text-primary-foreground"
-      : "hover:bg-secondary/80 hover:text-secondary-foreground";
+      ? "hover:bg-white/10"
+      : "hover:bg-gray-900/10";
 
   return (
     <>
@@ -91,13 +91,23 @@ export function MobileNav() {
           <Home size={18} />
           무련
         </Link>
-        <button
-          onClick={() => setIsOpen(true)}
-          aria-label="메뉴 열기"
-          className={`p-2 rounded-lg transition-colors ${hoverBg}`}
-        >
-          <Menu size={22} />
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={toggleTheme}
+            aria-label={theme === "light" ? "다크 모드로 전환" : "라이트 모드로 전환"}
+            title={theme === "light" ? "다크 모드로 전환" : "라이트 모드로 전환"}
+            className={`p-2 rounded-lg transition-colors ${hoverBg}`}
+          >
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+          <button
+            onClick={() => setIsOpen(true)}
+            aria-label="메뉴 열기"
+            className={`p-2 rounded-lg transition-colors ${hoverBg}`}
+          >
+            <Menu size={22} />
+          </button>
+        </div>
       </div>
 
       {/* Drawer */}

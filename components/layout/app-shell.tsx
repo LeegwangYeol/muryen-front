@@ -13,7 +13,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`min-h-screen ${
-        theme === "dark" ? "bg-[#410707]/90" : "bg-[#b3a6a6]/90"
+        theme === "dark" ? "bg-[#410707]/90" : "bg-[#f0e8e8]/95"
       }`}
     >
       {/* 키보드 사용자용 본문 바로가기 — 평소엔 숨겨지고 Tab 키 누르면 등장 */}
