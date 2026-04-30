@@ -41,7 +41,7 @@ export default function TrainingSystem() {
       <CardContainer className="mb-6 sm:mb-8">
         <Body className="text-center">
           기본기를 바탕으로 한 균형 잡힌 무인을 양성하기 위해, 한 번의 수련
-          시간을 3교시로 나누어 각 주제에 맞는 수련을 집중적으로 진행해요.
+          시간을 3교시로 나누어 각 주제에 맞는 수련을 집중적으로 진행합니다.
           이렇게 함으로써 기본기·투로·대련이 각자의 시간 안에서 충분히
           숙성되고, 동시에 서로를 받쳐주는 유기적인 수련이 가능해집니다.
         </Body>

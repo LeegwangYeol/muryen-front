@@ -87,14 +87,14 @@ export default function TargetAudience() {
         </div>
       </div>
 
-      {/* 이런 사람과 맞아요 */}
+      {/* 이런 사람과 맞습니다 */}
       <div className="text-center mb-8 sm:mb-12">
         <Eyebrow className="mb-3 text-center">WHO FITS</Eyebrow>
         <SectionHeading align="center" size="lg" className="mb-3 sm:mb-4">
-          이런 사람은 무련과 맞아요
+          이런 분과 잘 맞습니다
         </SectionHeading>
         <Body size="sm" muted className="max-w-2xl mx-auto">
-          한 가지라도 해당된다면, 주말에 한 번 들러 보세요.
+          한 가지라도 해당된다면, 주말에 한 번 들러 보십시오.
         </Body>
       </div>
 
