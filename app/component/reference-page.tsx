@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/theme-context";
 import { MainLayout } from "@/components/layout/main-layout";
+import { PageCTA } from "@/components/layout/page-cta";
 import {
   PageHeading,
   SectionHeading,
@@ -117,6 +118,8 @@ export default function ReferencePage() {
             </motion.div>
           ))}
         </div>
+        <PageCTA />
+
       </div>
     </MainLayout>
   );

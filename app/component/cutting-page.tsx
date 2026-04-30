@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { MainLayout } from "@/components/layout/main-layout";
+import { PageCTA } from "@/components/layout/page-cta";
 import {
   PageHeading,
   SectionHeading,
@@ -25,12 +26,12 @@ const cuttingData = {
         {
           title: "진검의 운용",
           content:
-            "진검을 다루는 것은 목검과는 완전히 다른 느낌입니다. 단순한 힘이 아닌, 바른 자세와 호흡, 그리고 원리을 통해 효율적으로 힘을 쓸 줄 알아야 합니다.",
+            "진검을 다루는 것은 목검과 완전히 다른 감각입니다. 단순한 힘이 아니라, 바른 자세와 호흡, 그리고 원리에 따라 효율적으로 힘을 쓸 줄 알아야 합니다.",
         },
         {
           title: "수련의 진단",
           content:
-            "실제 물체를 베어보는 과정은 그 동안의 수련을 점검하는 중요한 과정입니다. 검날의 방향과 힘의 흐름이 정확히 일치하는지, 기본기와 투로에서 배운 동작들이 실제로 효과가 있는지 확인할 수 있습니다.",
+            "실제 물체를 베어보는 과정은 그동안의 수련을 점검하는 중요한 단계입니다. 검날의 방향과 힘의 흐름이 정확히 일치하는지, 기본기와 투로에서 익힌 동작들이 실제로 작동하는지 확인할 수 있습니다.",
         },
         {
           title: "단계적 접근",
@@ -124,6 +125,8 @@ export default function CuttingPage() {
             </CardContainer>
           </motion.div>
         ))}
+        <PageCTA />
+
       </div>
     </MainLayout>
   );

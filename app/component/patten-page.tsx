@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/theme-context";
 import { MainLayout } from "@/components/layout/main-layout";
+import { PageCTA } from "@/components/layout/page-cta";
 import PatternCurriculumTable from "./pattern-curriculum-table";
 
 const turoData = {
@@ -251,6 +252,8 @@ export default function PatternPage() {
             </Fragment>
           );
         })}
+        <PageCTA />
+
       </div>
     </MainLayout>
   );

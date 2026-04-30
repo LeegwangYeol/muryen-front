@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/theme-context";
 import { MainLayout } from "@/components/layout/main-layout";
+import { PageCTA } from "@/components/layout/page-cta";
 
 const sparringData = {
   title: "대련의 특성과 의미",
@@ -270,6 +271,8 @@ export default function SparringPage() {
             </motion.section>
           );
         })}
+        <PageCTA />
+
       </div>
     </MainLayout>
   );

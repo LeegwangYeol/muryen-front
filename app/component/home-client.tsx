@@ -72,7 +72,7 @@ export default function HomeClient() {
               }`}
             >
               <span className="sm:hidden">무련</span>
-              <span className="hidden sm:inline">무련이란?</span>
+              <span className="hidden sm:inline">무련이란</span>
             </TabsTrigger>
             <TabsTrigger
               value="reason"
@@ -83,7 +83,7 @@ export default function HomeClient() {
               }`}
             >
               <span className="sm:hidden">수련법</span>
-              <span className="hidden sm:inline">어떻게 수련할까요?</span>
+              <span className="hidden sm:inline">어떻게 수련하는가</span>
             </TabsTrigger>
             <TabsTrigger
               value="training"
@@ -94,7 +94,7 @@ export default function HomeClient() {
               }`}
             >
               <span className="sm:hidden">의미</span>
-              <span className="hidden sm:inline">왜 수련을 해야하는가요?</span>
+              <span className="hidden sm:inline">왜 수련하는가</span>
             </TabsTrigger>
           </TabsList>
         </div>

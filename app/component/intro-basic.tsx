@@ -13,6 +13,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { ChartContainer } from "@/components/ui/chart";
 import Image from "next/image";
 import { MainLayout } from "@/components/layout/main-layout";
+import { PageCTA } from "@/components/layout/page-cta";
 import { createPortal } from "react-dom";
 import { useTheme } from "../context/theme-context";
 
@@ -552,10 +553,22 @@ const DonutChart = ({ book }: { book: Book }) => {
 export default function Muye24Introduction() {
   return (
     <MainLayout>
-      <div className="grid gap-4">
-        {Object.entries(muye24Data).map(([bookKey, book]) => (
-          <DonutChart key={bookKey} book={book} />
-        ))}
+      <div className="container mx-auto px-4 py-6 sm:py-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 text-center">
+          24반 무예 · 무예도보통지 24기
+        </h1>
+        <p className="text-sm sm:text-base md:text-lg text-center max-w-2xl mx-auto opacity-80 mb-8 sm:mb-12">
+          조선 정조가 1790년 편찬을 명한 무예도보통지에 수록된 24가지 국방무예 — 지상무예 18기 + 마상무예 6기. 무련은 이 24반 무예를 24기 차트로 한눈에 보여드립니다.
+        </p>
+        <div className="grid gap-4">
+          {Object.entries(muye24Data).map(([bookKey, book]) => (
+            <DonutChart key={bookKey} book={book} />
+          ))}
+        </div>
+        <PageCTA
+          title="24반 무예 직접 수련해보시겠습니까?"
+          subtitle="검·창·봉부터 마상무예까지 — 무련에서 단계적으로 익혀나갑니다"
+        />
       </div>
     </MainLayout>
   );

@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { MainLayout } from "@/components/layout/main-layout";
+import { PageCTA } from "@/components/layout/page-cta";
 import {
   PageHeading,
   SectionHeading,
@@ -28,7 +29,7 @@ const basicPrinciplesData = {
         {
           title: "강함과 부드러움의 조화",
           content:
-            "무예의 기본은 강함과 부드러움이 조화를 이루는 것입니다. 단순히 완력의 강약이 아닌, 힘의 사용에 있어서 완급 조절이 중요 포인트입니다.",
+            "무예의 기본은 강함과 부드러움이 조화를 이루는 것입니다. 단순한 완력의 강약이 아니라, 힘의 사용에서 완급 조절이 핵심입니다.",
         },
         {
           title: "바른 자세와 호흡",
@@ -43,7 +44,7 @@ const basicPrinciplesData = {
         {
           title: "우리 몸의 이해",
           content:
-            "효과적으로 기술을 쓰려면 우리 몸이 어떻게 움직이는지 아는 게 중요합니다. 이걸 알면 쓸데없는 힘을 빼고 효율적으로 움직일 수 있습니다.",
+            "효과적으로 기술을 쓰려면 우리 몸이 어떻게 움직이는지 아는 것이 중요합니다. 이를 통해 불필요한 힘을 빼고 효율적으로 움직일 수 있습니다.",
         },
         {
           title: "움직임의 핵심",
@@ -61,12 +62,12 @@ const basicPrinciplesData = {
         {
           title: "차근차근 배우기",
           content:
-            "기본 동작부터 시작해서 천천히 실전 기술로 발전시켜 나갑니다. 이렇게 하면 몸에 무리 가지 않고도 제대로 된 기술을 배울 수 있습니다.",
+            "기본 동작부터 시작하여 천천히 실전 기술로 발전시켜 나갑니다. 이렇게 하면 몸에 무리를 주지 않으면서도 제대로 된 기술을 익힐 수 있습니다.",
         },
         {
           title: "실전처럼 연습하기",
           content:
-            "기본기는 그냥 반복해서 외우는 게 아닙니다. 실제로 써먹을 수 있는 의미 있는 움직임이어야 합니다. 이렇게 해야 실제 상황에서도 자연스럽게 기술을 쓸 수 있습니다.",
+            "기본기는 단순한 반복 암기가 아닙니다. 실제로 사용 가능한, 의미 있는 움직임이어야 합니다. 그래야 실전에서도 자연스럽게 기술을 구사할 수 있습니다.",
         },
       ],
     },
@@ -186,6 +187,8 @@ export default function BasicPage() {
             </Fragment>
           );
         })}
+        <PageCTA />
+
       </div>
     </MainLayout>
   );
