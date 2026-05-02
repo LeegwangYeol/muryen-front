@@ -452,6 +452,66 @@ const TechniqueImages = memo(({ images }: { images: { image: string }[] }) => {
 });
 TechniqueImages.displayName = "TechniqueImages";
 
+/**
+ * 모바일(< md) 전용 — 도넛 차트 대신 기예 카드 리스트로 노출.
+ * 데스크탑은 도넛 차트가 시각적 임팩트가 좋지만, 모바일 좁은 화면에선
+ * 차트가 깨져 가독성 0. 카드 리스트가 정보 전달에 훨씬 유리.
+ */
+const MobileTechniqueList = ({
+  techniques,
+}: {
+  techniques: TechniqueData[];
+}) => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
+  return (
+    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {techniques.map((t) => (
+        <li
+          key={t.index}
+          className={`rounded-xl border overflow-hidden ${
+            isDark
+              ? "bg-white/5 border-white/15"
+              : "bg-white/70 border-gray-300"
+          }`}
+        >
+          <div className="flex gap-3 p-3">
+            <div className="relative w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-black/5">
+              {t.image && (
+                <Image
+                  src={t.image}
+                  alt={t.name}
+                  fill
+                  unoptimized={t.image.endsWith(".gif")}
+                  className="object-contain"
+                  sizes="80px"
+                />
+              )}
+            </div>
+            <div className="min-w-0 flex-1">
+              <h3
+                className={`font-bold text-base mb-1 ${
+                  isDark ? "text-white" : "text-gray-900"
+                }`}
+              >
+                {t.name}
+              </h3>
+              <p
+                className={`text-xs sm:text-sm leading-relaxed line-clamp-4 ${
+                  isDark ? "text-white/80" : "text-gray-700"
+                }`}
+              >
+                {t.description}
+              </p>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 const DonutChart = ({ book }: { book: Book }) => {
   const { theme } = useTheme();
   const techniqueData = useMemo(() => generateTechniqueData(book), [book]);
@@ -488,8 +548,13 @@ const DonutChart = ({ book }: { book: Book }) => {
           {book.description}
         </p>
       </CardHeader>
-      <CardContent className="relative h-[800px]">
-        <div className="relative w-full h-full flex justify-center items-center">
+      <CardContent className="relative">
+        {/* 모바일(<md): 카드 리스트 */}
+        <div className="md:hidden">
+          <MobileTechniqueList techniques={techniqueData} />
+        </div>
+        {/* 데스크탑(md+): 도넛 차트 */}
+        <div className="hidden md:flex relative w-full h-[800px] justify-center items-center">
           <ResponsiveContainer
             width="100%"
             height={800}
