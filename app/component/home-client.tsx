@@ -138,8 +138,8 @@ export default function HomeClient() {
 
       <WhyMuryeon />
       <TargetAudience />
-      <TrainingSystem />
       <InquirySection />
+      <TrainingSystem />
     </MainLayout>
   );
 }

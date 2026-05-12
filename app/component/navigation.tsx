@@ -28,6 +28,12 @@ import { CONTACT } from "@/lib/contact";
 
 const menuItems = [
   {
+    href: "/#inquiry",
+    icon: <Mail size={24} />,
+    label: "입회 안내",
+    highlight: true,
+  },
+  {
     href: "/about",
     icon: <Info size={24} />,
     label: "소개",
@@ -61,11 +67,6 @@ const menuItems = [
     href: "/daily",
     icon: <Dumbbell size={24} />,
     label: "수련일지",
-  },
-  {
-    href: "/#inquiry",
-    icon: <Mail size={24} />,
-    label: "입회 안내",
   },
   // {
   //   href: "/reference",
@@ -190,9 +191,13 @@ export default function Navigation({
               <Link
                 href={item.href}
                 className={`flex items-center gap-3 p-3 rounded-lg transition-colors duration-300 ${
-                  theme === "dark"
-                    ? "hover:bg-white/10"
-                    : "hover:bg-gray-900/10"
+                  item.highlight
+                    ? theme === "dark"
+                      ? "bg-[rgb(var(--accent))]/20 text-white font-semibold ring-1 ring-[rgb(var(--accent))]/40 hover:bg-[rgb(var(--accent))]/30"
+                      : "bg-[rgb(var(--accent))]/10 text-[rgb(var(--accent))] font-semibold ring-1 ring-[rgb(var(--accent))]/30 hover:bg-[rgb(var(--accent))]/20"
+                    : theme === "dark"
+                      ? "hover:bg-white/10"
+                      : "hover:bg-gray-900/10"
                 }`}
               >
                 {item.icon}
