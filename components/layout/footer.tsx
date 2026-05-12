@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Youtube, Instagram } from "lucide-react";
+import { Youtube, Instagram, MapPin, CalendarDays } from "lucide-react";
 import { useTheme } from "@/app/context/theme-context";
 import { SITE, CONTACT } from "@/lib/contact";
 import { Body } from "@/components/ui/typography";
@@ -51,12 +51,67 @@ export function Footer() {
 
   return (
     <footer
-      className={`mt-16 sm:mt-24 border-t ${divider} px-4 sm:px-6 lg:px-8 py-10 sm:py-14`}
+      className={`mt-16 sm:mt-24 border-t ${divider} px-4 sm:px-6 lg:px-8 py-10 sm:py-14 [padding-bottom:max(2.5rem,env(safe-area-inset-bottom))]`}
     >
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-10">
-          {/* 브랜드 */}
-          <div className="col-span-2 sm:col-span-1">
+        {/* 모바일: 브랜드 헤더 */}
+        <div className="sm:hidden mb-8 text-center">
+          <Link
+            href="/"
+            className={`inline-block text-xl font-bold ${heading} mb-3`}
+          >
+            {SITE.name} <span className="opacity-60">{SITE.hanja}</span>
+          </Link>
+          <Body size="xs" muted className="mb-4">
+            {SITE.tagline}
+          </Body>
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <a
+              href={CONTACT.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube @muryeon"
+              className={`flex items-center justify-center w-11 h-11 rounded-full transition-colors ${iconBtn}`}
+            >
+              <Youtube size={18} />
+            </a>
+            {CONTACT.instagram ? (
+              <a
+                href={CONTACT.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className={`flex items-center justify-center w-11 h-11 rounded-full transition-colors ${iconBtn}`}
+              >
+                <Instagram size={18} />
+              </a>
+            ) : (
+              <span
+                aria-disabled="true"
+                title="Instagram 준비 중"
+                className={`flex items-center justify-center w-11 h-11 rounded-full opacity-40 ${iconBtn}`}
+              >
+                <Instagram size={18} />
+              </span>
+            )}
+          </div>
+          <div
+            className={`flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs ${
+              isDark ? "text-white/60" : "text-gray-500"
+            }`}
+          >
+            <span className="inline-flex items-center gap-1">
+              <MapPin size={12} /> {SITE.location}
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <CalendarDays size={12} /> {SITE.schedule}
+            </span>
+          </div>
+        </div>
+
+        {/* 데스크탑: 4-column 그리드 */}
+        <div className="hidden sm:grid sm:grid-cols-4 sm:gap-10">
+          <div>
             <Link
               href="/"
               className={`inline-block text-lg font-bold ${heading}`}
@@ -100,7 +155,7 @@ export function Footer() {
 
           {navGroups.map((group) => (
             <div key={group.title}>
-              <h3 className={`text-sm font-semibold mb-3 sm:mb-4 ${heading}`}>
+              <h3 className={`text-sm font-semibold mb-4 ${heading}`}>
                 {group.title}
               </h3>
               <ul className="space-y-2">
@@ -108,7 +163,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className={`text-xs sm:text-sm transition-colors ${linkBase}`}
+                      className={`text-sm transition-colors ${linkBase}`}
                     >
                       {link.label}
                     </Link>
@@ -119,13 +174,53 @@ export function Footer() {
           ))}
         </div>
 
+        {/* 모바일: 3 link 그룹을 collapsible details 로 */}
+        <nav className="sm:hidden" aria-label="사이트맵">
+          {navGroups.map((group, idx) => (
+            <details
+              key={group.title}
+              className={`group border-t ${divider} ${
+                idx === navGroups.length - 1 ? "border-b" : ""
+              }`}
+            >
+              <summary
+                className={`flex items-center justify-between py-4 cursor-pointer list-none ${heading} font-semibold text-sm`}
+              >
+                <span>{group.title}</span>
+                <span
+                  aria-hidden="true"
+                  className="opacity-60 transition-transform duration-200 group-open:rotate-180"
+                >
+                  ▾
+                </span>
+              </summary>
+              <ul className="pb-4 space-y-3 pl-2">
+                {group.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className={`block py-1 text-sm transition-colors ${linkBase}`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ))}
+        </nav>
+
+        {/* 카피라이트 — 모바일/데스크탑 공통 */}
         <div
-          className={`mt-10 sm:mt-12 pt-6 border-t ${divider} flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3`}
+          className={`mt-8 sm:mt-12 pt-6 border-t ${divider} text-center sm:flex sm:items-center sm:justify-between sm:text-left gap-3`}
         >
-          <Body size="xs" muted>
+          <Body size="xs" muted className="hidden sm:block">
             © {new Date().getFullYear()} 무련(武緣) · {SITE.location} · {SITE.schedule}
           </Body>
-          <Body size="xs" muted className="italic">
+          <Body size="xs" muted className="sm:hidden">
+            © {new Date().getFullYear()} 무련(武緣)
+          </Body>
+          <Body size="xs" muted className="italic mt-2 sm:mt-0">
             &ldquo;{SITE.slogan}&rdquo;
           </Body>
         </div>

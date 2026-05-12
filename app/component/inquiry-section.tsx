@@ -73,27 +73,27 @@ export default function InquirySection() {
           &ldquo;{SITE.slogan}&rdquo;
         </Quote>
 
-        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center max-w-md mx-auto sm:max-w-none">
           <a
             href={CONTACT.youtube}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-red-600 text-white font-semibold hover:bg-red-700 transition-colors duration-200 text-sm sm:text-base"
+            className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3 rounded-full bg-red-600 text-white font-semibold hover:bg-red-700 transition-colors duration-200 text-sm sm:text-base shadow-md"
           >
-            <Youtube size={18} /> YouTube @muryeon 방문
+            <Youtube size={18} /> YouTube <span className="hidden sm:inline">@muryeon</span> 방문
           </a>
           {CONTACT.instagram ? (
             <a
               href={CONTACT.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-current font-medium transition-colors duration-200 text-sm sm:text-base"
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-full border border-current font-medium transition-colors duration-200 text-sm sm:text-base"
             >
               <Instagram size={18} /> Instagram
             </a>
           ) : (
             <span
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border text-sm opacity-60 cursor-not-allowed ${btnDisabled}`}
+              className={`inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-full border text-sm opacity-60 cursor-not-allowed ${btnDisabled}`}
               aria-disabled="true"
               title="Instagram 계정 준비 중"
             >
