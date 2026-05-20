@@ -35,9 +35,9 @@ const photos = [
     span: "md",
   },
   {
-    src: "/images/photos/armor-full.webp",
-    alt: "두정갑 전신 — 갑옷을 입은 수련생이 검을 들고 선 풀샷",
-    caption: "두정갑 풀샷",
+    src: "/images/photos/muye-line.webp",
+    alt: "수원 화성 신풍루 야간 시연 — 24반 무예인들이 도복 차림으로 무기를 들고 정렬",
+    caption: "신풍루 야간 시연",
     span: "md",
   },
   {
