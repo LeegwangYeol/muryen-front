@@ -21,6 +21,7 @@ import {
   Youtube,
   Instagram,
   Info,
+  Images,
 } from "lucide-react";
 import VideoModal from "./VideoModal";
 import { useTheme } from "../context/theme-context";
@@ -62,6 +63,11 @@ const menuItems = [
     href: "/sparring",
     icon: <Shield size={24} />,
     label: "대련",
+  },
+  {
+    href: "/gallery",
+    icon: <Images size={24} />,
+    label: "사진첩",
   },
   {
     href: "/daily",

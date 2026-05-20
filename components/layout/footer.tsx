@@ -30,6 +30,7 @@ const navGroups = [
     title: "참여",
     links: [
       { label: "입회 안내", href: "/#inquiry" },
+      { label: "사진첩", href: "/gallery" },
       { label: "24반 둘러보기", href: "/basic-sense" },
       { label: "참고 자료", href: "/reference" },
     ],

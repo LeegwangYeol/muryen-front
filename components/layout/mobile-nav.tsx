@@ -21,6 +21,7 @@ import {
   Youtube,
   Instagram,
   LogOut,
+  Images,
 } from "lucide-react";
 import { useTheme } from "@/app/context/theme-context";
 import { CONTACT } from "@/lib/contact";
@@ -39,6 +40,7 @@ const menuItems: {
   { href: "/pattern", icon: Waypoints, label: "투로" },
   { href: "/cutting", icon: Scissors, label: "베기" },
   { href: "/sparring", icon: Shield, label: "대련" },
+  { href: "/gallery", icon: Images, label: "사진첩" },
   { href: "/daily", icon: Dumbbell, label: "수련일지" },
 ];
 
