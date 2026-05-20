@@ -11,6 +11,7 @@ import VideoCircle from "./video-circle";
 import HowWork from "./how-work";
 import WhyMuryeon from "./why-muryeon";
 import TargetAudience from "./target-audience";
+import TrainingGallery from "./training-gallery";
 import TrainingSystem from "./training-system";
 import InquirySection from "./inquiry-section";
 import { mockVideos } from "./mock-data";
@@ -138,6 +139,7 @@ export default function HomeClient() {
 
       <WhyMuryeon />
       <TargetAudience />
+      <TrainingGallery />
       <InquirySection />
       <TrainingSystem />
     </MainLayout>
