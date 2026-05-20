@@ -168,18 +168,6 @@ export const photos: Photo[] = [
     caption: "대회 정렬 라인업",
     cat: "대회",
   },
-  {
-    src: "/images/photos/muye-line.webp",
-    alt: "수원 화성 신풍루 야간 시연 — 24반 무예인들이 도복 차림으로 무기를 들고 정렬",
-    caption: "신풍루 야간 시연",
-    cat: "대회",
-  },
-  {
-    src: "/images/photos/palace-demo.webp",
-    alt: "궁궐 야간 시연 — 도복을 입은 24반 무예인들의 단체 자세",
-    caption: "궁궐 시연",
-    cat: "대회",
-  },
 
   // ─────────────────────────────────────────────────────────
   // 단체
