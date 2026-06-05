@@ -347,11 +347,13 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* production Llami 위젯 CSS 비활성화 — 자체 백엔드(my-server-test) v2 위젯으로 전환됨 (components/chat/chat-widget.tsx)
         <link
           rel="stylesheet"
           type="text/css"
           href="https://static.llami.net/widget-v1.css"
         />
+        */}
         <link
           rel="alternate"
           type="application/rss+xml"
@@ -366,12 +368,15 @@ export default function RootLayout({
           src="https://cdn.jsdelivr.net/npm/@ricky0123/vad-web@0.0.19/dist/bundle.min.js"
           strategy="lazyOnload"
         />
+        {/* production Llami 위젯 로더 비활성화 — 자체 백엔드(my-server-test)의 v2 위젯으로 전환됨.
+            되돌리려면 이 주석을 풀고 components/chat/chat-widget.tsx 마운트를 제거할 것.
         <Script type="module" id="llami-chat-widget" strategy="lazyOnload">
           {`
             import { initialize, run } from "https://static.llami.net/widget-v1.js";
             run("9afddf76-2d21-422c-a4fc-a369fcf21d09");
           `}
         </Script>
+        */}
         <script
           id="org-jsonld"
           type="application/ld+json"
