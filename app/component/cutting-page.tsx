@@ -11,6 +11,7 @@ import {
   Body,
   CardContainer,
 } from "@/components/ui/typography";
+import { VadAnalyzer } from "@/components/ai/vad-analyzer";
 
 const cuttingData = {
   title: "베기의 특성과 의미",
@@ -80,6 +81,16 @@ export default function CuttingPage() {
             </div>
           </CardContainer>
         </motion.section>
+
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mt-12"
+        >
+          <VadAnalyzer />
+        </motion.div>
 
         {cuttingData.sections.map((section, index) => (
           <motion.div
