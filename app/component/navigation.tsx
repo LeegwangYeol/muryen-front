@@ -67,6 +67,11 @@ const menuItems = [
     icon: <Mail size={24} />,
     label: "입회 안내",
   },
+  {
+    href: "/mypage",
+    icon: <FileText size={24} />,
+    label: "나의 수련 (My)",
+  },
   // {
   //   href: "/reference",
   //   icon: <FileText size={24} />,
