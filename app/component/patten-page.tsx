@@ -7,6 +7,7 @@ import { useTheme } from "../context/theme-context";
 import { MainLayout } from "@/components/layout/main-layout";
 import { PageCTA } from "@/components/layout/page-cta";
 import PatternCurriculumTable from "./pattern-curriculum-table";
+import { InteractivePlayer } from "@/components/video/interactive-player";
 
 const turoData = {
   title: "투로의 의미",
@@ -154,6 +155,13 @@ export default function PatternPage() {
             </div>
           </div>
         </motion.section>
+
+        <div className="mt-12 sm:mt-16 max-w-4xl mx-auto">
+          <InteractivePlayer 
+            url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
+            title="본국검 투로 시연 (예시 영상)" 
+          />
+        </div>
 
         {turoData.sections.map((section, index) => {
           // 짝수(0,2,4) = 글(프로즈), 홀수(1,3,5) = 카드(그리드)
