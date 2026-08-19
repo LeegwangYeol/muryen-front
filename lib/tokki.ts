@@ -9,9 +9,10 @@
  *   POST /v2/widget/create-thread → 새 스레드 발급(여기선 view가 대신 처리)
  *   POST /v2/ask                  → SSE 토큰 스트리밍 + 양쪽 메시지 영속화
  *
- * ⚠️ SSE 인코딩: 백엔드가 청크의 공백을 "%20", 줄바꿈을 "%0a"로 치환해서
- * 보낸다(widget-endpoints.ts의 sendChunk 참고). 여기서 그대로 역디코딩한다.
- * 다른 문자는 그대로 오므로 decodeURIComponent가 아니라 두 패턴만 되돌린다.
+ * ⚠️ SSE 인코딩: 백엔드가 청크를 부분적으로 퍼센트 인코딩해서 보낸다
+ * (widget-endpoints.ts의 sendChunk 참고). 순서대로 "%"→%25, 공백→%20,
+ * 줄바꿈→%0a, 캐리지리턴→%0d. 한글 등 나머지 문자는 raw로 오므로
+ * decodeURIComponent가 아니라 이 네 패턴만 되돌린다(decodeChunk 참고).
  */
 
 /** 배포된 Tokki 백엔드. 커스텀 백엔드는 NEXT_PUBLIC_TOKKI_API_URL로 덮어쓴다. */
@@ -92,9 +93,20 @@ export async function loadWidget(threadId?: string): Promise<WidgetView> {
   };
 }
 
-/** 백엔드 인코딩(공백→%20, 줄바꿈→%0a)을 역으로 되돌린다. */
+/**
+ * 백엔드의 퍼센트 인코딩을 역으로 되돌린다.
+ *
+ * 백엔드는 "%"를 가장 먼저 %25로 escape한 뒤 공백/개행을 인코딩하므로,
+ * 디코딩은 그 역순 — %25를 반드시 **마지막**에 풀어야 한다. 먼저 풀면
+ * 모델이 실제로 출력한 "%20" 같은 문자열(와이어에선 "%2520")이 공백으로
+ * 잘못 복원된다.
+ */
 function decodeChunk(s: string): string {
-  return s.replace(/%20/g, " ").replace(/%0a/g, "\n");
+  return s
+    .replace(/%20/g, " ")
+    .replace(/%0a/g, "\n")
+    .replace(/%0d/g, "\r")
+    .replace(/%25/g, "%");
 }
 
 export interface AskOptions {
