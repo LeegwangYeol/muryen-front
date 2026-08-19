@@ -9,8 +9,6 @@ export async function POST(request: Request) {
 
     const authResponse = await AuthService.login({ username, password });
 
-    console.log("authResponse:", authResponse); // 로그 추가
-
     if (!authResponse) {
       return NextResponse.json(
         { error: "잘못된 아이디 또는 비밀번호입니다." },
