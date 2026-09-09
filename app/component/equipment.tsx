@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import { ShoppingBasket, Shield, Sword, X } from "lucide-react";
+import { ShoppingBasket, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MainLayout } from "@/components/layout/main-layout";
 import {
@@ -21,6 +21,7 @@ interface Equipment {
   materials: string;
   purchase: string;
   makingMethod: string;
+  image: string;
 }
 
 const equipmentData: Equipment[] = [
@@ -32,6 +33,7 @@ const equipmentData: Equipment[] = [
     materials: "가죽, 철판, 끈",
     purchase: "https://example.com/traditional-armor",
     makingMethod: "1. 가죽 재단\n2. 철판 가공\n3. 가죽에 철판 부착\n4. 끈 연결",
+    image: "/images/armour.png",
   },
   {
     title: "전투용 투구",
@@ -41,6 +43,7 @@ const equipmentData: Equipment[] = [
     materials: "강철, 가죽",
     purchase: "https://example.com/battle-helmet",
     makingMethod: "1. 강철 성형\n2. 내부 가죽 부착\n3. 도장 및 마감",
+    image: "/images/sparring.png",
   },
   {
     title: "장창",
@@ -51,6 +54,7 @@ const equipmentData: Equipment[] = [
     purchase: "https://example.com/long-spear",
     makingMethod:
       "1. 나무 선별 및 가공\n2. 창날 제작\n3. 창날 부착\n4. 도장 및 마감",
+    image: "/images/foot/muye24ki_core_01_jangchang.gif",
   },
 ];
 
@@ -83,15 +87,15 @@ export default function Equipment() {
                 <CardDescription>{item.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <Image
-                  src={`/images/${item.title
-                    .toLowerCase()
-                    .replace(" ", "-")}.jpg`}
-                  alt={item.title}
-                  width={300}
-                  height={200}
-                  className="rounded-lg mb-4"
-                />
+                <div className="relative w-full h-[200px] mb-4 overflow-hidden rounded-lg bg-black/5 dark:bg-white/5">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
               </CardContent>
               <CardFooter>
                 <Button onClick={() => openModal(item)}>자세히 보기</Button>

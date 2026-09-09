@@ -1,22 +1,31 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useTheme } from "@/app/context/theme-context";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar,
-  BarChart,
-  Bar,
-} from "recharts";
+
+const AttendanceLineChart = dynamic(
+  () => import("./stat-charts").then((mod) => mod.AttendanceLineChart),
+  {
+    ssr: false,
+    loading: () => <div className="h-64 animate-pulse bg-white/5 rounded-lg flex items-center justify-center text-sm text-gray-400">차트 로딩 중...</div>,
+  }
+);
+
+const SkillsRadarChart = dynamic(
+  () => import("./stat-charts").then((mod) => mod.SkillsRadarChart),
+  {
+    ssr: false,
+    loading: () => <div className="h-64 animate-pulse bg-white/5 rounded-lg flex items-center justify-center text-sm text-gray-400">차트 로딩 중...</div>,
+  }
+);
+
+const SparringBarChart = dynamic(
+  () => import("./stat-charts").then((mod) => mod.SparringBarChart),
+  {
+    ssr: false,
+    loading: () => <div className="h-64 animate-pulse bg-white/5 rounded-lg flex items-center justify-center text-sm text-gray-400">차트 로딩 중...</div>,
+  }
+);
 
 const attendanceData = [
   { month: "1월", attendance: 4 },
@@ -60,28 +69,12 @@ export function DashboardStatCards() {
       >
         <h3 className="text-lg font-bold mb-4">월별 수련 출석률</h3>
         <div className="h-64 w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={attendanceData}>
-              <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-              <XAxis dataKey="month" stroke={textColor} fontSize={12} />
-              <YAxis stroke={textColor} fontSize={12} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: isDark ? "#222" : "#fff",
-                  color: isDark ? "#fff" : "#000",
-                  borderColor: gridColor,
-                }}
-              />
-              <Line
-                type="monotone"
-                dataKey="attendance"
-                stroke="#d4af37" // accent color
-                strokeWidth={3}
-                dot={{ r: 4, fill: "#d4af37" }}
-                activeDot={{ r: 6 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+          <AttendanceLineChart
+            data={attendanceData}
+            isDark={isDark}
+            textColor={textColor}
+            gridColor={gridColor}
+          />
         </div>
       </div>
 
@@ -93,27 +86,12 @@ export function DashboardStatCards() {
       >
         <h3 className="text-lg font-bold mb-4">무예 숙련도 (스탯)</h3>
         <div className="h-64 w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="70%" data={skillsData}>
-              <PolarGrid stroke={gridColor} />
-              <PolarAngleAxis dataKey="skill" stroke={textColor} fontSize={12} />
-              <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-              <Radar
-                name="숙련도"
-                dataKey="score"
-                stroke="#d4af37"
-                fill="#d4af37"
-                fillOpacity={0.5}
-              />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: isDark ? "#222" : "#fff",
-                  color: isDark ? "#fff" : "#000",
-                  borderColor: gridColor,
-                }}
-              />
-            </RadarChart>
-          </ResponsiveContainer>
+          <SkillsRadarChart
+            data={skillsData}
+            isDark={isDark}
+            textColor={textColor}
+            gridColor={gridColor}
+          />
         </div>
       </div>
 
@@ -125,22 +103,12 @@ export function DashboardStatCards() {
       >
         <h3 className="text-lg font-bold mb-4">대련 주요 타격 부위</h3>
         <div className="h-64 w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={sparringData}>
-              <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
-              <XAxis dataKey="name" stroke={textColor} fontSize={12} />
-              <YAxis stroke={textColor} fontSize={12} />
-              <Tooltip
-                cursor={{ fill: isDark ? "#333" : "#f5f5f5" }}
-                contentStyle={{
-                  backgroundColor: isDark ? "#222" : "#fff",
-                  color: isDark ? "#fff" : "#000",
-                  borderColor: gridColor,
-                }}
-              />
-              <Bar dataKey="hits" fill="#d4af37" radius={[4, 4, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+          <SparringBarChart
+            data={sparringData}
+            isDark={isDark}
+            textColor={textColor}
+            gridColor={gridColor}
+          />
         </div>
       </div>
     </div>

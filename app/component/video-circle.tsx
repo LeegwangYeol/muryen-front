@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -11,7 +13,6 @@ interface CircleItem {
   story?: string;
   thumbnail: string;
   cta?: { label: string; href: string };
-  // optional future video embed
   url?: string;
 }
 
@@ -30,10 +31,13 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
   const isDark = theme === "dark";
 
   useEffect(() => {
+    let animationFrameId: number;
+
     if (initialAnimation) {
       const startTime = Date.now();
       const duration = 1500;
       const fastRotationDuration = 1000;
+      const expansionDuration = duration - fastRotationDuration; // 500ms
 
       const animateInitial = () => {
         const currentTime = Date.now();
@@ -42,26 +46,24 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
         if (elapsed < fastRotationDuration) {
           setRotation((prev) => (prev + 5) % 360);
           setCurrentRadius(radius * (1 - elapsed / fastRotationDuration));
-          requestAnimationFrame(animateInitial);
+          animationFrameId = requestAnimationFrame(animateInitial);
         } else if (elapsed < duration) {
-          const progress =
-            (elapsed - fastRotationDuration) / fastRotationDuration;
+          const progress = Math.min(
+            (elapsed - fastRotationDuration) / expansionDuration,
+            1
+          );
           setCurrentRadius(radius * progress);
           setRotation((prev) => (prev + 5 * (1 - progress)) % 360);
-          requestAnimationFrame(animateInitial);
+          animationFrameId = requestAnimationFrame(animateInitial);
         } else {
           setInitialAnimation(false);
           setCurrentRadius(radius);
+          setRotation(0);
         }
       };
 
-      requestAnimationFrame(animateInitial);
-    } else {
-      const interval = setInterval(() => {
-        setRotation((prev) => (prev + 0.2) % 360);
-      }, 50);
-
-      return () => clearInterval(interval);
+      animationFrameId = requestAnimationFrame(animateInitial);
+      return () => cancelAnimationFrame(animationFrameId);
     }
   }, [initialAnimation, radius]);
 
@@ -142,7 +144,11 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
         </div>
       )}
 
-      <div className="relative w-[600px] h-[600px] scale-[0.55] sm:scale-75 md:scale-100 origin-center">
+      <div
+        className={`relative w-[600px] h-[600px] scale-[0.55] sm:scale-75 md:scale-100 origin-center ${
+          !initialAnimation ? "animate-[spin_90s_linear_infinite]" : ""
+        }`}
+      >
         {videos.map((video, index) => {
           const angle =
             (index / totalVideos) * 2 * Math.PI + (rotation * Math.PI) / 180;
@@ -152,36 +158,41 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
           return (
             <div
               key={video.id}
-              className="absolute group cursor-pointer hover:scale-105 transition-transform duration-300"
+              className="absolute left-1/2 top-1/2"
               style={{
                 transform: `translate(${x}px, ${y}px)`,
-                left: "50%",
-                top: "50%",
                 transition: initialAnimation ? "none" : "transform 0.2s linear",
               }}
-              onClick={() => setSelected(video)}
             >
               <div
-                className={`relative w-40 h-40 -translate-x-1/2 -translate-y-1/2 rounded-full overflow-hidden shadow-lg ${
-                  isDark
-                    ? "glassmorphism-dark animate-[shine_3s_ease-in-out_infinite]"
-                    : "glassmorphism-light animate-[shineDark_3s_ease-in-out_infinite]"
+                className={`-translate-x-1/2 -translate-y-1/2 ${
+                  !initialAnimation ? "animate-[spin_90s_linear_infinite_reverse]" : ""
                 }`}
               >
-                <Image
-                  src={video.thumbnail}
-                  alt={video.title}
-                  fill
-                  className={`object-cover ${
+                <div
+                  className={`group relative w-40 h-40 rounded-full overflow-hidden shadow-lg cursor-pointer hover:scale-105 transition-transform duration-300 ${
                     isDark
-                      ? "animate-[imageGlow_3s_ease-in-out_infinite]"
-                      : "animate-[imageGlowDark_3s_ease-in-out_infinite]"
+                      ? "glassmorphism-dark animate-[shine_3s_ease-in-out_infinite]"
+                      : "glassmorphism-light animate-[shineDark_3s_ease-in-out_infinite]"
                   }`}
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="text-white text-center p-4">
-                    <h3 className="font-bold text-base mb-2">{video.title}</h3>
-                    <p className="text-sm">{video.description}</p>
+                  onClick={() => setSelected(video)}
+                >
+                  <Image
+                    src={video.thumbnail}
+                    alt={video.title}
+                    fill
+                    sizes="160px"
+                    className={`object-cover ${
+                      isDark
+                        ? "animate-[imageGlow_3s_ease-in-out_infinite]"
+                        : "animate-[imageGlowDark_3s_ease-in-out_infinite]"
+                    }`}
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-white text-center p-4">
+                      <h3 className="font-bold text-base mb-2">{video.title}</h3>
+                      <p className="text-sm">{video.description}</p>
+                    </div>
                   </div>
                 </div>
               </div>

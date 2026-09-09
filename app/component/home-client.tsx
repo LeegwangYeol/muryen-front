@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { MainLayout } from "@/components/layout/main-layout";
 import Hero from "./hero";
 import Philosophy from "./philosophy";
@@ -28,29 +28,31 @@ export default function HomeClient() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (isOpening) {
-    return (
-      <motion.div
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden"
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 0 }}
-        transition={{ duration: 2.5, delay: 1 }}
-        aria-hidden="true"
-      >
-        <motion.div
-          className="relative w-full h-full"
-          initial={{ scale: 1.2 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5 }}
-        >
-          <Hero />
-        </motion.div>
-      </motion.div>
-    );
-  }
-
   return (
-    <MainLayout>
+    <>
+      <AnimatePresence>
+        {isOpening && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden pointer-events-none"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, delay: 1 }}
+            aria-hidden="true"
+          >
+            <motion.div
+              className="relative w-full h-full"
+              initial={{ scale: 1.2 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 1.5 }}
+            >
+              <Hero />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <MainLayout>
       <h1 className="sr-only">
         무련(武緣) — 조선 24반 무예 · 갑주 대련 · 대학경당 계보를 잇는 서울 수련 동호회. 무련은 무예도보통지의 기록을 몸으로 읽어내는 방식으로 24반 무예를 수련합니다.
       </h1>
@@ -118,5 +120,6 @@ export default function HomeClient() {
       <TrainingSystem />
       <InquirySection />
     </MainLayout>
+  </>
   );
 }

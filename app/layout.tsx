@@ -340,17 +340,20 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  var theme = localStorage.getItem('theme') || 'light';
-                  document.documentElement.classList.add('theme-' + theme);
+                  var stored = localStorage.getItem('theme');
+                  var isDark = stored === 'dark' || (!stored && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                  var activeTheme = stored || (isDark ? 'dark' : 'light');
+                  document.documentElement.classList.remove('theme-light', 'theme-dark');
+                  document.documentElement.classList.add('theme-' + activeTheme);
+                  if (isDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
                 } catch (e) {}
               })();
             `,
           }}
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://static.llami.net/widget-v1.css"
         />
         <link
           rel="alternate"
@@ -366,12 +369,6 @@ export default function RootLayout({
           src="https://cdn.jsdelivr.net/npm/@ricky0123/vad-web@0.0.19/dist/bundle.min.js"
           strategy="lazyOnload"
         />
-        <Script type="module" id="llami-chat-widget" strategy="lazyOnload">
-          {`
-            import { initialize, run } from "https://static.llami.net/widget-v1.js";
-            run("9afddf76-2d21-422c-a4fc-a369fcf21d09");
-          `}
-        </Script>
         <script
           id="org-jsonld"
           type="application/ld+json"

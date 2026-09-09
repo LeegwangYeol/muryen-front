@@ -1,11 +1,13 @@
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-const handler = NextAuth({
-  providers: [
+const providers: NextAuthOptions["providers"] = [];
+
+if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  providers.push(
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
           scope:
@@ -15,8 +17,12 @@ const handler = NextAuth({
           response_type: "code",
         },
       },
-    }),
-  ],
+    })
+  );
+}
+
+const authOptions: NextAuthOptions = {
+  providers,
   callbacks: {
     async jwt({ token, account }) {
       // OAuth 액세스 토큰을 JWT에 포함
@@ -37,6 +43,8 @@ const handler = NextAuth({
     signIn: "/test2",
   },
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

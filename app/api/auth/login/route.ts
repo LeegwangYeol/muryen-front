@@ -3,9 +3,30 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  let body;
   try {
-    const body = await request.json();
-    const { username, password } = body;
+    body = await request.json();
+  } catch {
+    return NextResponse.json(
+      { message: "Invalid JSON or request body" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    const { username, password } = body || {};
+
+    if (
+      !username ||
+      !password ||
+      typeof username !== "string" ||
+      typeof password !== "string"
+    ) {
+      return NextResponse.json(
+        { message: "Username and password are required" },
+        { status: 400 }
+      );
+    }
 
     const authResponse = await AuthService.login({ username, password });
 
@@ -18,12 +39,25 @@ export async function POST(request: Request) {
       );
     }
 
-    // Set the access token cookie
-    (await cookies()).set("accessToken", authResponse.accessToken, {
-      // httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+    const cookieStore = await cookies();
+    const isProduction = process.env.NODE_ENV === "production";
+
+    // 1. Secure HTTP-only access token (protected against XSS)
+    cookieStore.set("accessToken", authResponse.accessToken, {
+      httpOnly: true,
+      secure: isProduction,
       sameSite: "lax",
       maxAge: 24 * 60 * 60, // 24 hours
+      path: "/",
+    });
+
+    // 2. Non-sensitive client indicator cookie for UI state
+    cookieStore.set("isLoggedIn", "true", {
+      httpOnly: false,
+      secure: isProduction,
+      sameSite: "lax",
+      maxAge: 24 * 60 * 60, // 24 hours
+      path: "/",
     });
 
     return NextResponse.json({

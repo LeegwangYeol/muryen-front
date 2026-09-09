@@ -1,41 +1,38 @@
-<<<<<<< HEAD
-# muryen-front
-show our muryeon
-=======
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 무련 (武緣, Muryeon) - 웹 프론트엔드
 
-## Getting Started
+조선 정조 시대 편찬된 『무예도보통지』 24반 무예를 수련하고 연구하는 무예 수련 단체 **무련(武緣)**의 공식 웹사이트 프론트엔드 애플리케이션입니다.
 
-First, run the development server:
+## 주요 기능
+- **24반 무예 소개**: 무예도보통지 24기(지상무예 18기 + 마상무예 6기) 인터랙티브 차트 및 상세 정보 제공
+- **수련 안내 및 입회 신청**: 수련 장소, 시간, 회비 및 상담 신청
+- **수련 일지 & 커뮤니티**: 나의 수련 기록 및 무예 수련 정보 아카이빙
+- **다크/라이트 모드 지원**: 사용자 테마 전환 지원
+
+## 시작하기
 
 ```bash
+# 의존성 설치
+npm install
+
+# 개발 서버 실행
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+브라우저에서 [http://localhost:3000](http://localhost:3000)으로 접속하여 결과를 확인할 수 있습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 빌드 및 검사
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# ESLint 정적 분석
+npm run lint
 
-## Learn More
+# 프로덕션 빌드
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> 6b73e5c (Initial commit from Create Next App)
+## 기술 스택
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI / Shadcn UI / Lucide React
+- **Data Visualization**: Recharts

@@ -19,17 +19,41 @@ export function VadAnalyzer() {
   const { theme } = useTheme();
   const [myVad, setMyVad] = useState<any>(null);
 
+  // Helper for complete AudioContext and MediaStream teardown
+  const teardownVad = (vadInstance: any) => {
+    if (!vadInstance) return;
+    try {
+      if (typeof vadInstance.destroy === "function") {
+        vadInstance.destroy();
+      } else if (typeof vadInstance.pause === "function") {
+        vadInstance.pause();
+      }
+      if (vadInstance.stream) {
+        vadInstance.stream.getTracks?.().forEach((track: MediaStreamTrack) => {
+          track.stop();
+        });
+      }
+      if (
+        vadInstance.audioContext &&
+        vadInstance.audioContext.state !== "closed"
+      ) {
+        vadInstance.audioContext.close?.();
+      }
+    } catch (err) {
+      console.error("VAD teardown error:", err);
+    }
+  };
+
   useEffect(() => {
     return () => {
-      if (myVad) {
-        myVad.pause();
-      }
+      teardownVad(myVad);
     };
   }, [myVad]);
 
   const toggleListening = async () => {
     if (isListening) {
-      if (myVad) myVad.pause();
+      teardownVad(myVad);
+      setMyVad(null);
       setIsListening(false);
       setFeedback(null);
       setIntensity(0);

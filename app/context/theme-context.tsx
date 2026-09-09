@@ -1,7 +1,14 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { Theme, themes } from "../styles/theme";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
+import { Theme } from "../styles/theme";
 
 type ThemeContextType = {
   theme: Theme;
@@ -11,34 +18,48 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // SSR/CSR hydration mismatch 방지를 위해, 초기값 undefined로 설정
-  const [theme, setTheme] = useState<Theme | undefined>(undefined);
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     const stored = localStorage.getItem("theme") as Theme | null;
     if (stored === "dark" || stored === "light") {
       setTheme(stored);
-    } else {
-      setTheme("light");
+    } else if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      setTheme("dark");
     }
   }, []);
 
   useEffect(() => {
-    if (!theme) return;
     const root = document.documentElement;
     root.classList.remove("theme-light", "theme-dark");
     root.classList.add(`theme-${theme}`);
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
     try {
       localStorage.setItem("theme", theme);
     } catch {}
   }, [theme]);
 
-  const toggleTheme = () =>
+  const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  }, []);
 
+  const value = useMemo(
+    () => ({
+      theme,
+      toggleTheme,
+    }),
+    [theme, toggleTheme]
+  );
 
   return (
-    <ThemeContext.Provider value={{ theme: theme ?? "light", toggleTheme }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   );

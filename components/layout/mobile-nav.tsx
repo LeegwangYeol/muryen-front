@@ -44,7 +44,10 @@ export function MobileNav() {
   const pathname = usePathname();
 
   useEffect(() => {
-    setIsLoggedIn(document.cookie.includes("accessToken"));
+    setIsLoggedIn(
+      document.cookie.includes("isLoggedIn=true") ||
+        document.cookie.includes("accessToken")
+    );
   }, []);
 
   // Close drawer when path changes

@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Home,
   Feather,
-  Swords,
   Dumbbell,
   BookOpen,
   ChevronLeft,
@@ -22,7 +21,6 @@ import {
   Instagram,
   Info,
 } from "lucide-react";
-import VideoModal from "./VideoModal";
 import { useTheme } from "../context/theme-context";
 import { CONTACT } from "@/lib/contact";
 
@@ -89,13 +87,15 @@ export default function Navigation({
 }: {
   onExpand?: (expanded: boolean) => void;
 }) {
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const { theme, toggleTheme } = useTheme();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsLoggedIn(document.cookie.includes("accessToken"));
+    setIsLoggedIn(
+      document.cookie.includes("isLoggedIn=true") ||
+        document.cookie.includes("accessToken")
+    );
   }, []);
 
   const handleLogout = async () => {
@@ -126,13 +126,10 @@ export default function Navigation({
     onExpand?.(expanded);
   };
 
-  // theme이 결정되지 않았으면 렌더하지 않음 (SSR/CSR mismatch 방지)
-  if (!theme) return null;
-
   return (
     <>
       <nav
-        className={`${isExpanded ? "w-44" : "w-24"} ${
+        className={`${isExpanded ? "w-64" : "w-24"} ${
           theme === "dark"
             ? "bg-[#280505] border-r border-white/10 text-white"
             : "bg-[#f5efef] border-r border-gray-300 text-gray-900"
@@ -256,11 +253,6 @@ export default function Navigation({
               <LogOut size={18} /> 로그아웃
             </button>
           )}
-          <VideoModal
-            isOpen={isVideoModalOpen}
-            onClose={() => setIsVideoModalOpen(false)}
-            videoId=""
-          />
         </div>
       </nav>
     </>

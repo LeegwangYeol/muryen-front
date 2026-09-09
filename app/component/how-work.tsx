@@ -131,6 +131,7 @@ export default function HowWork() {
                   src={item.image}
                   alt={`${item.title} 이미지`}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 300px"
                   className="object-contain hover:scale-110 transition-transform duration-300"
                 />
               </div>
@@ -157,6 +158,7 @@ export default function HowWork() {
               src="/images/hero.jpeg"
               alt="기본기 이미지"
               fill
+              sizes="(max-width: 768px) 100vw, 600px"
               className="object-contain hover:scale-110 transition-transform duration-300"
             />
           </div>

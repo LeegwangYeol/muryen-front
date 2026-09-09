@@ -110,7 +110,6 @@ const sparringData = {
 
 export default function SparringPage() {
   const { theme } = useTheme();
-  if (!theme) return null;
 
   return (
     <MainLayout>

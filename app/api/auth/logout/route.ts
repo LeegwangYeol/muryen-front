@@ -4,7 +4,9 @@ import { NextResponse } from "next/server";
 export async function POST() {
   try {
     // 쿠키 삭제
-    (await cookies()).delete("accessToken");
+    const cookieStore = await cookies();
+    cookieStore.delete("accessToken");
+    cookieStore.delete("isLoggedIn");
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Logout error:", error);

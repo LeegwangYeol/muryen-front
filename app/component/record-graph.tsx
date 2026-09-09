@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState, useMemo } from "react";
 import {
   format,
   parseISO,
+  subDays,
   eachDayOfInterval,
   startOfYear,
   endOfYear,
@@ -17,6 +18,7 @@ import {
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -34,29 +36,33 @@ type CommitData = {
   };
 };
 
-const mockCommitData: CommitData = {
-  ...Object.fromEntries(
-    Array.from({ length: 365 * 3 }, (_, i) => {
-      const date = new Date();
-      date.setDate(date.getDate() - i);
-      return [
-        format(date, "yyyy-MM-dd"),
-        {
-          count: Math.floor(Math.random() * 10),
-          records: Array.from(
-            { length: Math.floor(Math.random() * 5) },
-            (_, j) => ({
-              id: `record-${i}-${j}`,
-              title: `수련 기록 ${j + 1}`,
-              content: `이날의 수련 내용입니다. ${j + 1}번째 기록`,
-              timestamp: format(date, "HH:mm:ss"),
-            })
-          ),
-        },
-      ];
-    })
-  ),
+const ANCHOR_DATE = parseISO("2024-12-31");
+
+const generateMockCommitData = (): CommitData => {
+  const data: CommitData = {};
+  const totalDays = 365 * 3;
+  for (let i = 0; i < totalDays; i++) {
+    const date = subDays(ANCHOR_DATE, i);
+    const dateString = format(date, "yyyy-MM-dd");
+    // Deterministic arithmetic formula based on day index
+    const count = (i * 7 + (i % 3) * 5 + 3) % 10;
+    const recordCount = count > 0 ? ((i * 3 + 1) % 4) + 1 : 0;
+    const records = Array.from({ length: recordCount }, (_, j) => {
+      const hour = String(9 + ((i * 2 + j * 3) % 12)).padStart(2, "0");
+      const minute = String((i * 13 + j * 17) % 60).padStart(2, "0");
+      return {
+        id: `record-${i}-${j}`,
+        title: `수련 기록 ${j + 1}`,
+        content: `이날의 수련 내용입니다. ${j + 1}번째 기록`,
+        timestamp: `${hour}:${minute}:00`,
+      };
+    });
+    data[dateString] = { count, records };
+  }
+  return data;
 };
+
+const mockCommitData: CommitData = generateMockCommitData();
 
 const colorGradient = [
   "bg-emerald-50",
@@ -77,7 +83,7 @@ const getColorClass = (count: number) => {
 };
 
 const RecordGraph: React.FC = () => {
-  const [selectedDate, setSelectedDate] = React.useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   const handleDateClick = (dateString: string) => {
     setSelectedDate(dateString);
@@ -85,37 +91,50 @@ const RecordGraph: React.FC = () => {
 
   const selectedDateData = selectedDate ? mockCommitData[selectedDate] : null;
 
-  const years = Array.from(
-    new Set(Object.keys(mockCommitData).map((date) => date.split("-")[0]))
+  const years = useMemo(
+    () =>
+      Array.from(
+        new Set(Object.keys(mockCommitData).map((date) => date.split("-")[0]))
+      ).sort().reverse(),
+    []
   );
+
+  const yearIntervals = useMemo(() => {
+    return years.map((year) => ({
+      year,
+      days: eachDayOfInterval({
+        start: startOfYear(parseISO(`${year}-01-01`)),
+        end: endOfYear(parseISO(`${year}-12-31`)),
+      }),
+    }));
+  }, [years]);
 
   return (
     <MainLayout>
       <div className="p-4 bg-white rounded-lg shadow">
         <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Commit History</h2>
-        <div className="flex flex-col space-y-4">
-          {years.map((year) => (
-            <div key={year} className="flex flex-col">
-              <h3 className="text-lg font-semibold mb-2">{year}</h3>
-              <div className="flex flex-wrap">
-                {eachDayOfInterval({
-                  start: startOfYear(parseISO(`${year}-01-01`)),
-                  end: endOfYear(parseISO(`${year}-12-31`)),
-                }).map((date) => {
-                  const dateString = format(date, "yyyy-MM-dd");
-                  const data = mockCommitData[dateString] || {
-                    count: 0,
-                    records: [],
-                  };
-                  return (
-                    <TooltipProvider key={dateString}>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <div
+        <TooltipProvider delayDuration={100}>
+          <div className="flex flex-col space-y-4">
+            {yearIntervals.map(({ year, days }) => (
+              <div key={year} className="flex flex-col">
+                <h3 className="text-lg font-semibold mb-2">{year}</h3>
+                <div className="flex flex-wrap">
+                  {days.map((date) => {
+                    const dateString = format(date, "yyyy-MM-dd");
+                    const data = mockCommitData[dateString] || {
+                      count: 0,
+                      records: [],
+                    };
+                    return (
+                      <Tooltip key={dateString}>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
                             onClick={() => handleDateClick(dateString)}
+                            aria-label={`${format(date, "yyyy-MM-dd")}: ${data.count}회 수련`}
                             className={`w-3 h-3 m-[1px] rounded-sm ${getColorClass(
                               data.count
-                            )} cursor-pointer hover:ring-2 hover:ring-offset-1 hover:ring-emerald-500`}
+                            )} cursor-pointer hover:ring-2 hover:ring-offset-1 hover:ring-emerald-500 focus:outline-none`}
                           />
                         </TooltipTrigger>
                         <TooltipContent>
@@ -125,13 +144,13 @@ const RecordGraph: React.FC = () => {
                           </p>
                         </TooltipContent>
                       </Tooltip>
-                    </TooltipProvider>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </TooltipProvider>
 
         <Dialog
           open={selectedDate !== null}
@@ -144,6 +163,9 @@ const RecordGraph: React.FC = () => {
                   format(parseISO(selectedDate), "yyyy년 MM월 dd일")}
                 의 수련 기록
               </DialogTitle>
+              <DialogDescription className="sr-only">
+                선택된 일자의 수련 기록 상세 내역입니다.
+              </DialogDescription>
             </DialogHeader>
             <div className="mt-4 space-y-4">
               {selectedDateData?.records.map((record) => (

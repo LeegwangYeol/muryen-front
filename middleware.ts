@@ -10,18 +10,24 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  const targetUrl = request.nextUrl.pathname + request.nextUrl.search;
   const accessToken = request.cookies.get("accessToken")?.value;
 
   if (!accessToken) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(
+      new URL(`/login?redirect=${encodeURIComponent(targetUrl)}`, request.url)
+    );
   }
 
   // 토큰 검증
   const user = await AuthService.validateToken(accessToken);
 
   if (!user) {
-    const response = NextResponse.redirect(new URL("/login", request.url));
+    const response = NextResponse.redirect(
+      new URL(`/login?redirect=${encodeURIComponent(targetUrl)}`, request.url)
+    );
     response.cookies.delete("accessToken");
+    response.cookies.delete("isLoggedIn");
     return response;
   }
 

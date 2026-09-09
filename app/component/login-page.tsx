@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Activity, Apple } from "lucide-react";
+import { Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTheme } from "../context/theme-context";
@@ -26,7 +26,7 @@ export default function LoginPage() {
         throw new Error("로그인에 실패했습니다.");
       }
 
-      const data = await response.json();
+      await response.json();
 
       // URL 파라미터에서 리다이렉트 URL 가져오기
       const params = new URLSearchParams(window.location.search);
@@ -42,7 +42,7 @@ export default function LoginPage() {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center p-4 md:ml-24 ${
+      className={`min-h-screen flex items-center justify-center p-4 ${
         theme === "dark"
           ? "bg-[rgb(var(--background))]"
           : "bg-[rgb(var(--background))]"
