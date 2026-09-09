@@ -13,14 +13,14 @@ export default function Hero() {
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 px-4 text-center">
-        <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-2 drop-shadow-lg">
+      <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 px-6 text-center [padding-top:env(safe-area-inset-top)] [padding-bottom:env(safe-area-inset-bottom)]">
+        <h1 className="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-3 drop-shadow-2xl leading-tight">
           무련 <span className="opacity-80 font-bold">武緣</span>
         </h1>
-        <p className="text-white/90 text-base sm:text-lg md:text-xl font-medium mb-1 drop-shadow">
+        <p className="text-white text-base sm:text-lg md:text-xl font-medium mb-2 drop-shadow-lg max-w-md">
           발끝에서 손끝까지 잇다
         </p>
-        <p className="text-white/80 text-xs sm:text-sm">
+        <p className="text-white/85 text-xs sm:text-sm tracking-wide">
           &apos; 자연스럽게, 깊이 있게, 부드럽게 &apos;
         </p>
       </div>

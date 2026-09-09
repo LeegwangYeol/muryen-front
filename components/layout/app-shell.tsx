@@ -5,6 +5,7 @@ import Navigation from "@/app/component/navigation";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
 import { useTheme } from "@/app/context/theme-context";
+import { ChatWidget } from "@/components/chat/chat-widget";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [isNavExpanded, setIsNavExpanded] = useState(true);
@@ -41,6 +42,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Footer />
         </main>
       </div>
+      <ChatWidget />
     </div>
   );
 }

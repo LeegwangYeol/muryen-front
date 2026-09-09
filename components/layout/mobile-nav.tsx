@@ -21,20 +21,27 @@ import {
   Youtube,
   Instagram,
   LogOut,
+  Images,
 } from "lucide-react";
 import { useTheme } from "@/app/context/theme-context";
 import { CONTACT } from "@/lib/contact";
 
-const menuItems = [
+const menuItems: {
+  href: string;
+  icon: typeof Home;
+  label: string;
+  highlight?: boolean;
+}[] = [
   { href: "/", icon: Home, label: "홈" },
+  { href: "/#inquiry", icon: Mail, label: "입회 안내", highlight: true },
   { href: "/about", icon: Info, label: "소개" },
   { href: "/basic-sense", icon: Feather, label: "24반" },
   { href: "/basic", icon: BookOpen, label: "기본기" },
   { href: "/pattern", icon: Waypoints, label: "투로" },
   { href: "/cutting", icon: Scissors, label: "베기" },
   { href: "/sparring", icon: Shield, label: "대련" },
+  { href: "/gallery", icon: Images, label: "사진첩" },
   { href: "/daily", icon: Dumbbell, label: "수련일지" },
-  { href: "/#inquiry", icon: Mail, label: "입회 안내" },
 ];
 
 export function MobileNav() {
@@ -166,7 +173,13 @@ export function MobileNav() {
                       <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className={`flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${hoverBg}`}
+                        className={`flex items-center gap-3 px-3 py-3 rounded-lg transition-colors ${
+                          item.highlight
+                            ? theme === "dark"
+                              ? "bg-[rgb(var(--accent))]/20 text-white font-semibold ring-1 ring-[rgb(var(--accent))]/40 hover:bg-[rgb(var(--accent))]/30"
+                              : "bg-[rgb(var(--accent))]/10 text-[rgb(var(--accent))] font-semibold ring-1 ring-[rgb(var(--accent))]/30 hover:bg-[rgb(var(--accent))]/20"
+                            : hoverBg
+                        }`}
                       >
                         <Icon size={20} />
                         <span>{item.label}</span>

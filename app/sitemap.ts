@@ -18,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: [HERO_IMAGE],
     },
     {
+      path: "/gallery",
+      priority: 0.8,
+      changeFrequency: "weekly" as const,
+      images: [`${SITE.url}/images/gallery/galju-spar-01.webp`],
+    },
+    {
       path: "/basic-sense",
       priority: 0.9,
       changeFrequency: "monthly" as const,

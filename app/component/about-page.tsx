@@ -120,6 +120,20 @@ export default function AboutPage() {
             <Body size="base" className="mb-5 sm:mb-6">
               {aboutData.lead}
             </Body>
+
+            {/* 즉시 입회 CTA — 글 읽기 전에 행동 가능 */}
+            <div className="mb-5 sm:mb-6 flex flex-wrap items-center gap-3">
+              <Link
+                href="/#inquiry"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[rgb(var(--accent))] text-white font-semibold text-sm sm:text-base shadow-md hover:opacity-90 transition-opacity"
+              >
+                입회 안내 바로 보기 →
+              </Link>
+              <Body as="span" size="xs" muted>
+                회비 무료 · 숙련도 무관 · 주말 수련
+              </Body>
+            </div>
+
             <nav
               className="flex flex-wrap gap-2 sm:gap-3"
               aria-label="소개 섹션 바로가기"
@@ -128,7 +142,7 @@ export default function AboutPage() {
                 <a
                   key={s.id}
                   href={`#${s.id}`}
-                  className="inline-flex items-center px-3 py-1.5 text-xs sm:text-sm rounded-full border border-current/20 hover:bg-current/5 transition-colors"
+                  className="inline-flex items-center px-3.5 sm:px-3 py-2 sm:py-1.5 text-xs sm:text-sm rounded-full border border-current/20 hover:bg-current/5 transition-colors min-h-[40px] sm:min-h-0"
                 >
                   {s.title}
                 </a>
