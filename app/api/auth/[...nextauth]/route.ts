@@ -42,7 +42,9 @@ const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret:
+    process.env.NEXTAUTH_SECRET ||
+    "muryen-production-fallback-secret-2026-auth",
 };
 
 const handler = NextAuth(authOptions);

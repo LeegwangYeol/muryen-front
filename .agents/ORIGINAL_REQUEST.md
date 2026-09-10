@@ -59,3 +59,34 @@ Document all newly discovered issues and the corresponding fixes applied during 
 - [ ] `npm run build` compiles successfully without any build-breaking errors.
 - [ ] All existing and newly generated tests (`npm test`) pass with 100% success rate.
 - [ ] The independent Victory Auditor confirms no regression has been introduced.
+
+## Follow-up — 2026-09-10T14:58:00Z
+
+# Teamwork Project Prompt — Draft
+
+> Status: Launched
+> Goal: Craft prompt → get user approval → delegate to teamwork_preview
+> Requested team: Use a very large team of agents. (30 agents authorized)
+
+Use a very large team of agents. Locate the Vercel deployed URL for the `muryen-front` application and conduct an extremely rigorous, forensic audit of the live production site. You must heavily utilize the Chrome DevTools MCP tools and troubleshooting skills to inspect the live page dynamically.
+
+Working directory: /Users/a7890/src/muryen-front
+Integrity mode: development
+
+## Requirements
+
+### R1. Live Production Site Audit (Vercel)
+Identify the Vercel deployment URL. Deploy a massive 30-agent team to access the live site. Conduct an exhaustive inspection covering all user flows, pages, and interactive components in the production environment.
+
+### R2. Chrome DevTools Troubleshooting
+Actively use Chrome DevTools MCP tools to inspect the live production DOM, intercept network requests, analyze console logs, and measure Core Web Vitals (LCP, CLS, FID) on the Vercel page. Hunt for any production-only edge cases that might not appear in local development.
+
+### R3. Comprehensive Reporting & Remediation
+Document every single discrepancy, console warning, accessibility violation, or performance drop found on the Vercel live site. If code fixes are required to address these production issues, apply them to the local repository.
+
+## Acceptance Criteria
+
+### Verification
+- [ ] The Vercel live site is successfully navigated and analyzed via Chrome DevTools.
+- [ ] An exhaustive audit report is generated detailing the health of the production deployment.
+- [ ] If local code changes are made to fix Vercel-specific issues, `npm run build` and all tests must still pass cleanly.

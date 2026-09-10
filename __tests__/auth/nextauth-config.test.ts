@@ -108,4 +108,18 @@ describe("NextAuth Route & Configuration (app/api/auth/[...nextauth]/route.ts)",
       accessToken: "mock-session-token",
     });
   });
+
+  it("provides a resilient fallback secret when NEXTAUTH_SECRET is unset", () => {
+    delete process.env.NEXTAUTH_SECRET;
+
+    const mockNextAuth = jest.fn((options) => options);
+    jest.doMock("next-auth", () => mockNextAuth);
+    jest.doMock("next-auth/providers/google", () => jest.fn());
+
+    require("@/app/api/auth/[...nextauth]/route");
+    const passedOptions = mockNextAuth.mock.calls[0][0];
+    expect(passedOptions.secret).toBe(
+      "muryen-production-fallback-secret-2026-auth"
+    );
+  });
 });

@@ -20,7 +20,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* 키보드 사용자용 본문 바로가기 — 평소엔 숨겨지고 Tab 키 누르면 등장 */}
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[rgb(var(--accent))] focus:text-white focus:shadow-lg"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-blue-700 focus:text-white focus:shadow-lg"
       >
         본문으로 건너뛰기
       </a>

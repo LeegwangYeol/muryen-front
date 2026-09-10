@@ -8,9 +8,11 @@ import { useTheme } from "../context/theme-context";
 
 export function sanitizeRedirectUrl(url: string | null): string {
   if (!url) return "/";
-  // Must start with single '/' and not '//' or '/\'
-  if (url.startsWith("/") && !url.startsWith("//") && !url.startsWith("/\\")) {
-    return url;
+  // Strip ASCII control characters (0x00-0x1F, 0x7F) and trim whitespace
+  const cleaned = url.replace(/[\x00-\x1F\x7F]/g, "").trim();
+  // Must start with single '/' and not be followed by '/', '\', or whitespace
+  if (/^\/[^\/\\\s]/.test(cleaned) || cleaned === "/") {
+    return cleaned;
   }
   return "/";
 }
@@ -77,9 +79,12 @@ export default function LoginPage() {
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <Input
+              id="username"
+              name="username"
               type="text"
               placeholder="아이디"
               aria-label="아이디"
+              autoComplete="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               disabled={isLoading}
@@ -92,9 +97,12 @@ export default function LoginPage() {
           </div>
           <div>
             <Input
+              id="password"
+              name="password"
               type="password"
               placeholder="비밀번호"
               aria-label="비밀번호"
+              autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={isLoading}

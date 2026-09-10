@@ -41,6 +41,14 @@ describe("LoginPage & Open Redirect Protection (app/component/login-page.tsx)", 
       expect(sanitizeRedirectUrl("data:text/html,<script>alert(1)</script>")).toBe("/");
     });
 
+    it("rejects control character and whitespace bypass attempts (/\\t, /\\r, /\\n, /\\0, / )", () => {
+      expect(sanitizeRedirectUrl("/\t/evil.com")).toBe("/");
+      expect(sanitizeRedirectUrl("/\r/evil.com")).toBe("/");
+      expect(sanitizeRedirectUrl("/\n/evil.com")).toBe("/");
+      expect(sanitizeRedirectUrl("/\0/evil.com")).toBe("/");
+      expect(sanitizeRedirectUrl("/ /evil.com")).toBe("/");
+    });
+
     it("allows valid relative internal paths", () => {
       expect(sanitizeRedirectUrl("/daily")).toBe("/daily");
       expect(sanitizeRedirectUrl("/mypage")).toBe("/mypage");
@@ -69,6 +77,12 @@ describe("LoginPage & Open Redirect Protection (app/component/login-page.tsx)", 
       expect(passwordInput).toBeInTheDocument();
       expect(usernameInput).toHaveAttribute("placeholder", "아이디");
       expect(passwordInput).toHaveAttribute("placeholder", "비밀번호");
+      expect(usernameInput).toHaveAttribute("id", "username");
+      expect(usernameInput).toHaveAttribute("name", "username");
+      expect(usernameInput).toHaveAttribute("autoComplete", "username");
+      expect(passwordInput).toHaveAttribute("id", "password");
+      expect(passwordInput).toHaveAttribute("name", "password");
+      expect(passwordInput).toHaveAttribute("autoComplete", "current-password");
     });
 
     it("disables submit button and inputs while login request is in flight", async () => {

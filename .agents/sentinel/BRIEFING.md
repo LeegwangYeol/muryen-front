@@ -1,7 +1,7 @@
-# BRIEFING — 2026-09-09T23:14:30+09:00
+# BRIEFING — 2026-09-10T23:58:45+09:00
 
 ## Mission
-Conduct a final, exhaustive, autonomous codebase sweep of the muryen-front application, fix hidden bugs/edge cases/performance bottlenecks, and perform final inspection.
+Locate Vercel deployment URL for muryen-front and conduct an exhaustive, forensic audit of the live production site via Chrome DevTools MCP with remediations.
 
 ## 🔒 My Identity
 - Archetype: sentinel
@@ -11,18 +11,22 @@ Conduct a final, exhaustive, autonomous codebase sweep of the muryen-front appli
 - Orchestrator (Sweep): 3bd27fc9-f7f8-43dc-a3fc-72134db9387e
 - Cron 1 (Reporting): task-32
 - Cron 2 (Liveness): task-34
-
 - Victory Auditor (Sweep): 7dae95b0-7fb7-428d-afa2-7eb3c3f4501f
+- Orchestrator (Live Audit): a2a2802d-525d-4d62-9f19-059aaa153527
+- Cron 1 (Reporting, Live Audit): 182c6a21-0da2-4ad4-a1ac-1b16eb83116c/task-22
+- Cron 2 (Liveness, Live Audit): 182c6a21-0da2-4ad4-a1ac-1b16eb83116c/task-24
+- Victory Auditor (Live Audit): be02a485-26f9-4d3b-a192-db36a7e48529
 
 ## 🔒 Key Constraints
 - No technical decisions — relay only
 - Victory Audit is MANDATORY before reporting completion
 - Route: General (teamwork_preview_orchestrator)
+- Multi-agent swarm authorized up to 30 agents
 
 ## User Context
-- **Last user request**: Final exhaustive codebase sweep of muryen-front application using a very large team of agents to find/fix hidden bugs, edge cases, and performance bottlenecks.
+- **Last user request**: Locate Vercel deployed URL and conduct rigorous forensic audit of live site using Chrome DevTools MCP tools and troubleshooting skills; remediate any issues.
 - **Pending clarifications**: none
-- **Delivered results**: Final exhaustive autonomous codebase sweep completed: 100% test pass rate (222/222), 0 lint errors/warnings, 0 TS errors, clean Next.js build (25/25 pages), and independent Victory Audit CONFIRMED.
+- **Delivered results**: Live production audit completed (17 routes, TTFB 8ms, LCP 316ms, CLS 0.0000), 7 production remediations implemented and tested, 100% test pass rate (247/247 across 30 suites), 0 lint warnings, clean 25/25 Next.js build, and independent Victory Audit CONFIRMED.
 
 ## Project Status
 - **Phase**: complete
@@ -33,10 +37,8 @@ Conduct a final, exhaustive, autonomous codebase sweep of the muryen-front appli
 - **Retry count**: 0
 
 ## Artifact Index
-- /Users/a7890/src/muryen-front/.agents/ORIGINAL_REQUEST.md — Authoritative record of user request
+- /Users/a7890/src/muryen-front/.agents/ORIGINAL_REQUEST.md — Authoritative record of user requests
 - /Users/a7890/src/muryen-front/.agents/sentinel/BRIEFING.md — Sentinel state and persistent memory
 - /Users/a7890/src/muryen-front/.agents/sentinel/handoff.md — Sentinel handoff report
-- /Users/a7890/src/muryen-front/.agents/orchestrator_3/handoff.md — Codebase sweep orchestrator handoff
-- /Users/a7890/src/muryen-front/.agents/victory_auditor_3/audit.md — Post-victory independent audit report (Confirmed)
-- /Users/a7890/src/muryen-front/PROJECT.md — Hardened architecture and component specifications
-- /Users/a7890/src/muryen-front/TEST_READY.md — Multi-tier test documentation
+- /Users/a7890/src/muryen-front/.agents/orchestrator_4/handoff.md — Live audit orchestrator handoff
+- /Users/a7890/src/muryen-front/.agents/victory_auditor_4/audit.md — Post-victory independent audit report (Confirmed)

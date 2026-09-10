@@ -138,6 +138,8 @@ export default function Navigation({
       >
         <button
           onClick={() => handleExpand(!isExpanded)}
+          aria-label={isExpanded ? "사이드바 축소" : "사이드바 확장"}
+          title={isExpanded ? "사이드바 축소" : "사이드바 확장"}
           className={`absolute -right-3 top-1/2 -translate-y-1/2 ${
             theme === "dark"
               ? "bg-[#280505] border border-white/10 text-white"
@@ -220,7 +222,6 @@ export default function Navigation({
               </a>
             ) : (
               <span
-                aria-label="Instagram (준비 중)"
                 aria-disabled="true"
                 title="Instagram 계정 준비 중"
                 className={`flex items-center justify-center w-10 h-10 rounded-full opacity-40 cursor-not-allowed ${

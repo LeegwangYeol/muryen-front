@@ -85,15 +85,33 @@ export function ChatWidget() {
       setMessages((prev) => [...prev, { role: "user", content: message }]);
       setStreaming(true);
       setStreamingText("");
+      let accumulated = "";
       try {
         const full = await ask({
           message,
           threadId,
-          onToken: (tk) => setStreamingText((s) => s + tk),
+          onToken: (tk) => {
+            accumulated += tk;
+            if (
+              accumulated.includes("[LLM error]") ||
+              accumulated.includes("insufficient_quota")
+            ) {
+              setStreamingText(
+                "AI 도우미가 현재 점검 중입니다. 잠시 후 다시 이용해 주세요."
+              );
+            } else {
+              setStreamingText(accumulated);
+            }
+          },
         });
+        const isQuotaError =
+          full.includes("[LLM error]") || full.includes("insufficient_quota");
+        const finalContent = isQuotaError
+          ? "AI 도우미가 현재 점검 중입니다. 잠시 후 다시 이용해 주세요."
+          : full || "(빈 응답)";
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: full || "(빈 응답)" },
+          { role: "assistant", content: finalContent },
         ]);
       } catch {
         setError("답변을 받지 못했어요. 네트워크를 확인하고 다시 시도해 주세요.");

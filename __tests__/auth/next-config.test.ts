@@ -27,5 +27,7 @@ describe("Next.js Configuration Security Hardening (next.config.ts)", () => {
     expect(headerMap.get("Permissions-Policy")).toBe(
       "camera=(), microphone=(self), geolocation=()"
     );
+    expect(headerMap.get("Content-Security-Policy")).toContain("default-src 'self'");
+    expect(headerMap.get("Content-Security-Policy")).toContain("https://my-server-test.vercel.app");
   });
 });
