@@ -10,12 +10,6 @@ import {
   endOfYear,
 } from "date-fns";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -82,12 +76,70 @@ const getColorClass = (count: number) => {
   return colorGradient[index];
 };
 
+const DayButton = React.memo(function DayButton({
+  dateString,
+  formattedDate,
+  count,
+  onClick,
+}: {
+  dateString: string;
+  formattedDate: string;
+  count: number;
+  onClick: (date: string) => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onClick(dateString)}
+      aria-label={`${dateString}: ${count}회 수련`}
+      title={`${count} commits on ${formattedDate}`}
+      className={`w-3 h-3 m-[1px] rounded-sm ${getColorClass(
+        count
+      )} cursor-pointer hover:ring-2 hover:ring-offset-1 hover:ring-emerald-500 focus:outline-none`}
+    />
+  );
+});
+
+const YearGrid = React.memo(function YearGrid({
+  year,
+  days,
+  onDateClick,
+}: {
+  year: string;
+  days: Date[];
+  onDateClick: (date: string) => void;
+}) {
+  return (
+    <div className="flex flex-col">
+      <h3 className="text-lg font-semibold mb-2">{year}</h3>
+      <div className="flex flex-wrap">
+        {days.map((date) => {
+          const dateString = format(date, "yyyy-MM-dd");
+          const data = mockCommitData[dateString] || {
+            count: 0,
+            records: [],
+          };
+          return (
+            <DayButton
+              key={dateString}
+              dateString={dateString}
+              formattedDate={format(date, "MMM d, yyyy")}
+              count={data.count}
+              onClick={onDateClick}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+});
+
 const RecordGraph: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
-  const handleDateClick = (dateString: string) => {
+  const handleDateClick = React.useCallback((dateString: string) => {
     setSelectedDate(dateString);
-  };
+  }, []);
 
   const selectedDateData = selectedDate ? mockCommitData[selectedDate] : null;
 
@@ -113,44 +165,16 @@ const RecordGraph: React.FC = () => {
     <MainLayout>
       <div className="p-4 bg-white rounded-lg shadow">
         <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Commit History</h2>
-        <TooltipProvider delayDuration={100}>
-          <div className="flex flex-col space-y-4">
-            {yearIntervals.map(({ year, days }) => (
-              <div key={year} className="flex flex-col">
-                <h3 className="text-lg font-semibold mb-2">{year}</h3>
-                <div className="flex flex-wrap">
-                  {days.map((date) => {
-                    const dateString = format(date, "yyyy-MM-dd");
-                    const data = mockCommitData[dateString] || {
-                      count: 0,
-                      records: [],
-                    };
-                    return (
-                      <Tooltip key={dateString}>
-                        <TooltipTrigger asChild>
-                          <button
-                            type="button"
-                            onClick={() => handleDateClick(dateString)}
-                            aria-label={`${format(date, "yyyy-MM-dd")}: ${data.count}회 수련`}
-                            className={`w-3 h-3 m-[1px] rounded-sm ${getColorClass(
-                              data.count
-                            )} cursor-pointer hover:ring-2 hover:ring-offset-1 hover:ring-emerald-500 focus:outline-none`}
-                          />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>
-                            {data.count} commits on{" "}
-                            {format(date, "MMM d, yyyy")}
-                          </p>
-                        </TooltipContent>
-                      </Tooltip>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-        </TooltipProvider>
+        <div className="flex flex-col space-y-4">
+          {yearIntervals.map(({ year, days }) => (
+            <YearGrid
+              key={year}
+              year={year}
+              days={days}
+              onDateClick={handleDateClick}
+            />
+          ))}
+        </div>
 
         <Dialog
           open={selectedDate !== null}

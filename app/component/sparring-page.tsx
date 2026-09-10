@@ -117,7 +117,7 @@ export default function SparringPage() {
         <motion.h1
           initial={{ y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`text-2xl sm:text-xl sm:text-2xl md:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center ${
+          className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center ${
             theme === "dark" ? "text-white" : "text-gray-900"
           }`}
         >

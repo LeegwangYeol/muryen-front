@@ -361,14 +361,6 @@ export default function RootLayout({
           title={`${SITE.name} RSS`}
           href="/feed.xml"
         />
-        <Script
-          src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.14.0/dist/ort.js"
-          strategy="lazyOnload"
-        />
-        <Script
-          src="https://cdn.jsdelivr.net/npm/@ricky0123/vad-web@0.0.19/dist/bundle.min.js"
-          strategy="lazyOnload"
-        />
         <script
           id="org-jsonld"
           type="application/ld+json"

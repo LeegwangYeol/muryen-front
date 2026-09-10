@@ -21,15 +21,33 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as Theme | null;
-    if (stored === "dark" || stored === "light") {
-      setTheme(stored);
-    } else if (
+    try {
+      const stored = localStorage.getItem("theme") as Theme | null;
+      if (stored === "dark" || stored === "light") {
+        setTheme(stored);
+        return;
+      }
+    } catch {
+      // Fallback if localStorage is inaccessible (e.g., private browsing)
+    }
+
+    if (
+      typeof window !== "undefined" &&
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ) {
       setTheme("dark");
     }
+  }, []);
+
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "theme" && (e.newValue === "light" || e.newValue === "dark")) {
+        setTheme(e.newValue);
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, []);
 
   useEffect(() => {

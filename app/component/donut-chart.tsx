@@ -2,11 +2,8 @@
 
 import React, {
   useState,
-  memo,
   useMemo,
   useEffect,
-  useLayoutEffect,
-  useRef,
 } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
@@ -90,32 +87,26 @@ const Tooltip = ({
   y: number;
 }) => {
   const { theme } = useTheme();
-  const ref = useRef<HTMLDivElement>(null);
-  const [pos, setPos] = useState<{ left: number; top: number }>({
-    left: x + 20,
-    top: y + 20,
-  });
+  const left = Math.max(
+    12,
+    Math.min(
+      x + 18,
+      typeof window !== "undefined" && window.innerWidth ? window.innerWidth - 320 : x + 18
+    )
+  );
+  const top = Math.max(
+    12,
+    Math.min(
+      y + 18,
+      typeof window !== "undefined" && window.innerHeight ? window.innerHeight - 200 : y + 18
+    )
+  );
 
-  useLayoutEffect(() => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const padding = 12;
-    const offset = 18;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    let left = x + offset;
-    let top = y + offset;
-    if (left + rect.width + padding > vw) left = x - rect.width - offset;
-    if (left < padding) left = padding;
-    if (top + rect.height + padding > vh) top = y - rect.height - offset;
-    if (top < padding) top = padding;
-    setPos({ left, top });
-  }, [x, y]);
+  if (typeof document === "undefined") return null;
 
   return createPortal(
     <div
-      ref={ref}
-      style={{ position: "fixed", top: pos.top, left: pos.left, pointerEvents: "none" }}
+      style={{ position: "fixed", top, left, pointerEvents: "none" }}
       className={`shadow-lg rounded-xl z-[9999] p-4 sm:p-6 w-[min(90vw,500px)] transition-colors duration-200
       ${
         theme === "dark"
@@ -155,30 +146,34 @@ const CustomSectionContent = (props: any) => {
   const x = cx + radius * Math.cos(-midAngle * RADIAN) - 80;
   const y = cy + radius * Math.sin(-midAngle * RADIAN) - 80;
 
-  useEffect(() => {
-    if (!isHovered) return;
-    const onMove = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [isHovered]);
-
   const handleEnter = (e: React.MouseEvent) => {
     setMousePos({ x: e.clientX, y: e.clientY });
     setIsHovered(true);
   };
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
     <>
       <foreignObject x={x} y={y} width={160} height={160}>
-        <div className="relative w-full h-full">
+        <div
+          className="relative w-full h-full"
+          onMouseEnter={handleEnter}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleLeave}
+        >
           <Image
             src={payload.image}
             alt={payload.name}
-            onMouseEnter={handleEnter}
-            onMouseLeave={() => setIsHovered(false)}
             fill
             sizes="160px"
-            className={`object-contain transition-all duration-200 ${
+            className={`object-contain transition-all duration-200 pointer-events-none ${
               theme === "dark"
                 ? "opacity-40 contrast-200 dark:invert"
                 : "opacity-60 contrast-150"
@@ -197,24 +192,6 @@ const CustomSectionContent = (props: any) => {
     </>
   );
 };
-
-const TechniqueImages = memo(({ images }: { images: { image: string }[] }) => {
-  return (
-    <>
-      {images.map((item, index) => (
-        <div key={`${item.image}-${index}`} className="hidden">
-          <Image
-            src={item.image}
-            alt=""
-            width={500}
-            height={500}
-          />
-        </div>
-      ))}
-    </>
-  );
-});
-TechniqueImages.displayName = "TechniqueImages";
 
 export default function DonutChart({ book }: { book: Book }) {
   const { theme } = useTheme();
@@ -308,7 +285,6 @@ export default function DonutChart({ book }: { book: Book }) {
             </PieChart>
           </ResponsiveContainer>
         </div>
-        <TechniqueImages images={techniqueData} />
       </CardContent>
     </Card>
   );

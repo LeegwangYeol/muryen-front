@@ -119,7 +119,7 @@ export default function PatternPage() {
         <motion.h1
           initial={false}
           animate={{ opacity: 1, y: 0 }}
-          className={`text-2xl sm:text-xl sm:text-2xl md:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center ${
+          className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-12 text-center ${
             theme === "dark" ? "text-white" : "text-gray-900"
           }`}
         >
@@ -158,7 +158,7 @@ export default function PatternPage() {
 
         <div className="mt-12 sm:mt-16 max-w-4xl mx-auto">
           <InteractivePlayer 
-            url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
+            url="https://www.youtube.com/watch?v=kYJvMv1w8i4" 
             title="본국검 투로 시연 (예시 영상)" 
           />
         </div>

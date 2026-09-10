@@ -2,11 +2,16 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { AuthService } from "./lib/auth-service";
 
+const PROTECTED_PREFIXES = ["/daily", "/mypage"];
+
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // daily 경로가 아니면 통과
-  if (!pathname.startsWith("/daily")) {
+  // daily 또는 mypage 경로가 아니면 통과
+  const isProtected = PROTECTED_PREFIXES.some((prefix) =>
+    pathname.startsWith(prefix)
+  );
+  if (!isProtected) {
     return NextResponse.next();
   }
 
@@ -20,9 +25,21 @@ export async function middleware(request: NextRequest) {
   }
 
   // 토큰 검증
-  const user = await AuthService.validateToken(accessToken);
+  try {
+    const user = await AuthService.validateToken(accessToken);
 
-  if (!user) {
+    if (!user) {
+      const response = NextResponse.redirect(
+        new URL(`/login?redirect=${encodeURIComponent(targetUrl)}`, request.url)
+      );
+      response.cookies.delete("accessToken");
+      response.cookies.delete("isLoggedIn");
+      return response;
+    }
+
+    return NextResponse.next();
+  } catch (error) {
+    console.error("Middleware auth verification error:", error);
     const response = NextResponse.redirect(
       new URL(`/login?redirect=${encodeURIComponent(targetUrl)}`, request.url)
     );
@@ -30,6 +47,8 @@ export async function middleware(request: NextRequest) {
     response.cookies.delete("isLoggedIn");
     return response;
   }
-
-  return NextResponse.next();
 }
+
+export const config = {
+  matcher: ["/daily/:path*", "/mypage/:path*"],
+};

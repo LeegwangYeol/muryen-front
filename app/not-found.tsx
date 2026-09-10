@@ -20,12 +20,12 @@ const quickLinks = [
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 py-12 text-[rgb(var(--foreground))]">
+    <section aria-labelledby="not-found-heading" className="min-h-screen flex items-center justify-center px-4 py-12 text-[rgb(var(--foreground))]">
       <div className="max-w-xl w-full text-center">
         <p className="text-xs sm:text-sm tracking-[0.3em] uppercase opacity-60 mb-3">
           404 · NOT FOUND
         </p>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+        <h1 id="not-found-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
           <span className="highlight-word">武緣</span>
         </h1>
         <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3">
@@ -55,6 +55,6 @@ export default function NotFound() {
           {SITE.name} 메인으로 돌아가기 →
         </Link>
       </div>
-    </main>
+    </section>
   );
 }

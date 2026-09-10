@@ -33,16 +33,16 @@ export interface SparringItem {
   hits: number;
 }
 
-export function AttendanceLineChart({
+export const AttendanceLineChart = React.memo(function AttendanceLineChart({
   data,
   isDark,
-  textColor,
-  gridColor,
+  textColor = isDark ? "#e5e7eb" : "#374151",
+  gridColor = isDark ? "#374151" : "#e5e7eb",
 }: {
   data: AttendanceItem[];
   isDark: boolean;
-  textColor: string;
-  gridColor: string;
+  textColor?: string;
+  gridColor?: string;
 }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -68,18 +68,18 @@ export function AttendanceLineChart({
       </LineChart>
     </ResponsiveContainer>
   );
-}
+});
 
-export function SkillsRadarChart({
+export const SkillsRadarChart = React.memo(function SkillsRadarChart({
   data,
   isDark,
-  textColor,
-  gridColor,
+  textColor = isDark ? "#e5e7eb" : "#374151",
+  gridColor = isDark ? "#374151" : "#e5e7eb",
 }: {
   data: SkillItem[];
   isDark: boolean;
-  textColor: string;
-  gridColor: string;
+  textColor?: string;
+  gridColor?: string;
 }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -104,18 +104,18 @@ export function SkillsRadarChart({
       </RadarChart>
     </ResponsiveContainer>
   );
-}
+});
 
-export function SparringBarChart({
+export const SparringBarChart = React.memo(function SparringBarChart({
   data,
   isDark,
-  textColor,
-  gridColor,
+  textColor = isDark ? "#e5e7eb" : "#374151",
+  gridColor = isDark ? "#374151" : "#e5e7eb",
 }: {
   data: SparringItem[];
   isDark: boolean;
-  textColor: string;
-  gridColor: string;
+  textColor?: string;
+  gridColor?: string;
 }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -135,4 +135,4 @@ export function SparringBarChart({
       </BarChart>
     </ResponsiveContainer>
   );
-}
+});

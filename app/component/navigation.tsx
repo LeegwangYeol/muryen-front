@@ -129,6 +129,7 @@ export default function Navigation({
   return (
     <>
       <nav
+        aria-label="주요 내비게이션"
         className={`${isExpanded ? "w-64" : "w-24"} ${
           theme === "dark"
             ? "bg-[#280505] border-r border-white/10 text-white"
@@ -171,22 +172,7 @@ export default function Navigation({
           </button>
         </div>
 
-        {/* 테마 토글 — 확장 시 라벨로 강조 */}
-        {isExpanded && (
-          <button
-            onClick={toggleTheme}
-            aria-label={theme === "light" ? "다크 모드로 전환" : "라이트 모드로 전환"}
-            className={`w-full flex items-center justify-center gap-2 px-3 py-2 mb-3 rounded-lg text-xs font-medium border transition-colors duration-300 ${
-              theme === "dark"
-                ? "bg-white/5 hover:bg-white/10 text-white/90 border-white/15"
-                : "bg-gray-900/5 hover:bg-gray-900/10 text-gray-800 border-gray-300"
-            }`}
-          >
-            {theme === "light" ? <Moon size={14} /> : <Sun size={14} />}
-            <span>{theme === "light" ? "다크 모드" : "라이트 모드"}</span>
-          </button>
-        )}
-        <ul className="space-y-2">
+        <ul className="space-y-2 overflow-y-auto max-h-[calc(100vh-220px)]">
           {menuItems.map((item) => (
             <li key={item.href}>
               <Link

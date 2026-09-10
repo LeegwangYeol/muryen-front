@@ -6,13 +6,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useTheme } from "../context/theme-context";
 
+export function sanitizeRedirectUrl(url: string | null): string {
+  if (!url) return "/";
+  // Must start with single '/' and not '//' or '/\'
+  if (url.startsWith("/") && !url.startsWith("//") && !url.startsWith("/\\")) {
+    return url;
+  }
+  return "/";
+}
+
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { theme } = useTheme();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isLoading) return;
+    setIsLoading(true);
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
@@ -28,15 +40,17 @@ export default function LoginPage() {
 
       await response.json();
 
-      // URL 파라미터에서 리다이렉트 URL 가져오기
+      // URL 파라미터에서 리다이렉트 URL 가져오기 및 검증
       const params = new URLSearchParams(window.location.search);
-      const redirectUrl = params.get("redirect") || "/";
+      const redirectUrl = sanitizeRedirectUrl(params.get("redirect"));
 
       // 리다이렉트
       window.location.href = redirectUrl;
     } catch (error) {
       console.error("Login error:", error);
       alert("로그인에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -65,8 +79,10 @@ export default function LoginPage() {
             <Input
               type="text"
               placeholder="아이디"
+              aria-label="아이디"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              disabled={isLoading}
               className={`w-full px-4 py-2 border rounded-md transition-all duration-300 ${
                 theme === "dark"
                   ? "bg-[rgb(var(--background))] border-[rgb(var(--secondary))] text-[rgb(var(--foreground))]"
@@ -78,8 +94,10 @@ export default function LoginPage() {
             <Input
               type="password"
               placeholder="비밀번호"
+              aria-label="비밀번호"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              disabled={isLoading}
               className={`w-full px-4 py-2 border rounded-md transition-all duration-300 ${
                 theme === "dark"
                   ? "bg-[rgb(var(--background))] border-[rgb(var(--secondary))] text-[rgb(var(--foreground))]"
@@ -89,7 +107,8 @@ export default function LoginPage() {
           </div>
           <Button
             type="submit"
-            className={`w-full font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 ${
+            disabled={isLoading}
+            className={`w-full font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${
               theme === "dark"
                 ? "bg-[rgb(var(--accent))] text-white hover:bg-[rgb(var(--accent))/90]"
                 : "bg-[rgb(var(--accent))] text-white hover:bg-[rgb(var(--accent))/90]"

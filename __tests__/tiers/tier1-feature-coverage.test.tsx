@@ -50,7 +50,7 @@ describe("Tier 1: Feature Coverage Verification Suite", () => {
       );
 
       expect(screen.getByRole("link", { name: "본문으로 건너뛰기" })).toBeInTheDocument();
-      expect(screen.getByRole("navigation")).toBeInTheDocument();
+      expect(screen.getByRole("navigation", { name: "주요 내비게이션" })).toBeInTheDocument();
       const main = screen.getByRole("main");
       expect(main).toHaveAttribute("id", "main");
       expect(screen.getByRole("contentinfo")).toBeInTheDocument();
@@ -105,11 +105,11 @@ describe("Tier 1: Feature Coverage Verification Suite", () => {
         </ThemeProvider>
       );
 
-      expect(screen.getByText(SITE.name)).toBeInTheDocument();
-      expect(screen.getByText(SITE.tagline)).toBeInTheDocument();
-      expect(screen.getByText("소개")).toBeInTheDocument();
-      expect(screen.getByText("수련")).toBeInTheDocument();
-      expect(screen.getByText("참여")).toBeInTheDocument();
+      expect(screen.getAllByText(SITE.name)[0]).toBeInTheDocument();
+      expect(screen.getAllByText(SITE.tagline)[0]).toBeInTheDocument();
+      expect(screen.getAllByText("소개")[0]).toBeInTheDocument();
+      expect(screen.getAllByText("수련")[0]).toBeInTheDocument();
+      expect(screen.getAllByText("참여")[0]).toBeInTheDocument();
     });
   });
 

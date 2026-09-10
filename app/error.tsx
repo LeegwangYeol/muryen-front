@@ -20,12 +20,12 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <main className="min-h-[calc(100vh-3.5rem)] flex items-center justify-center px-4 py-12 text-[rgb(var(--foreground))]">
+    <section aria-labelledby="error-heading" className="min-h-[calc(100vh-3.5rem)] flex items-center justify-center px-4 py-12 text-[rgb(var(--foreground))]">
       <div className="max-w-xl w-full text-center">
         <p className="text-xs sm:text-sm tracking-[0.3em] uppercase opacity-60 mb-3">
           ERROR
         </p>
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
+        <h1 id="error-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
           잠시 길이 막혔습니다
         </h1>
         <p className="text-sm sm:text-base opacity-80 mb-8 leading-relaxed">
@@ -53,6 +53,6 @@ export default function GlobalError({
           </Link>
         </div>
       </div>
-    </main>
+    </section>
   );
 }

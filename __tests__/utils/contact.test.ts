@@ -5,7 +5,7 @@ describe("Contact and Site Metadata (lib/contact.ts)", () => {
     it("contains valid site URLs and identity information", () => {
       expect(SITE.url).toMatch(/^https?:\/\//);
       expect(SITE.name).toBe("무련");
-      expect(SITE.hanja).toBe("武聯");
+      expect(SITE.hanja).toBe("武緣");
       expect(SITE.fullName).toContain("무련");
       expect(SITE.tagline).toBeTruthy();
       expect(SITE.slogan).toBeTruthy();

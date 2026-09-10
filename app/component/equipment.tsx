@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { ShoppingBasket, X } from "lucide-react";
+import { ShoppingBasket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MainLayout } from "@/components/layout/main-layout";
 import {
@@ -13,6 +13,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 interface Equipment {
   title: string;
@@ -62,7 +70,6 @@ export default function Equipment() {
   const [selectedEquipment, setSelectedEquipment] = useState<Equipment | null>(
     null
   );
-  const modalRef = useRef<HTMLDivElement | null>(null);
 
   const openModal = (equipment: Equipment) => {
     setSelectedEquipment(equipment);
@@ -105,37 +112,43 @@ export default function Equipment() {
         </div>
       </div>
 
-      {selectedEquipment && (
-        <div
-          ref={modalRef}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-        >
-          <div className="bg-white p-5 sm:p-8 rounded-lg max-w-2xl w-full">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl sm:text-2xl font-bold">{selectedEquipment.title}</h2>
-              <Button onClick={closeModal} variant="ghost">
-                <X className="h-6 w-6" />
-              </Button>
-            </div>
-            <p className="mb-4">{selectedEquipment.details}</p>
-            <h3 className="font-bold mb-2">재료</h3>
-            <p className="mb-4">{selectedEquipment.materials}</p>
-            <h3 className="font-bold mb-2">제작 방법</h3>
-            <pre className="bg-gray-100 p-4 rounded mb-4">
+      <Dialog
+        open={!!selectedEquipment}
+        onOpenChange={(open) => {
+          if (!open) closeModal();
+        }}
+      >
+        {selectedEquipment && (
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="text-xl sm:text-2xl font-bold">
+                {selectedEquipment.title}
+              </DialogTitle>
+              <DialogDescription className="sr-only">
+                {selectedEquipment.description}
+              </DialogDescription>
+            </DialogHeader>
+            <p className="mb-4 text-sm sm:text-base text-muted-foreground">{selectedEquipment.details}</p>
+            <h3 className="font-bold mb-2 text-foreground">재료</h3>
+            <p className="mb-4 text-sm text-muted-foreground">{selectedEquipment.materials}</p>
+            <h3 className="font-bold mb-2 text-foreground">제작 방법</h3>
+            <pre className="bg-muted p-4 rounded mb-4 text-sm whitespace-pre-wrap font-sans text-foreground">
               {selectedEquipment.makingMethod}
             </pre>
-            <Button asChild>
-              <a
-                href={selectedEquipment.purchase}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ShoppingBasket className="mr-2 h-4 w-4" /> 구매하기
-              </a>
-            </Button>
-          </div>
-        </div>
-      )}
+            <DialogFooter>
+              <Button asChild>
+                <a
+                  href={selectedEquipment.purchase}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ShoppingBasket className="mr-2 h-4 w-4" /> 구매하기
+                </a>
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        )}
+      </Dialog>
     </MainLayout>
   );
 }

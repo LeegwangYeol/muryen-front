@@ -26,7 +26,7 @@ describe("NextAuth Route & Configuration (app/api/auth/[...nextauth]/route.ts)",
     expect(mockNextAuth).toHaveBeenCalled();
     const passedOptions = mockNextAuth.mock.calls[0][0];
     expect(passedOptions.providers).toHaveLength(0);
-    expect(passedOptions.pages?.signIn).toBe("/test2");
+    expect(passedOptions.pages?.signIn).toBe("/login");
     expect(mockGoogle).not.toHaveBeenCalled();
   });
 

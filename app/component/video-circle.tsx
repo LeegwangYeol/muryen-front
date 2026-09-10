@@ -20,9 +20,9 @@ interface VideoCircleProps {
   videos: CircleItem[];
 }
 
-export default function VideoCircle({ videos }: VideoCircleProps) {
+export default function VideoCircle({ videos = [] }: VideoCircleProps) {
   const radius = 250;
-  const totalVideos = videos.length;
+  const totalVideos = videos?.length ?? 0;
   const [selected, setSelected] = useState<CircleItem | null>(null);
   const [rotation, setRotation] = useState(0);
   const [initialAnimation, setInitialAnimation] = useState(true);
@@ -151,7 +151,9 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
       >
         {videos.map((video, index) => {
           const angle =
-            (index / totalVideos) * 2 * Math.PI + (rotation * Math.PI) / 180;
+            totalVideos > 0
+              ? (index / totalVideos) * 2 * Math.PI + (rotation * Math.PI) / 180
+              : 0;
           const x = currentRadius * Math.cos(angle);
           const y = currentRadius * Math.sin(angle);
 
@@ -170,12 +172,21 @@ export default function VideoCircle({ videos }: VideoCircleProps) {
                 }`}
               >
                 <div
-                  className={`group relative w-40 h-40 rounded-full overflow-hidden shadow-lg cursor-pointer hover:scale-105 transition-transform duration-300 ${
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${video.title} 상세 보기`}
+                  className={`group relative w-40 h-40 rounded-full overflow-hidden shadow-lg cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[rgb(var(--accent))] transition-transform duration-300 ${
                     isDark
                       ? "glassmorphism-dark animate-[shine_3s_ease-in-out_infinite]"
                       : "glassmorphism-light animate-[shineDark_3s_ease-in-out_infinite]"
                   }`}
                   onClick={() => setSelected(video)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelected(video);
+                    }
+                  }}
                 >
                   <Image
                     src={video.thumbnail}

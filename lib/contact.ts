@@ -1,7 +1,7 @@
 export const SITE = {
   url: "https://muryen-front.vercel.app",
   name: "무련",
-  hanja: "武聯",
+  hanja: "武緣",
   fullName: "무련 · 24반 무예 · 갑주 대련",
   tagline: "조선 24반 무예를 갑주 입고 대련합니다",
   subTagline: "대학경당 계보를 잇는 서울 수련 모임",
@@ -32,7 +32,7 @@ export const ANALYTICS = {
 
 export const KEYWORDS = [
   "무련",
-  "武聯",
+  "武緣",
   "24반 무예",
   "24기 무예",
   "무예도보통지",

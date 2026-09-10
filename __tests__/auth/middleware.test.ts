@@ -3,7 +3,7 @@
  */
 
 import { NextRequest } from "next/server";
-import { middleware } from "@/middleware";
+import { middleware, config } from "@/middleware";
 import { AuthService } from "@/lib/auth-service";
 
 jest.mock("@/lib/auth-service", () => ({
@@ -130,6 +130,66 @@ describe("Middleware Route Guard & Redirection (middleware.ts)", () => {
       expect(res.headers.get("location")).toBeNull();
       expect(res.status).toBe(200);
       expect(AuthService.validateToken).toHaveBeenCalledWith("valid_jwt_token");
+    });
+  });
+
+  describe("Protected Route Guard (/mypage)", () => {
+    it("redirects to /login with encoded redirect query param when accessToken is missing", async () => {
+      const req = new NextRequest("http://localhost:3000/mypage");
+      const res = await middleware(req);
+
+      expect(res.status).toBe(307);
+      const location = res.headers.get("location");
+      expect(location).toBe("http://localhost:3000/login?redirect=%2Fmypage");
+    });
+
+    it("allows access to /mypage when accessToken is valid", async () => {
+      (AuthService.validateToken as jest.Mock).mockResolvedValueOnce({
+        id: "2",
+        role: "user",
+      });
+
+      const req = new NextRequest("http://localhost:3000/mypage", {
+        headers: {
+          cookie: "accessToken=valid_user_token",
+        },
+      });
+
+      const res = await middleware(req);
+
+      expect(res.headers.get("location")).toBeNull();
+      expect(res.status).toBe(200);
+      expect(AuthService.validateToken).toHaveBeenCalledWith("valid_user_token");
+    });
+  });
+
+  describe("Error Resilience (try/catch in middleware)", () => {
+    it("handles unexpected exception in validateToken gracefully by redirecting and purging cookies", async () => {
+      (AuthService.validateToken as jest.Mock).mockRejectedValueOnce(
+        new Error("Unexpected crypto / edge runtime error")
+      );
+
+      const req = new NextRequest("http://localhost:3000/daily", {
+        headers: {
+          cookie: "accessToken=malformed_or_crashing_token; isLoggedIn=true",
+        },
+      });
+
+      const res = await middleware(req);
+
+      expect(res.status).toBe(307);
+      expect(res.headers.get("location")).toBe("http://localhost:3000/login?redirect=%2Fdaily");
+
+      const setCookieHeader = res.headers.get("set-cookie") || "";
+      expect(setCookieHeader).toContain("accessToken=;");
+      expect(setCookieHeader).toContain("isLoggedIn=;");
+    });
+  });
+
+  describe("Matcher Configuration", () => {
+    it("exports matcher containing /daily and /mypage subpaths", () => {
+      expect(config).toBeDefined();
+      expect(config.matcher).toEqual(["/daily/:path*", "/mypage/:path*"]);
     });
   });
 });
