@@ -90,3 +90,35 @@ Document every single discrepancy, console warning, accessibility violation, or 
 - [ ] The Vercel live site is successfully navigated and analyzed via Chrome DevTools.
 - [ ] An exhaustive audit report is generated detailing the health of the production deployment.
 - [ ] If local code changes are made to fix Vercel-specific issues, `npm run build` and all tests must still pass cleanly.
+
+## Follow-up — 2026-09-30T01:19:06Z
+
+# Teamwork Project Prompt — Draft
+
+> Status: Launched
+> Goal: Craft prompt → get user approval → delegate to teamwork_preview
+> Requested team: Use a very large team of agents. (50+ agents requested)
+
+Use a very large team of agents. Conduct an exhaustive, all-encompassing inspection and summarization of the entire `muryen-front` project. Act as a massive swarm to review every line of code, architecture pattern, and configuration. Produce a definitive project summary and fix any hidden micro-defects or sub-optimal patterns found during the inspection.
+
+Working directory: /Users/a7890/src/muryen-front
+Integrity mode: development
+
+## Requirements
+
+### R1. Deep Architectural & Code Inspection
+Deploy a massive swarm to independently audit all directories, components, APIs, and configs. Evaluate state management, component composition, security, and performance against Next.js 14+ best practices.
+
+### R2. Micro-Defect Remediation
+Identify and fix any remaining edge cases, minor typescript strictness warnings, or sub-optimal rendering patterns that were missed in previous passes. 
+
+### R3. Definitive Project Summary
+Generate a comprehensive `PROJECT_SUMMARY.md` artifact at the root of the project that documents the current architecture, routing map, state management patterns, and security implementations.
+
+## Acceptance Criteria
+
+### Verification
+- [ ] A detailed `PROJECT_SUMMARY.md` is generated at the project root.
+- [ ] `npm run lint` passes with 0 warnings and 0 errors.
+- [ ] All existing and new tests pass (100% success rate).
+- [ ] The independent Victory Auditor confirms no regression or logic breaks.

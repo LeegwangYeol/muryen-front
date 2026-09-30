@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import {
   Home,
@@ -121,10 +121,24 @@ export default function Navigation({
     }
   };
 
-  const handleExpand = (expanded: boolean) => {
-    setIsExpanded(expanded);
-    onExpand?.(expanded);
-  };
+  const handleExpand = useCallback(
+    (expanded: boolean) => {
+      setIsExpanded(expanded);
+      onExpand?.(expanded);
+    },
+    [onExpand]
+  );
+
+  // Escape 키로 내비게이션 메뉴 닫기 (축소)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isExpanded) {
+        handleExpand(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isExpanded, handleExpand]);
 
   return (
     <>

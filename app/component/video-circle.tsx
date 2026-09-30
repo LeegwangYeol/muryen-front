@@ -130,6 +130,7 @@ export default function VideoCircle({ videos = [] }: VideoCircleProps) {
                 )}
                 <button
                   onClick={() => setSelected(null)}
+                  aria-label="닫기"
                   className={`px-4 py-2 text-sm rounded-full transition-colors ${
                     isDark
                       ? "border border-white/20 text-white/80 hover:bg-white/10"

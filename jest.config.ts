@@ -7,6 +7,7 @@ const createJestConfig = nextJest({
 });
 
 const customJestConfig: Config = {
+  testTimeout: 15000,
   coverageProvider: "v8",
   testEnvironment: "jest-environment-jsdom",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],

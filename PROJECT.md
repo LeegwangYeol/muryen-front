@@ -47,6 +47,7 @@
 | 11 | RecordGraph & DonutChart Optimization | Eliminate 1,095+ simultaneous Radix Tooltips in `record-graph.tsx`, fix mousemove listener and layout reflow in `donut-chart.tsx`. | M4-C | Completed (Worker M4-C) |
 | 12 | 100% Test Pass & Verification | Verify 100% pass on all 28 test suites (222/222 tests), 0 lint warnings, clean build. | M4-C | Completed (Worker M4-C) |
 | 13 | Final Review, Challenge & Forensic Audit | Multi-agent review, empirical challenge, and independent forensic integrity verification. | M4-D | DONE |
+| 14 | Massive Swarm Codebase Inspection, Micro-Defect Fixes & Project Summary | Exhaustive 5-domain audit, micro-defect remediations (HSTS, Jest timeout, A11y), and root PROJECT_SUMMARY.md. | M5 | Completed (Orchestrator 5) |
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
@@ -59,6 +60,7 @@
 | M4-B | UI Landmarks, Layouts & Modals | Navigation a11y, nested `<main>` removal, Radix Dialog migration, Tailwind fixes. | M4-A | DONE |
 | M4-C | Types, Performance & Test Pass | Stat-charts TS fix, record-graph tooltip optimization, 100% test pass rate. | M4-B | DONE |
 | M4-D | Final Quality & Forensic Audit | Reviewers, Challengers, and Forensic Auditor verification for post-victory. | M4-C | DONE |
+| M5 | Massive Swarm Inspection & Definitive Summary | Full codebase audit, HSTS/Jest timeout/A11y remediations, PROJECT_SUMMARY.md generation, and Gate PASS. | M4-D | DONE |
 
 ## Interface Contracts
 ### `app/layout.tsx` ↔ Client Components
