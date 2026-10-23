@@ -3,7 +3,7 @@ name: Jules Daily Check
 on:
   schedule:
     # INFO : GitHub evaluates cron in UTC, not KST
-    - cron: '33 20 * * *'
+    - cron: '33'
   workflow_dispatch:
 
 permissions:
@@ -31,7 +31,22 @@ jobs:
               answer you chose under "Assumptions" in the pull request body, then continue.
             - When several candidates qualify, any one is fine. Pick one and go;
               the next daily run picks up the others.
+            - Earlier daily runs may already be fixing something. Run `git fetch origin` and
+              `git branch -r` first; skip any issue that an existing fix branch already addresses.
             - If you cannot settle on a safe fix, finish without changes and without a pull request.
+
+            ## This repository
+            Public website front end for 무련, a Korean traditional martial-arts group: Next.js 14 App Router, Tailwind, Radix/shadcn, Recharts, next-auth; jest + Testing Library tests in `__tests__/`.
+
+            Setup and checks:
+            - `npm ci` (`.npmrc` may enable legacy peer deps), `npm run lint`, `npm test`, `npm run build`
+            - Auth providers, media libraries (`react-player`, `@xenova/transformers`, `vad-web`) and any backend URL are unavailable here; failures caused only by missing env values are not defects.
+
+            Focus:
+            - `middleware.ts` auth gating, `lib/` data and chart helpers (the 24-skill chart data shape), form validation in `components/` for the membership/consultation request, `date-fns` date handling.
+
+            Leave alone:
+            - Korean copy in the `app/` pages, `components.json`, the planning and report `.md` files.
 
             ## Goal
             Find ONE real defect and fix it in a small, safe pull request.
@@ -67,6 +82,8 @@ jobs:
             - How it was verified (build/test command and result)
             - Not fixed (problems that need a decision), or "none"
             - Assumptions (questions you would have asked, with the answer you chose), or "none"
+            - Prompt feedback (instructions above that were wrong, missing or unclear for this
+              repository, e.g. a build command that does not exist), or "none"
 
             Reminder: do not ask questions. Decide, finish, and open the pull request or stop.
         run: |
