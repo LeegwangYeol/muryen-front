@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
 
   // daily 또는 mypage 경로가 아니면 통과
   const isProtected = PROTECTED_PREFIXES.some((prefix) =>
-    pathname.startsWith(prefix)
+    pathname === prefix || pathname.startsWith(`${prefix}/`)
   );
   if (!isProtected) {
     return NextResponse.next();
