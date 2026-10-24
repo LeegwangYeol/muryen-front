@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import ReactPlayer from "react-player";
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 import { Play, Pause, RotateCcw, Volume2, VolumeX, Settings2 } from "lucide-react";
 import { useTheme } from "@/app/context/theme-context";
 
@@ -15,7 +16,7 @@ export function InteractivePlayer({ url, title }: InteractivePlayerProps) {
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
-  const playerRef = useRef<ReactPlayer>(null);
+  const playerRef = useRef<any>(null);
   const { theme } = useTheme();
 
   const handlePlayPause = () => setIsPlaying(!isPlaying);
