@@ -30,7 +30,7 @@ type CommitData = {
   };
 };
 
-const ANCHOR_DATE = parseISO("2024-12-31");
+const ANCHOR_DATE = new Date(2024, 11, 31);
 
 const generateMockCommitData = (): CommitData => {
   const data: CommitData = {};
@@ -155,8 +155,8 @@ const RecordGraph: React.FC = () => {
     return years.map((year) => ({
       year,
       days: eachDayOfInterval({
-        start: startOfYear(parseISO(`${year}-01-01`)),
-        end: endOfYear(parseISO(`${year}-12-31`)),
+        start: startOfYear(new Date(parseInt(year), 0, 1)),
+        end: endOfYear(new Date(parseInt(year), 11, 31)),
       }),
     }));
   }, [years]);
@@ -184,7 +184,7 @@ const RecordGraph: React.FC = () => {
             <DialogHeader>
               <DialogTitle>
                 {selectedDate &&
-                  format(parseISO(selectedDate), "yyyy년 MM월 dd일")}
+                  format(new Date(selectedDate), "yyyy년 MM월 dd일")}
                 의 수련 기록
               </DialogTitle>
               <DialogDescription className="sr-only">
