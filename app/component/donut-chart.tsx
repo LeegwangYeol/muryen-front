@@ -38,6 +38,7 @@ interface LabelProps {
 
 const generateTechniqueData = (book: Book) => {
   const total = book.techniques.length;
+  if (total === 0) return [];
   const data = book.techniques.map((technique, index) => ({
     name: technique.name,
     value: 100 / total,
