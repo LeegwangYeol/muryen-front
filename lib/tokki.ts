@@ -103,10 +103,10 @@ export async function loadWidget(threadId?: string): Promise<WidgetView> {
  */
 function decodeChunk(s: string): string {
   return s
+    .replace(/%25/g, "%")
     .replace(/%20/g, " ")
     .replace(/%0a/g, "\n")
-    .replace(/%0d/g, "\r")
-    .replace(/%25/g, "%");
+    .replace(/%0d/g, "\r");
 }
 
 export interface AskOptions {
