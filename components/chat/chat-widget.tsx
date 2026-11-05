@@ -41,15 +41,25 @@ export function ChatWidget() {
     if (!open || loaded) return;
     let cancelled = false;
     (async () => {
+      let stored = "";
       try {
-        const stored = window.localStorage.getItem(STORAGE_KEY) ?? "";
+        stored = window.localStorage.getItem(STORAGE_KEY) ?? "";
+      } catch {
+        // localStorage is not accessible (e.g. Safari Private Mode)
+      }
+
+      try {
         const view = await loadWidget(stored);
         if (cancelled) return;
         setPersona(view.persona);
         setThreadId(view.threadId);
         setMessages(view.messages);
         if (view.threadId) {
-          window.localStorage.setItem(STORAGE_KEY, view.threadId);
+          try {
+            window.localStorage.setItem(STORAGE_KEY, view.threadId);
+          } catch {
+            // Ignore localStorage quota/access errors
+          }
         }
         setLoaded(true);
       } catch {
