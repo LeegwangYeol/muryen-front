@@ -74,23 +74,31 @@ function normalizePersona(w: Partial<WidgetPersona> | undefined): WidgetPersona 
  * (보낸 게 없거나 만료됐으면 새로 발급). 호출 측은 그 값을 저장해 재사용한다.
  */
 export async function loadWidget(threadId?: string): Promise<WidgetView> {
-  const res = await fetch(`${TOKKI_API_URL}/v2/widget/view`, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      widgetId: TOKKI_WIDGET_ID,
-      threadId: threadId ?? "",
-    }),
-  });
-  if (!res.ok) {
-    throw new Error(`/v2/widget/view 실패: HTTP ${res.status}`);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+  try {
+    const res = await fetch(`${TOKKI_API_URL}/v2/widget/view`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        widgetId: TOKKI_WIDGET_ID,
+        threadId: threadId ?? "",
+      }),
+      signal: controller.signal,
+    });
+    if (!res.ok) {
+      throw new Error(`/v2/widget/view 실패: HTTP ${res.status}`);
+    }
+    const data = (await res.json()) as ViewResponse;
+    return {
+      threadId: data.thread_id ?? "",
+      messages: Array.isArray(data.messages) ? data.messages : [],
+      persona: normalizePersona(data.widget),
+    };
+  } finally {
+    clearTimeout(timeoutId);
   }
-  const data = (await res.json()) as ViewResponse;
-  return {
-    threadId: data.thread_id ?? "",
-    messages: Array.isArray(data.messages) ? data.messages : [],
-    persona: normalizePersona(data.widget),
-  };
 }
 
 /**
