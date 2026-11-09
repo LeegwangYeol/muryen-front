@@ -8,8 +8,8 @@ export async function POST() {
     cookieStore.delete("accessToken");
     cookieStore.delete("isLoggedIn");
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Logout error:", error);
+  } catch {
+    console.error("Logout error");
     return NextResponse.json(
       { error: "로그아웃 처리 중 오류가 발생했습니다." },
       { status: 500 }
