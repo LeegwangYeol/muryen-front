@@ -115,8 +115,8 @@ export default function Navigation({
       setIsLoggedIn(false);
       alert("로그아웃 되었습니다.");
       window.location.href = "/";
-    } catch (error) {
-      console.error("Logout error:", error);
+    } catch {
+      console.error("Logout error");
       alert("로그아웃 처리 중 오류가 발생했습니다.");
     }
   };

@@ -38,8 +38,8 @@ export async function middleware(request: NextRequest) {
     }
 
     return NextResponse.next();
-  } catch (error) {
-    console.error("Middleware auth verification error:", error);
+  } catch {
+    console.error("Middleware auth verification error");
     const response = NextResponse.redirect(
       new URL(`/login?redirect=${encodeURIComponent(targetUrl)}`, request.url)
     );

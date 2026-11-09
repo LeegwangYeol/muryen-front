@@ -48,8 +48,8 @@ export default function LoginPage() {
 
       // 리다이렉트
       window.location.href = redirectUrl;
-    } catch (error) {
-      console.error("Login error:", error);
+    } catch {
+      console.error("Login error");
       alert("로그인에 실패했습니다. 다시 시도해주세요.");
     } finally {
       setIsLoading(false);
